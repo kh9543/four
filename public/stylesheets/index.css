@@ -37,6 +37,8 @@
     background-color: #ff715b; }
 
 .intro {
-  height: 200px; }
+  height: 200px;
+  text-align: center;
+  padding-top: 50px; }
 
 /*# sourceMappingURL=index.css.map */

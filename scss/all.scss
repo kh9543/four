@@ -1,12 +1,12 @@
 //run sass --watch scss:public/stylesheets/ in four
 
 body {
-  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-family: 'Heiti TC', HeitiTC-Light, LiHei, 微軟正黑體, Lato, Verdana, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #656565;
+    -webkit-font-smoothing: antialiased;
 }
 
-a {
-  color: #00B7FF;
-}
 .main{
     clear: both;
 }
@@ -14,6 +14,7 @@ a {
 .glyphicon {
     margin: 0 5px;
 }
+
 .nav-container {
     min-height: 55px;
     background-color: white;
