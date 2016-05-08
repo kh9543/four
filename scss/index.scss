@@ -46,14 +46,17 @@
     }
 }
 .center-container {
-    height: 800px;
-    padding: 200px 0px;
+    height: auto;
+    width: 100%;
 }
-.intro {
-    text-align: center;
-    padding: 0px 0;
+.row {
+    margin: 0;
+    padding: 0px 100px;
+    padding-top: 150px;
+    width: 100%;
     .detail {
-        margin-top: 20px;
+        margin-bottom: 50px;
+        font-size: 20px;
     }
     .btn-reg {
         padding: 10px 20px;
@@ -65,5 +68,30 @@
         &:hover {
             opacity: 1;
         }
+    }
+    h1 {
+        margin-bottom: 50px;
+        font-size: 50px;
+        color: #ff715b;
+        font-weight: 700;
+    }
+    h2 {
+        margin-top: 40px;
+        color: #ff715b;
+        font-weight: 700;
+        text-align: center;
+    }
+    img.who {
+        margin-top: 40px;
+        width: 100%;
+    }
+    img.feature {
+        padding-left: 80px;
+        padding-right: 80px;
+        width: 100%;
+    }
+    .feature-box {
+        padding-left: 50px;
+        padding-right: 50px;
     }
 }

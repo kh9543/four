@@ -8,12 +8,17 @@ body {
   margin: 0; }
 
 .main {
-  clear: both; }
+  clear: both;
+  height: 100%;
+  padding-top: 55px; }
 
 .glyphicon {
   margin: 0 5px; }
 
 .nav-container {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
   min-height: 55px;
   background-color: white;
   text-decoration: none; }
