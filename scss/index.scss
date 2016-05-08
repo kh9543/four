@@ -45,10 +45,25 @@
         }
     }
 }
+.center-container {
+    height: 800px;
+    padding: 200px 0px;
+}
 .intro {
-    height: 200px;
     text-align: center;
-    padding-top: 50px;
+    padding: 0px 0;
     .detail {
+        margin-top: 20px;
+    }
+    .btn-reg {
+        padding: 10px 20px;
+        font-size: 20px;
+        margin-top: 20px;
+        color: #fff;
+        background-color: #ff715b;
+        opacity: 0.85;
+        &:hover {
+            opacity: 1;
+        }
     }
 }

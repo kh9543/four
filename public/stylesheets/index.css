@@ -36,9 +36,23 @@
   .user_entrance a:hover h2 {
     background-color: #ff715b; }
 
+.center-container {
+  height: 800px;
+  padding: 200px 0px; }
+
 .intro {
-  height: 200px;
   text-align: center;
-  padding-top: 50px; }
+  padding: 0px 0; }
+  .intro .detail {
+    margin-top: 20px; }
+  .intro .btn-reg {
+    padding: 10px 20px;
+    font-size: 20px;
+    margin-top: 20px;
+    color: #fff;
+    background-color: #ff715b;
+    opacity: 0.85; }
+    .intro .btn-reg:hover {
+      opacity: 1; }
 
 /*# sourceMappingURL=index.css.map */

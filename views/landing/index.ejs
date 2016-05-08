@@ -5,7 +5,10 @@
       <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
       <link rel='stylesheet' href='/stylesheets/all.css'>
       <link rel='stylesheet' href='/stylesheets/index.css'>
+      <link rel='stylesheet' href='/stylesheets/animate.css'>
       <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="/components/wowjs/dist/wow.min.js"></script>
+      <script>new WOW().init();</script>
   </head>
   <body>
     <%-include ../layout/navbar %>
@@ -26,10 +29,16 @@
                 </div>
             </a>
         </div>
-        <div class="intro">
-            <div class="col-lg-offset-3 col-lg-6">
-                <h1>四人幫-亞洲最大的影音媒合平台</h1>
-                <p class="detail">四人幫提供一個媒合平台，讓想要製作或拍攝影片的需求者，能夠找到具備專業技能的業餘人士，而且能夠直接與他們溝通，來製作出符合期待又高品質的影片！</p>
+        <div class="center-container">
+            <div class="intro col-lg-offset-3 col-lg-6">
+                <h1 class="wow animated fadeInUp">四人幫-亞洲最大的影音媒合平台</h1>
+                <p class="detail wow animated fadeInUp">四人幫提供一個媒合平台，讓想要製作或拍攝影片的需求者，能夠找到具備專業技能的業餘人士，而且能直接與他們溝通，來製作出符合期待又高品質的影片！</p>
+                <a href="/reg">
+                    <button type="button" class="btn btn-reg">馬上註冊</button>
+                </a>
+            </div>
+            <div class="intro col-lg-offset-3 col-lg-6">
+                <h1>Features 四人幫特色</h1>
             </div>
         </div>
     </div>
