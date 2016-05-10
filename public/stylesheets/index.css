@@ -38,22 +38,45 @@
     background-color: #ff715b; }
 
 .center-container {
-  height: 800px;
-  padding: 200px 0px; }
+  height: auto;
+  width: 100%; }
 
-.intro {
-  text-align: center;
-  padding: 0px 0; }
-  .intro .detail {
-    margin-top: 20px; }
-  .intro .btn-reg {
+.row {
+  margin: 0;
+  padding: 0px 100px;
+  padding-top: 150px;
+  width: 100%; }
+  .row .detail {
+    margin-bottom: 50px;
+    font-size: 20px; }
+  .row .btn-reg {
     padding: 10px 20px;
     font-size: 20px;
     margin-top: 20px;
     color: #fff;
     background-color: #ff715b;
     opacity: 0.85; }
-    .intro .btn-reg:hover {
+    .row .btn-reg:hover {
       opacity: 1; }
+  .row h1 {
+    margin-bottom: 50px;
+    font-size: 50px;
+    color: #ff715b;
+    font-weight: 700; }
+  .row h2 {
+    margin-top: 40px;
+    color: #ff715b;
+    font-weight: 700;
+    text-align: center; }
+  .row img.who {
+    margin-top: 40px;
+    width: 100%; }
+  .row img.feature {
+    padding-left: 80px;
+    padding-right: 80px;
+    width: 100%; }
+  .row .feature-box {
+    padding-left: 50px;
+    padding-right: 50px; }
 
 /*# sourceMappingURL=index.css.map */

@@ -11,6 +11,8 @@ body {
 
 .main{
     clear: both;
+    height: 100%;
+    padding-top: 55px;
 }
 
 .glyphicon {
@@ -18,6 +20,9 @@ body {
 }
 
 .nav-container {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
     min-height: 55px;
     background-color: white;
     text-decoration: none;
