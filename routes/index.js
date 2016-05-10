@@ -3,15 +3,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: '四人幫' , user: req.user});
+  res.render('landing/index', {user: req.session});
 });
 
-router.get('/login', function(req, res, next){
-    res.render('login', {title: 'Login'})
-
-});
-
-function ensureAuthenticated(req, res, next) {
+function log_check(req, res, next) {
 	//check ID in session to see if authenticated
 }
 

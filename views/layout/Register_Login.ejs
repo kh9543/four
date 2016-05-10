@@ -1,0 +1,42 @@
+<!--Register&Login Modal-->
+<div class="modal fade in Register_Login" id="Register" role="dialog">
+    <div class="modal-dialog Register_Login">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <img class="logo" src="image/logo.png">
+         </div>
+         <!--Modal Body-->
+         <div class="modal-body" ng-controller="LoginController">
+           <div class="box">
+                <div class="content">
+                   <div class="social">
+                       <a id="google_register" class="google" ng-click="fb_login()">
+                           用 Google 帳號註冊
+                       </a>
+                       <a id="facebook_register" class="facebook" href="/">
+                           用 Facebook 帳號註冊
+                       </a>
+                       <span>{{message}}</span>
+                   </div>
+
+                   <div class="form-group">
+                       <input id="email" class="form-control" type="text" placeholder="電子信箱" name="email">
+                   </div>
+                   <div class="form-group">
+                       <input id="password" class="form-control" type="password" placeholder="使用者密碼" name="password">
+                   </div>
+                   <div class="form-group">
+                       <input type="submit" class="btn-default btn btn-login "  name="button" value="註冊">
+                   </div>
+                  </div>
+                </div>
+           </div>
+        </div>
+
+        <div class="modal-footer">
+
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,83 @@
+//run sass --watch scss:public/stylesheets/ in four
+
+body {
+    font-size: 16px;
+    font-family: 'Heiti TC', HeitiTC-Light, LiHei,Noto Sans T Chinese, Lato, Verdana, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #656565;
+    -webkit-font-smoothing: antialiased;
+    background-color: #F0F0F0;
+    margin: 0;
+}
+
+.main{
+    clear: both;
+    height: 100%;
+    padding-top: 55px;
+}
+
+.glyphicon {
+    margin: 0 5px;
+}
+
+.nav-container {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    min-height: 55px;
+    background-color: white;
+    text-decoration: none;
+}
+.navbar-collapse {
+    padding: 0 80px;
+}
+.nav-logo {
+    float:left;
+    margin-left: 20px;
+    line-height: 55px;
+    img {
+        height: 40px;
+    }
+}
+.nav-menu {
+    height: 55px;
+    a {
+        margin-left: 20px;
+        line-height: 55px;
+        font-weight: bold;
+        color: rgba(0,0,0,.65);
+        text-decoration: none;
+        border-bottom: transparent solid 1px;
+        padding-bottom: 5px;
+        &:hover {
+            color: rgba(0,0,0,.95);
+            border-bottom: #ff715b solid 3px;
+        }
+    }
+    float: right;
+    margin-right: 20px;
+}
+
+.footer {
+    width: 100%;
+    min-height: 70px;
+    background-color: white;
+}
+.footer-menu {
+    font-size: 14px;
+    height: 70px;
+    padding: 5px 80px;
+    text-align: center;
+    a {
+        margin-right: 50px;
+        line-height: 70px;
+        color: rgba(0,0,0,.65);
+        text-decoration: none;
+        &:hover {
+            color: rgba(0,0,0,.95);
+        }
+    }
+    span {
+        color: rgba(0,0,0,.7);
+    }
+    margin-right: 20px;
+}
