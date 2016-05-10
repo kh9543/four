@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="four">
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.10/angular.min.js"></script>
+    <script type="text/javascript" src="/javascript/clean.js"></script>
+    <script type="text/javascript" src="/javascript/event.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <% if (!user) { %>
+        <div style="width:500px;height:180px;" ng-controller="LoginController">
+            <h2> {{message}} </h2>
+            <a href="/auth/facebook" ng-click="fb_login()">fb_login</a>
+
+        </div>
+        <% } else { %>
+        <p>ID: <%= user.id %></p>
+        <p>Username: <%= user.name.familyName %></p>
+        <a href="/logout" >fb_logout</a>
+    <% } %>
   </body>
 </html>

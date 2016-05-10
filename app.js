@@ -4,11 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var expressSession = require('express-session');
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var fb_config = require('./configuration/config'); // facebook config
 
 var app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,7 +26,45 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(expressSession({
+    secret:'four@group4',
+    proxy:true,
+    resave:true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Passport session setup.
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+/*config is our configuration variable.*/
+passport.use(new FacebookStrategy({
+    clientID: fb_config.facebook_api_key,
+    clientSecret:fb_config.facebook_api_secret ,
+    callbackURL: fb_config.callback_url,
+    profileFields: ['id','name','email','photos']
+  },
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function () {
+      //Check whether the User exists or not using profile.id
+      if(fb_config.use_database==='true')
+      {
+         //Further code of Database.
+
+      }
+      console.log(profile.name.familyName+profile.name.givenName);
+      return done(null, profile);
+    });
+  }
+));
+
 
 app.use('/', routes);
 app.use('/users', users);
