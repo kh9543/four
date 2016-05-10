@@ -6,12 +6,16 @@
       <link rel='stylesheet' href='/stylesheets/all.css'>
       <link rel='stylesheet' href='/stylesheets/index.css'>
       <link rel='stylesheet' href='/stylesheets/animate.css'>
+      <link rel='stylesheet' href='/stylesheets/Register_Login.css'>
+      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
       <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="/components/wowjs/dist/wow.min.js"></script>
       <script>new WOW().init();</script>
   </head>
   <body>
     <%-include ../layout/navbar %>
+    <%-include ../layout/Register_Login %>
     <div class="main">
         <div class="user_entrance">
             <a href="/">
@@ -42,6 +46,8 @@
             </div>
         </div>
     </div>
+
+
     <%- include ../layout/footer %>
   </body>
 </html>
