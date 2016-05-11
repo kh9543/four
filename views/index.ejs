@@ -13,13 +13,18 @@
     <% if (!user) { %>
         <div style="width:500px;height:180px;" ng-controller="LoginController">
             <h2> {{message}} </h2>
-            <a href="/auth/facebook" ng-click="fb_login()">fb_login</a>
-
+            <div>
+                <a href="/auth/facebook" ng-click="fb_login()">fb_login</a>
+            </div>
+            <div>
+                <a href="/auth/google" ng-click="gp_login()">g+_login</a>
+            </div>
         </div>
         <% } else { %>
         <p>ID: <%= user.id %></p>
         <p>Username: <%= user.name.familyName %></p>
         <a href="/logout" >fb_logout</a>
     <% } %>
+
   </body>
 </html>

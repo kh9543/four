@@ -7,10 +7,10 @@ var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook');
-
+var GooglePlusStrategy = require('passport-google-oauth2');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var fb_config = require('./configuration/config'); // facebook config
+var pconfig = require('./configuration/config'); // facebook config
 
 var app = express();
 
@@ -46,24 +46,43 @@ passport.deserializeUser(function(obj, done) {
 
 /*config is our configuration variable.*/
 passport.use(new FacebookStrategy({
-    clientID: fb_config.facebook_api_key,
-    clientSecret:fb_config.facebook_api_secret ,
-    callbackURL: fb_config.callback_url,
+    clientID: pconfig.fb_conf.facebook_api_key,
+    clientSecret:pconfig.fb_conf.facebook_api_secret ,
+    callbackURL: pconfig.fb_conf.callback_url,
     profileFields: ['id','name','email','photos']
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
       //Check whether the User exists or not using profile.id
-      if(fb_config.use_database==='true')
+      if(pconfig.fb_conf.use_database==='true')
       {
          //Further code of Database.
 
       }
-      console.log(profile.name.familyName+profile.name.givenName);
       return done(null, profile);
     });
   }
 ));
+
+passport.use(new GooglePlusStrategy({
+    clientID:     pconfig.gp_conf.google_api_key,
+    clientSecret: pconfig.gp_conf.google_api_secret,
+    callbackURL:  pconfig.gp_conf.callback_url,
+    passReqToCallback   : true
+  },
+  function(request, accessToken, refreshToken, profile, done) {
+    process.nextTick(function () {
+        if(pconfig.gp_conf.use_database==='true')
+        {
+           //Further code of Database.
+
+        }
+        //console.log(profile);
+        return done(null, profile);
+    });
+  }
+));
+
 
 
 app.use('/', routes);
