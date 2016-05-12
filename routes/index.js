@@ -20,7 +20,7 @@ router.get('/auth/facebook/callback',
        failureRedirect: '/auth/facebook/failuer'
   }),
   function(req, res){
-      //console.log(req);
+      console.log(req);
       res.redirect('/');
   }
 );
@@ -37,7 +37,7 @@ router.get('/auth/google/callback',
         failureRedirect: '/auth/google/failure'
     }),
     function(req, res){
-        //console.log(req);
+        console.log(req);
         res.redirect ('/');
     }
 );
