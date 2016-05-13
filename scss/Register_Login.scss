@@ -1,34 +1,35 @@
 .Register_Login{
   .logo {
-      width:100%;
-      img {
-          height:auto;
-      }
+      width:56%;
+      margin:0px 22%;
   }
 
   .btn-login{
-    background-color:#83dd7e;
+    background-color:#63d55c;
     border-width: 0;
     color: #efeff6;
     font-size:16px;
     font-weight: 500;
     font-family: 'LiHei Pro';
     display: block;
-    margin: 0 auto;
+    margin: 15px auto 0px;
     padding: 10px 10px;
     text-transform: uppercase;
-    width: 100%;
+    width: 56%;
     &:hover{
-      background-color: #63d55c;
+      background-color: #83dd7e;
       color: #FFFFFF;
     }
   }
   .modal-dialog{
-      width: 400px;
+      width: 35%;
   }
 
   .modal-header {
       border: 0 none;
+  }
+  .modal-body{
+    padding: 0px 0px 15px 0px;
   }
   .modal-footer{
       border-top: 0;
@@ -39,7 +40,6 @@
   .box {
     .social {
         float: none;
-        margin: 0 auto 20px;
         text-align: center;
 
         .fa{
@@ -50,7 +50,7 @@
             background-color:#617fbd;
             color: #FFFFFF;
             display:inline-block;
-            width:100%;
+            width:56%;
             position:relative;
             margin:15px 0px;
             padding: 15px 15px 15px 60px;
@@ -91,7 +91,7 @@
            }
         .google{
             display:inline-block;
-            width:100%;
+            width:56%;
             background-color: #f75b47;
             color: #FFFFFF;
             position:relative;
@@ -138,20 +138,102 @@
 
 
     }
-  .form-control{
-    width:100%;
-    font-weight: 500;
-    font-size:15px;
-    background-color: rgba(0,0,0,.05);
-    &:hover{
-      background-color:rgba(0,0,0,.16);
-    }
+    .four{
+      float: none;
+      text-align: center;
+      background-color: #f3f3f3;
+      padding-bottom: 20px;
+      border-radius: 6px;
+      p{
+        font-size: 20px;
+        font-weight: 600;
+        padding: 25px 0 15px 0;
+      }
+      ul{
+        width:56%;
+        margin: 5px auto;
+        padding:0;
+      }
+      .login{
+          display: block;
+          width: 100%;
+          height: 34px;
+          padding: 6px 12px;
+          font-weight: 500;
+          font-size:15px;
+          padding-left:30px;
+          color: #bbb;
+          border: 1px solid #ccc;
 
-    &:focus{
-      box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04) inset;
-      background-color: rgba(0,0,0,0.23);
-      color: #333333;
-    }
-  }
+          &:hover{
+            background-color:#eaeaea;
+          }
 
+          &:focus{
+            box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04) inset;
+            background-color:#dedede;
+            color: #333333;
+            border: 1 solid #ccc;
+          }
+      }
+      .id{
+          border-radius: 5px 5px 0 0;
+          background-image: url(/image/user.png);
+          background-position:5px 6px;
+          background-repeat: no-repeat;
+          background-size: 20px 20px;
+          margin-bottom: -1px;
+          &:focus{
+            background-image: url(/image/user-focus.png);
+          }
+      }
+      .password{
+        border-radius: 0 0 5px 5px;
+        background-image: url(/image/padlock.png);
+        background-position:5px 6px;
+        background-repeat: no-repeat;
+        background-size: 20px 20px;
+        &:focus{
+          background-image: url(/image/padlock-focus.png);
+        }
+      }
+      .form-group{
+        margin-bottom: 0px;
+      }
+      textarea:focus, input:focus{
+        outline: none;
+      }
+      .login-help{
+        margin: 0 auto;
+        padding: 0 10px;
+        font-size: 14px;
+        .login-problem{
+          text-align: center;
+          padding: 16px 0 0 0;
+          width: 100%;
+          line-height: 1;
+        }
+      }
+      a{
+        text-align: center;
+        position: relative;
+        padding-right: 16px;
+        font-size: 14px;
+        color: #888;
+        display:inline-block;
+        &:hover{
+
+        }
+      }
+      a:last-child{
+        padding-right: 0;
+        padding-left: 20px;
+      }
+      a + a:before{
+        content: '|';
+        color: #ddd;
+        position: absolute;
+        left: 0;
+      }
+    }
 }

@@ -1,33 +1,33 @@
 .Register_Login .logo {
-  width: 100%; }
-  .Register_Login .logo img {
-    height: auto; }
+  width: 56%;
+  margin: 0px 22%; }
 .Register_Login .btn-login {
-  background-color: #83dd7e;
+  background-color: #63d55c;
   border-width: 0;
   color: #efeff6;
   font-size: 16px;
   font-weight: 500;
   font-family: 'LiHei Pro';
   display: block;
-  margin: 0 auto;
+  margin: 15px auto 0px;
   padding: 10px 10px;
   text-transform: uppercase;
-  width: 100%; }
+  width: 56%; }
   .Register_Login .btn-login:hover {
-    background-color: #63d55c;
+    background-color: #83dd7e;
     color: #FFFFFF; }
 .Register_Login .modal-dialog {
-  width: 400px; }
+  width: 35%; }
 .Register_Login .modal-header {
   border: 0 none; }
+.Register_Login .modal-body {
+  padding: 0px 0px 15px 0px; }
 .Register_Login .modal-footer {
   border-top: 0;
   margin-top: 0px;
   padding: 0px 10px 10px; }
 .Register_Login .box .social {
   float: none;
-  margin: 0 auto 20px;
   text-align: center; }
   .Register_Login .box .social .fa {
     font-size: 30px; }
@@ -35,7 +35,7 @@
     background-color: #617fbd;
     color: #FFFFFF;
     display: inline-block;
-    width: 100%;
+    width: 56%;
     position: relative;
     margin: 15px 0px;
     padding: 15px 15px 15px 60px;
@@ -71,7 +71,7 @@
       box-shadow: inset 0px 1px 0px #6375b8, 0px 2px 0px 0px #5e74a1, 0px 5px 3px #999; }
   .Register_Login .box .social .google {
     display: inline-block;
-    width: 100%;
+    width: 56%;
     background-color: #f75b47;
     color: #FFFFFF;
     position: relative;
@@ -107,16 +107,81 @@
       top: 3px;
       background-image: linear-gradient(bottom, #3eb8e5 0%, #2ca0ca 100%);
       box-shadow: inset 0px 1px 0px #e5695b, 0px 2px 0px 0px #ca5a4b, 0px 5px 3px #999; }
-.Register_Login .form-control {
-  width: 100%;
-  font-weight: 500;
-  font-size: 15px;
-  background-color: rgba(0, 0, 0, 0.05); }
-  .Register_Login .form-control:hover {
-    background-color: rgba(0, 0, 0, 0.16); }
-  .Register_Login .form-control:focus {
-    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04) inset;
-    background-color: rgba(0, 0, 0, 0.23);
-    color: #333333; }
+.Register_Login .four {
+  float: none;
+  text-align: center;
+  background-color: #f3f3f3;
+  padding-bottom: 20px;
+  border-radius: 6px; }
+  .Register_Login .four p {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 25px 0 15px 0; }
+  .Register_Login .four ul {
+    width: 56%;
+    margin: 5px auto;
+    padding: 0; }
+  .Register_Login .four .login {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-weight: 500;
+    font-size: 15px;
+    padding-left: 30px;
+    color: #bbb;
+    border: 1px solid #ccc; }
+    .Register_Login .four .login:hover {
+      background-color: #eaeaea; }
+    .Register_Login .four .login:focus {
+      box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04) inset;
+      background-color: #dedede;
+      color: #333333;
+      border: 1 solid #ccc; }
+  .Register_Login .four .id {
+    border-radius: 5px 5px 0 0;
+    background-image: url(/image/user.png);
+    background-position: 5px 6px;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    margin-bottom: -1px; }
+    .Register_Login .four .id:focus {
+      background-image: url(/image/user-focus.png); }
+  .Register_Login .four .password {
+    border-radius: 0 0 5px 5px;
+    background-image: url(/image/padlock.png);
+    background-position: 5px 6px;
+    background-repeat: no-repeat;
+    background-size: 20px 20px; }
+    .Register_Login .four .password:focus {
+      background-image: url(/image/padlock-focus.png); }
+  .Register_Login .four .form-group {
+    margin-bottom: 0px; }
+  .Register_Login .four textarea:focus, .Register_Login .four input:focus {
+    outline: none; }
+  .Register_Login .four .login-help {
+    margin: 0 auto;
+    padding: 0 10px;
+    font-size: 14px; }
+    .Register_Login .four .login-help .login-problem {
+      text-align: center;
+      padding: 16px 0 0 0;
+      width: 100%;
+      line-height: 1; }
+  .Register_Login .four a {
+    text-align: center;
+    position: relative;
+    padding-right: 16px;
+    font-size: 14px;
+    color: #888;
+    display: inline-block; }
+  .Register_Login .four a:last-child {
+    padding-right: 0;
+    padding-left: 20px; }
+  .Register_Login .four a + a:before {
+    content: '|';
+    color: #ddd;
+    position: absolute;
+    left: 0; }
 
 /*# sourceMappingURL=Register_Login.css.map */
