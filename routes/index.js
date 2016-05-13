@@ -5,8 +5,5 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('landing/index');
 });
-router.get('/reg', function(req, res, next) {
-  res.render('landing/register');
-});
 
 module.exports = router;
