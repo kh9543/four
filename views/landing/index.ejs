@@ -17,8 +17,12 @@
       <script>new WOW().init();</script>
   </head>
   <body>
-    <%-include ../layout/navbar %>
-    <%-include ../layout/Register_Login %>
+    <% if (!user) { %>
+        <%-include ../layout/Register_Login %>
+        <%-include ../layout/navbar %>
+    <% } else { %>
+        <%-include ../layout/login-nav %>
+    <% } %>
     <div class="main">
         <div class="user_entrance">
             <a href="/">
