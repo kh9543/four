@@ -26,12 +26,13 @@ router.get('/auth/google/callback',
     }),
     function(req, res){
         req.session.authenticated = true;
+        req.session.oauth_id = req.user.id;
         req.session.provider = req.user.provider;
         req.session.name = req.user.displayName;
         req.session.photo_url = req.user.photos[0].value;
         req.session.email = req.user.email;
         delete req.session.passport;
-        console.log(req.session);
+        //console.log(req.session);
         res.redirect ('/');
     }
 );
@@ -42,6 +43,7 @@ router.get('/auth/facebook/callback',
   }),
   function(req, res){
       req.session.authenticated = true;
+      req.session.oauth_id = req.user.id;
       req.session.provider = req.user.provider;
       req.session.name = req.user.displayName;
       req.session.photo_url = req.user.photos[0].value;
@@ -59,13 +61,13 @@ router.get('/logout', ensureAuthenticated, function(req, res){
 });
 
 
-//check facebook authentication
+//check authentication
 function ensureAuthenticated(req, res, next) {
   if (req.session.authenticated) { return next(); }
   res.redirect('/')
 }
 
-router.get('/login', function(req, res, next){
+router.get('/register', function(req, res, next){
     res.render('login', {title: 'Login'});
 });
 

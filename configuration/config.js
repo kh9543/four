@@ -15,6 +15,3 @@ exports.gp_conf={
     "use_database"      :   "false",
     "callback_url"      :   "http://localhost:3000/auth/google/callback"
 };
-
-exports.db_options={
-};
