@@ -8,7 +8,11 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log(req.session);
-  res.render('landing/index', {user: req.session.name});
+  res.render('landing/index', {
+      //email: req.session.email,
+      name: req.session.name,
+      photo_url: req.session.photo_url
+  });
 });
 
 router.get('/auth/google',
