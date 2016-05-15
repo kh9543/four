@@ -11,6 +11,7 @@ body {
 
 .main{
     clear: both;
+    margin-top: 55px;
 }
 
 .glyphicon {
@@ -18,6 +19,10 @@ body {
 }
 
 .nav-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
     min-height: 55px;
     background-color: white;
     text-decoration: none;
@@ -35,7 +40,7 @@ body {
 }
 .nav-menu {
     height: 55px;
-    a {
+    a.reg-log {
         margin-left: 20px;
         line-height: 55px;
         font-weight: bold;
@@ -48,8 +53,83 @@ body {
             border-bottom: #ff715b solid 3px;
         }
     }
+    a.login-menu {
+        height: 100%;
+        line-height: 55px;
+        font-weight: bold;
+        color: rgba(0,0,0,.65);
+        text-decoration: none;
+    }
+    .photo-box {
+        margin: 0 5px;
+        vertical-align: middle;
+        height: 40px;
+        width: 40px;
+        display: inline-block;
+        border: 2px solid #ff715b;
+        border-radius: 50%;
+        overflow: hidden;
+        img {
+            height: 38px;
+            width: 38px;
+        }
+    }
+    .dropdown {
+        margin: 0 15px;
+        height: 70px;
+        z-index: 1;
+        position: relative;
+        display: inline-block;
+        &:hover .dropdown-content{
+            display: block;
+        }
+    }
     float: right;
     margin-right: 20px;
+    .dropdown-content {
+        border-radius: 10px;
+        border: 1px solid rgba(0,0,0,.1);
+        display: none;
+        position: absolute;
+        background-color: white;
+        min-width: 300px;
+        top: 65px;
+        left: auto;
+        right: 1px;
+        line-height: normal;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        a {
+            display: block;
+            margin: 0 20px;
+            padding-bottom: 0px;
+            border-bottom: 1px solid rgba(0,0,0,.12);
+            &:hover {
+                color: rgba(0,0,0,.95);
+            }
+        }
+        .hover-item{
+            position: relative;
+            left: 0;
+            -webkit-transition: left .15s ease-out;
+            transition: left .15s ease-out;
+            &:hover {
+                left: 6px;
+            }
+        }
+        &::after{
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: -9px;
+            right: 10px;
+            bottom: auto;
+            border: 9px solid transparent;
+            border-top: 0;
+            border-bottom-color: white;
+            z-index: 1;
+        }
+    }
 }
 
 .footer {
