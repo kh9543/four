@@ -65,6 +65,12 @@ router.get('/logout', ensureAuthenticated, function(req, res){
   req.logout();
   res.redirect('/');
 });
+router.get('/mycase', function(req, res, next) {
+  res.render('landing/mycase');
+});
+router.get('/mywork', function(req, res, next) {
+  res.render('landing/mywork');
+});
 
 
 //check authentication
