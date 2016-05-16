@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="four">
   <head>
       <title>四人幫</title>
       <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
@@ -7,32 +7,41 @@
       <link rel='stylesheet' href='/stylesheets/index.css'>
       <link rel='stylesheet' href='/stylesheets/animate.css'>
       <link rel='stylesheet' href='/stylesheets/Register_Login.css'>
+      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.10/angular.min.js"></script>
+      <script src="/javascript/clean.js"></script>
+      <script src="/javascript/event.js"></script>
       <script src="/components/jquery/dist/jquery.min.js"></script>
       <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="/components/wowjs/dist/wow.min.js"></script>
       <script>new WOW().init();</script>
   </head>
   <body>
-    <%-include ../layout/login-nav %>
-    <%-include ../layout/Register_Login %>
+    <% if (!name) { %>
+        <%-include ../layout/Register_Login %>
+        <%-include ../layout/navbar %>
+    <% } else { %>
+        <%-include ../layout/login-nav %>
+    <% } %>
     <div class="main">
         <div class="user_entrance">
             <a href="/">
-                <div class="col-lg-4 demander">
+                <div class="col-lg-4 col-md-4 demander">
                     <div class="backcolor"></div>
                     <p>我有製作影片的需求</p>
                     <h2>我要提案</h2>
                 </div>
             </a>
             <a href="/">
-                <div class="col-lg-4 PM">
+                <div class="col-lg-4 col-md-4 PM">
                     <div class="backcolor"></div>
                     <p>我想要當案子的負責人</p>
                     <h2>我要接案</h2>
                 </div>
             </a>
             <a href="/">
-                <div class="col-lg-4 worker">
+                <div class="col-lg-4 col-md-4 worker">
                     <div class="backcolor"></div>
                     <p>我會專業的技能想找工作</p>
                     <h2>我要找工作</h2>
@@ -42,10 +51,10 @@
         <div class="center-container">
             <div class="row">
                 <div class="row-content">
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-md-4">
                         <img class="who wow fadeInUp" src="/image/demander.png">
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-md-4">
                         <h1 class="wow animated fadeInUp" style="text-align:center">如果你是...</h1>
                         <h2 class="wow animated fadeInUp">想拍片的人</h2>
                         <p class="detail wow animated fadeInUp">想為生活留下紀錄，卻因不擅長專業技術而不得其門而入嗎？腦子裡有著新奇想法，卻苦無志同道合的夥伴一起做出作品嗎？
@@ -53,7 +62,7 @@
                         <h2 class="wow animated fadeInUp">影音高手</h2>
                         <p class="detail wow animated fadeInUp">家中有各式攝影器材，對於剪輯軟體的操作瞭若指掌，不管是專業拍攝剪輯人士或是業餘的素人高手，都想要大展身手嗎？</p>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-md-4">
                         <img class="who wow fadeInUp" src="/image/supplier.png">
                     </div>
                 </div>
@@ -63,20 +72,26 @@
                     <div class="col-lg-push-1 col-lg-11">
                         <h1 class="wow animated fadeInUp">Why 四人幫？</h1>
                     </div>
-                    <div class="feature-box col-lg-4">
-                        <img class="feature wow fadeInUp" src="/image/easy-use.png">
+                    <div class="feature-box col-lg-4 col-md-4">
+                        <figure>
+                            <img class="wow fadeInUp" src="/image/easy-use.png">
+                        </figure>
                         <h2 class="wow animated fadeInUp">輕易上手</h2>
                         <p class="detail wow animated fadeInUp">快速註冊後，不需要專業背景就能從簡單的介面進行提案！提案人自由提出需求
                         </p>
                     </div>
-                    <div class="feature-box col-lg-4">
-                        <img class="feature wow fadeInUp" src="/image/category.svg">
+                    <div class="feature-box col-lg-4 col-md-4">
+                        <figure>
+                            <img class="wow fadeInUp" src="/image/category.svg">
+                        </figure>
                         <h2 class="wow animated fadeInUp">分類簡潔</h2>
                         <p class="detail wow animated fadeInUp">對人才進行初步分類，讓搜尋者一目瞭然，利用篩選條件從資料庫找到最適合自己的團隊人才！
                         攝影/剪輯/文字/其他</p>
                     </div>
-                    <div class="feature-box col-lg-4">
-                        <img class="feature wow fadeInUp" src="/image/communicate.svg">
+                    <div class="feature-box col-lg-4 col-md-4">
+                        <figure>
+                            <img class="wow fadeInUp" src="/image/communicate.svg">
+                        </figure>
                         <h2 class="wow animated fadeInUp">溝通零距離</h2>
                         <p class="detail wow animated fadeInUp">團隊直接在網站上溝通專案的細項內容，增加溝通便利性。溝通及時，拉近案主與團隊人員之間的距離</p>
                     </div>

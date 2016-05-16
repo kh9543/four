@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="four">
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.10/angular.min.js"></script>
+    <script type="text/javascript" src="/javascript/clean.js"></script>
+    <script type="text/javascript" src="/javascript/event.js"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <% if (!user) { %>
+        <div ng-controller="LoginController">
+            <h2> {{message}} </h2>
+<<<<<<< HEAD:views/example.ejs
+            <button ng-click="fb_login()">fb_login</button>
+
+=======
+            <div>
+                <a href="/auth/facebook" ng-click="fb_login()">fb_login</a>
+            </div>
+            <div>
+                <a href="/auth/google" ng-click="gp_login()">g+_login</a>
+            </div>
+>>>>>>> kh9543:views/index.ejs
+        </div>
+        <% } else { %>
+        <p>ID: <%= user.id %></p>
+        <p>Username: <%= user.name.familyName %></p>
+        <button href="/logout" >fb_logout</button>
+    <% } %>
+
+  </body>
+</html>

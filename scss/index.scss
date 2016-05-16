@@ -48,6 +48,12 @@
             background-color: #ff715b;
         }
     }
+    @media (max-width: 1250px) {
+        height: 500px;
+    }
+    @media (max-width: 1120px) {
+        height: 450px;
+    }
 }
 .demander {
     height: 600px;
@@ -55,6 +61,12 @@
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
+    @media (max-width: 1250px) {
+        height: 500px;
+    }
+    @media (max-width: 1120px) {
+        height: 450px;
+    }
 }
 .PM {
     height: 600px;
@@ -62,6 +74,12 @@
     background-size: cover;
     background-position: 70% 50%;
     background-repeat: no-repeat;
+    @media (max-width: 1250px) {
+        height: 500px;
+    }
+    @media (max-width: 1120px) {
+        height: 450px;
+    }
 }
 .worker {
     height: 600px;
@@ -69,21 +87,35 @@
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
+    @media (max-width: 1250px) {
+        height: 500px;
+    }
+    @media (max-width: 1120px) {
+        height: 450px;
+    }
 }
 
 .center-container {
-    height: auto;
-    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
     padding-bottom: 150px;
+    @media (min-width: 768px) {
+        width: 750px;
+    }
+    @media (min-width: 992px) {
+        width: 970px;
+    }
+    @media (min-width: 1200px) {
+        width: 1170px;
+    }
 }
 .row {
-    margin: 0;
-    padding: 0px 100px;
+    width: 950px;
+    margin: 0 auto;
     padding-top: 150px;
-    width: 100%;
     .detail {
         margin-bottom: 50px;
-        font-size: 20px;
+        font-size: 1.1em;
     }
     .btn-reg {
         padding: 10px 20px;
@@ -98,11 +130,12 @@
     }
     h1 {
         margin-bottom: 50px;
-        font-size: 50px;
+        font-size: 3em;
         color: #ff715b;
         font-weight: 700;
     }
     h2 {
+        font-size: 2em;
         margin-top: 40px;
         color: #ff715b;
         font-weight: 700;
@@ -112,13 +145,15 @@
         margin-top: 40px;
         width: 100%;
     }
-    img.feature {
-        padding-left: 80px;
-        padding-right: 80px;
-        width: 100%;
+    figure {
+        width: 200px;
+        margin: 0 auto;
+        img {
+            width: 100%;
+        }
     }
     .feature-box {
-        padding-left: 50px;
-        padding-right: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 }

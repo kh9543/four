@@ -8,10 +8,10 @@
         <div class="nav-menu">
             <div class="dropdown">
                 <a href="/" class="login-menu">
-                    <span>尚恩</span>
+                    <span><%= name %></span>
                 </a>
                 <div class="photo-box">
-                    <img src="https://a2.muscache.com/im/pictures/d321a34c-4811-430d-be3d-fb632c62e5da.jpg?aki_policy=profile_small">
+                    <img src="<%= photo_url %>">
                 </div>
                 <div class="dropdown-content">
                     <a href="/" class="login-menu">
@@ -38,7 +38,7 @@
                         <span>編輯履歷</span>
                     </div>
                     </a>
-                    <a href="/" class="login-menu">
+                    <a href="/logout" class="login-menu">
                         <div class="hover-item">登出</div>
                     </a>
                 </div>
