@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var mongoose = require('mongoose');
-var MongoStore = require('connect-mongo')(session);
+var MongoStore = require('connect-mongo/es5')(session);
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var passport = require('passport');
@@ -56,7 +56,7 @@ passport.use(new FacebookStrategy({
     clientID: pconfig.fb_conf.facebook_api_key,
     clientSecret:pconfig.fb_conf.facebook_api_secret ,
     callbackURL: pconfig.fb_conf.callback_url,
-    profileFields: ['id','displayName','email','photos']
+    profileFields: ['id','displayName','emails','photos']
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
@@ -66,6 +66,7 @@ passport.use(new FacebookStrategy({
          //Further code of Database.
 
       }
+      console.log(profile);
       return done(null, profile);
     });
   }

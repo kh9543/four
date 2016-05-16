@@ -2,6 +2,9 @@ var express = require('express');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
+// models
+var User = require('../models/user.js');
+//
 
 var router = express.Router();
 
@@ -32,11 +35,11 @@ router.get('/auth/google/callback',
         req.session.photo_url = req.user.photos[0].value;
         req.session.email = req.user.email;
         delete req.session.passport;
-        //console.log(req.session);
+        console.log(req.session);
         res.redirect ('/');
     }
 );
-router.get('/auth/facebook', passport.authenticate('facebook'));
+router.get('/auth/facebook', passport.authenticate('facebook', {scope : ['public_profile','email']}));
 router.get('/auth/facebook/callback',
   passport.authenticate('facebook', {
        failureRedirect: '/auth/facebook/failuer'
@@ -47,7 +50,10 @@ router.get('/auth/facebook/callback',
       req.session.provider = req.user.provider;
       req.session.name = req.user.displayName;
       req.session.photo_url = req.user.photos[0].value;
-      req.session.email = req.user.emails[0].value;
+      if(req.user.emails)
+        req.session.email = req.user.emails[0].value;
+      else
+        req.session.email = null;
       delete req.session.passport;
       console.log(req.session);
       res.redirect('/');
@@ -66,10 +72,6 @@ function ensureAuthenticated(req, res, next) {
   if (req.session.authenticated) { return next(); }
   res.redirect('/')
 }
-
-router.get('/register', function(req, res, next){
-    res.render('login', {title: 'Login'});
-});
 
 
 module.exports = router;
