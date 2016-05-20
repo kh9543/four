@@ -1,5 +1,18 @@
+.main {
+  margin-right: auto;
+  margin-left: auto; }
+  @media (min-width: 768px) {
+    .main {
+      width: 750px; } }
+  @media (min-width: 992px) {
+    .main {
+      width: 970px; } }
+  @media (min-width: 1200px) {
+    .main {
+      width: 1170px; } }
+
 .row {
-  margin: 0 120px;
+  margin: 0 auto;
   padding: 30px 100px;
   background-color: white; }
   .row h2 {
@@ -7,27 +20,19 @@
     font-weight: bold; }
   .row hr {
     border-color: rbga(0, 0, 0, 0.2); }
-
-.type {
-  min-height: 300px; }
-
-.case-func {
-  background-color: black;
-  opacity: 1;
-  display: inline-block; }
+  .row .col-lg-4 {
+    margin-top: 25px; }
 
 .case-container {
-  padding: 0;
-  margin: 20px 30px;
-  width: 250px; }
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto; }
   .case-container:hover .text_display {
     background: rgba(0, 0, 0, 0.8); }
     .case-container:hover .text_display a {
       display: block; }
 
 .case-box {
-  margin-left: auto;
-  margin-right: auto;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2); }
   .case-box h4 {
     border-top: 5px solid #ff715b;

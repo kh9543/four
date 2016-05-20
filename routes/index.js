@@ -122,7 +122,14 @@ router.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-router.get('/mycase', ensureAuthenticated, function(req, res, next) {
+router.get('/profile',ensureAuthenticated, function(req, res, next) {
+  res.render('landing/profile', {
+      //email: req.session.email,
+      name: req.session.name,
+      photo_url: req.session.photo_url
+  });
+});
+router.get('/mycase', ensureAuthenticated,function(req, res, next) {
   res.render('landing/mycase', {
       //email: req.session.email,
       name: req.session.name,
@@ -137,6 +144,10 @@ router.get('/mywork', ensureAuthenticated,function(req, res, next) {
   });
 });
 
+router.get('/test', function(req, res, next) {
+  res.render('landing/test')
+});
+
 router.get('/manage', ensureAuthenticated, function(req,res){
     res.render('landing/manage', {
         id : req.session.o_id,
@@ -146,6 +157,7 @@ router.get('/manage', ensureAuthenticated, function(req,res){
         error: req.flash('error')
     });
 });
+
 
 //check authentication
 function ensureAuthenticated(req, res, next) {

@@ -1,5 +1,18 @@
+.main {
+    margin-right: auto;
+    margin-left: auto;
+    @media (min-width: 768px) {
+        width: 750px;
+    }
+    @media (min-width: 992px) {
+        width: 970px;
+    }
+    @media (min-width: 1200px) {
+        width: 1170px;
+    }
+}
 .row {
-    margin: 0 120px;
+    margin: 0 auto;
     padding: 30px 100px;
     background-color: white;
     h2 {
@@ -9,19 +22,14 @@
     hr {
         border-color: rbga(0,0,0,0.2);
     }
-}
-.type {
-    min-height: 300px;
-}
-.case-func {
-    background-color: black;
-    opacity: 1;
-    display: inline-block;
+    .col-lg-4 {
+        margin-top: 25px;
+    }
 }
 .case-container {
-    padding: 0;
-    margin: 20px 30px;
     width: 250px;
+    margin-left: auto;
+    margin-right: auto;
     &:hover {
         .text_display {
             background: rgba(0, 0, 0, 0.8);
@@ -32,8 +40,6 @@
     }
 }
 .case-box {
-    margin-left: auto;
-    margin-right: auto;
     box-shadow: 0 0 3px rgba(0,0,0,0.2);
     h4 {
         border-top: 5px solid #ff715b;
@@ -74,7 +80,7 @@
 }
 .text_display {
     position: absolute;
-    top: 0;
+    top:0;
     z-index: 1;
     height: 330px;
     width: 250px;
