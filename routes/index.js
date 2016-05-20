@@ -79,6 +79,10 @@ router.get('/mywork', function(req, res, next) {
       photo_url: req.session.photo_url
   });
 });
+router.get('/test', function(req, res, next) {
+  res.render('landing/test')
+});
+
 
 
 //check authentication
