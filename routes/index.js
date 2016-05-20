@@ -116,7 +116,7 @@ router.get('/auth/facebook/callback',
   }
 );
 
-router.get('/logout', ensureAuthenticated, function(req, res){
+router.get('/logout', function(req, res){
   req.session.destroy();
   req.logout();
   res.redirect('/');

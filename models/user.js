@@ -7,7 +7,7 @@ exports.addUser = function (user, callback) {
             callback(err);
         }
         else{
-            callback(null, user)
+            callback(null, user);
         }
     });
 }
@@ -19,7 +19,7 @@ exports.findUser = function (provider, o_id, callback) {
             if(err)
                 callback(err);
             if(user)
-                callback(null, user)
+                callback(null, user);
             else
                 callback(null, null);
         });
