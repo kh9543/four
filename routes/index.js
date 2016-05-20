@@ -65,6 +65,13 @@ router.get('/logout', ensureAuthenticated, function(req, res){
   req.logout();
   res.redirect('/');
 });
+router.get('/profile', function(req, res, next) {
+  res.render('landing/profile', {
+      //email: req.session.email,
+      name: req.session.name,
+      photo_url: req.session.photo_url
+  });
+});
 router.get('/mycase', function(req, res, next) {
   res.render('landing/mycase', {
       //email: req.session.email,

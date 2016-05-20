@@ -1,33 +1,31 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ]
-2 info using npm@3.5.1
-3 info using node@v4.0.0
+1 verbose cli [ 'node', '/Users/Min/.nvm/v0.11.16/bin/npm', 'start' ]
+2 info using npm@3.8.8
+3 info using node@v0.11.16
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]
 5 info lifecycle application@0.0.0~prestart: application@0.0.0
 6 silly lifecycle application@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle application@0.0.0~start: application@0.0.0
 8 verbose lifecycle application@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle application@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/b02705014/Desktop/four/node_modules/.bin:/opt/local/bin:/opt/local/sbin:/Users/b02705014/.rvm/gems/ruby-2.0.0-p643/bin:/Users/b02705014/.rvm/gems/ruby-2.0.0-p643@global/bin:/Users/b02705014/.rvm/rubies/ruby-2.0.0-p643/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/b02705014/.rvm/bin:/Users/b02705014/.rvm/bin
-10 verbose lifecycle application@0.0.0~start: CWD: /Users/b02705014/Desktop/four
+9 verbose lifecycle application@0.0.0~start: PATH: /Users/Min/.nvm/v0.11.16/lib/node_modules/npm/bin/node-gyp-bin:/Users/Min/Desktop/SAproject/four/node_modules/.bin:/Users/Min/.nvm/v0.11.16/bin:/Users/Min/.nvm/v0.11.16/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+10 verbose lifecycle application@0.0.0~start: CWD: /Users/Min/Desktop/SAproject/four
 11 silly lifecycle application@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle application@0.0.0~start: Returned: code: 1  signal: null
 13 info lifecycle application@0.0.0~start: Failed to exec start script
 14 verbose stack Error: application@0.0.0 start: `node ./bin/www`
 14 verbose stack Exit status 1
-14 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:232:16)
-14 verbose stack     at emitTwo (events.js:87:13)
-14 verbose stack     at EventEmitter.emit (events.js:172:7)
-14 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
-14 verbose stack     at emitTwo (events.js:87:13)
-14 verbose stack     at ChildProcess.emit (events.js:172:7)
-14 verbose stack     at maybeClose (internal/child_process.js:817:16)
-14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+14 verbose stack     at EventEmitter.<anonymous> (/Users/Min/.nvm/v0.11.16/lib/node_modules/npm/lib/utils/lifecycle.js:244:16)
+14 verbose stack     at EventEmitter.emit (events.js:110:17)
+14 verbose stack     at ChildProcess.<anonymous> (/Users/Min/.nvm/v0.11.16/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+14 verbose stack     at ChildProcess.emit (events.js:110:17)
+14 verbose stack     at maybeClose (child_process.js:1008:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:1080:5)
 15 verbose pkgid application@0.0.0
-16 verbose cwd /Users/b02705014/Desktop/four
-17 error Darwin 15.4.0
-18 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
-19 error node v4.0.0
-20 error npm  v3.5.1
+16 verbose cwd /Users/Min/Desktop/SAproject/four
+17 error Darwin 13.4.0
+18 error argv "node" "/Users/Min/.nvm/v0.11.16/bin/npm" "start"
+19 error node v0.11.16
+20 error npm  v3.8.8
 21 error code ELIFECYCLE
 22 error application@0.0.0 start: `node ./bin/www`
 22 error Exit status 1
