@@ -7,8 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo/es5')(session);
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var flash = require('connect-flash');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook');
 var GooglePlusStrategy = require('passport-google-oauth2');
@@ -28,6 +27,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(flash());
 app.use(session({
     secret:'four@group4',
     cookie: { maxAge: 30*60000 }, //30 mins sessid cookie-session
@@ -66,7 +66,7 @@ passport.use(new FacebookStrategy({
          //Further code of Database.
 
       }
-      console.log(profile);
+      //console.log(profile);
       return done(null, profile);
     });
   }

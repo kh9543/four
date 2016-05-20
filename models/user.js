@@ -1,38 +1,33 @@
 var mongoose = require('mongoose');
-var db = require('./db');
-var schema = require('./schema')
+var User = require('./schema').User;
 
-function User(user){
-    if(oauth(user)){
-        //facebook or google+ login
-        this.id = user.id;
+exports.addUser = function (user, callback) {
+    user.save(function(err){
+        if(err) {
+            callback(err);
+        }
+        else{
+            callback(null, user)
+        }
+    });
+}
+
+exports.findUser = function (provider, o_id, callback) {
+    var query = User.where({ id: o_id });
+    if(provider=="google" || provider=="facebook") {
+        query.findOne(function(err, user){
+            if(err)
+                callback(err);
+            if(user)
+                callback(null, user)
+            else
+                callback(null, null);
+        });
     }
-    else {
-        console.log('custom user');
-        this.id = "0";
+    else if (provider=="four"){
+
     }
-    this.name = user.name;
-    this.email = user.email;
-    this.provider = user.provider;
-};
-
-module.exports = User;
-
-User.prototype.save = function (callback) {
-    var newUser = new schema.userobject;
-    newUser.id = this.id;
-    newUser.name = this.name;
-    newUser.email = this.email;
-    newUser.provider = this.provider;
-    newUser.save;
-};
-
-User.get = function (provider, email, callback) {
-    console.log('User query');
-};
-
-function oauth(user) {
-    if(user.provider == "four")
-        return false;
-    return true;
-};
+    else{
+        console.log("user error");
+    }
+}

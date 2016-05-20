@@ -12,8 +12,12 @@
       <script>new WOW().init();</script>
   </head>
   <body>
-    <%-include ../layout/login-nav %>
-    <%-include ../layout/Register_Login %>
+      <% if (!name) { %>
+          <%-include ../layout/Register_Login %>
+          <%-include ../layout/navbar %>
+      <% } else { %>
+          <%-include ../layout/login-nav %>
+      <% } %>
     <div class="main">
         <div class="row">
             <h2>我的接案</h2>
