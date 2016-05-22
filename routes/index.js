@@ -32,13 +32,15 @@ router.get('/auth/google/callback',
     }),
     function(req, res){
         var user_s = schema.User;
+        var photo_resize = req.user.photos[0].value.replace("?sz=50", "?sz=200");
         var newUser = new user_s ({
             id : req.user.id,
             provider : req.user.provider,
             name : req.user.displayName,
-            photo_url : req.user.photos[0].value,
+            photo_url : photo_resize,
             email : req.user.email
         });
+        console.log(newUser.photo_url);
         delete req.session.passport;
         User.findUser(newUser.provider, newUser.id, function(err, user){
             if(user){
@@ -46,6 +48,8 @@ router.get('/auth/google/callback',
                 req.session.name = user.name;
                 req.session.provider = user.provider;
                 req.session.photo_url = user.photo_url;
+                req.session.birthdate = user.birthdate;
+                req.session.profile = user.profile;
                 req.session.email = user.email;
                 res.redirect('/');
                 return;
@@ -62,7 +66,7 @@ router.get('/auth/google/callback',
                     req.session.provider = user.provider;
                     req.session.photo_url = user.photo_url;
                     req.session.email = user.email;
-                    res.redirect('/manage');
+                    res.redirect('/profile');
                 }
             });
 
@@ -78,12 +82,16 @@ router.get('/auth/facebook/callback',
   }),
   function(req, res){
       var user_s = schema.User;
+      if(req.user.emails===undefined || req.user.emails===null)
+          email_checked = null;
+      else
+          email_checked = req.user.emails[0].value;
       var newUser = new user_s ({
           id : req.user.id,
           provider : req.user.provider,
           name : req.user.displayName,
           photo_url : req.user.photos[0].value,
-          email : req.user.emails[0].value  //care
+          email : email_checked //care
       });
       delete req.session.passport;
       User.findUser(newUser.provider, newUser.id, function(err, user){
@@ -92,6 +100,8 @@ router.get('/auth/facebook/callback',
               req.session.name = user.name;
               req.session.provider = user.provider;
               req.session.photo_url = user.photo_url;
+              req.session.birthdate = user.birthdate;
+              req.session.profile = user.profile;
               req.session.email = user.email;
               res.redirect('/');
               return;
@@ -108,7 +118,7 @@ router.get('/auth/facebook/callback',
                   req.session.provider = user.provider;
                   req.session.photo_url = user.photo_url;
                   req.session.email = user.email;
-                  res.redirect('/manage');
+                  res.redirect('/profile');
               }
           });
 
@@ -125,8 +135,10 @@ router.get('/logout', function(req, res){
 router.get('/profile',ensureAuthenticated, function(req, res, next) {
   res.render('landing/profile', {
       //email: req.session.email,
+      o_id: req.session.o_id,
       name: req.session.name,
-      photo_url: req.session.photo_url
+      photo_url: req.session.photo_url,
+      email: req.session.email
   });
 });
 router.get('/mycase', ensureAuthenticated,function(req, res, next) {

@@ -22,7 +22,7 @@
             <div class="leftwrapper">
               <div class="photo">
                 <li>
-                  <div class="item selphie">
+                  <div class="item" style="background-image: url(<%= photo_url %>); background-size:contain;">
                     <div class="selphie-info">
                       <a href="/"><i class="glyphicon glyphicon-camera"></i>更新大頭貼<input type="file"></a>
                     </div>
@@ -30,7 +30,7 @@
                 </li>
               </div>
               <div class="name">
-                江孟軒
+                <%= name %>
               </div>
             </div>
             <!--Tab & Pills-->
@@ -42,12 +42,22 @@
          <div class="right-part">
            <div class="tab-content">
              <div id="about-me" class="tab-pane fade in active">
-               <h3>姓名：江孟軒</h3>
+             <form>
+               <h3>姓名：<%= name %></h3>
                <h3>生日：1994年11月25日</h3>
-               <h3>Email: brian8311@gmail.com</h3>
+                   <h3 style="display:inline-block;">Email:</h3>
+                   <% if(email) { %>
+                       <input style="padding-left: 10px;" type="text" value="<%= email %>">
+                   <% } else {  %>
+                       <input type="text">
+                   <% } %>
                <h3>個人簡介:</h3>
-               <p>積極學習，願意嘗試任何挑戰！</p>
-               <a class="btn"> <i class="glyphicon glyphicon-check"></i>修改資料 </a>
+               <div>
+                   <span>積極學習，願意嘗試任何挑戰！</span>
+                   <i class="glyphicon glyphicon-pencil"></i>
+               </div>
+               <a type="submit" class="btn"> <i class="glyphicon glyphicon-check"></i>修改資料</a>
+            </form>
             </div>
             <div id="resume" class="tab-pane fade">
                 <h3>學習歷程：</h3>

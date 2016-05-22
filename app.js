@@ -56,7 +56,7 @@ passport.use(new FacebookStrategy({
     clientID: pconfig.fb_conf.facebook_api_key,
     clientSecret:pconfig.fb_conf.facebook_api_secret ,
     callbackURL: pconfig.fb_conf.callback_url,
-    profileFields: ['id','displayName','emails','photos']
+    profileFields: ['id','displayName','emails','picture.type(large)']
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
