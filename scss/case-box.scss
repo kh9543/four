@@ -1,0 +1,107 @@
+.case-container {
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    &:hover {
+        .text_display {
+            background: rgba(0, 0, 0, 0.8);
+            a {
+                display: block;
+            }
+        }
+    }
+}
+.case-box {
+    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+    h4 {
+        border-top: 5px solid #ff715b;
+        font-size: 25px;
+        text-align: center;
+        padding: 10px;
+        margin-top: 0;
+        height: 70px;
+    }
+    .img-container {
+        position: relative;
+        overflow: hidden;
+        height: 150px;
+        img {
+            height: 190px;
+        }
+        .status-flag {
+            background: #4d90fe;
+            position: absolute;
+            z-index: 2;
+            top: 12px;
+            right: -20px;
+            width: 115px;
+            -webkit-transform: rotate(40deg);
+            transform: rotate(40deg);
+            color: #fff;
+            text-align: center;
+            box-shadow: 0 0 2px #ccc;
+        }
+        .finding {
+            background-color: #ff715b;
+        }
+        .found {
+            background-color: #2894FF;
+        }
+        .finished {
+            background-color: #8E8E8E;
+        }
+    }
+    .case-intro {
+        height: 100px;
+        span {
+            color: #ff715b;
+        }
+        .case-money {
+            height: 50px;
+            float: left;
+            margin-left: 10px;
+        }
+        .case-apply {
+            height: 50px;
+            float: right;
+            margin-right: 10px;
+        }
+        .case-date {
+            margin-bottom: 15px;
+            margin-right: 10px;
+            float: right;
+            text-align: center;
+        }
+        .case-loc {
+            margin-bottom: 15px;
+            margin-left: 10px;
+            float: left;
+            text-align: center;
+        }
+    }
+}
+.text_display {
+    position: absolute;
+    top:0;
+    z-index: 1;
+    height: 330px;
+    width: 250px;
+    transform-origin: top;
+    transition-duration: 0.2s;
+    -webkit-transform-origin: top;
+    -webkit-transition-duration: 0.2s;
+    font-size: 25px;
+    line-height: 50px;
+    padding: 30px 0;
+    text-align:center;
+    color: #ff715b;
+    a {
+        margin-top: 25px;
+        text-decoration: none;
+        color: white;
+        display: none;
+        &:hover {
+            color: #ff715b;
+        }
+    }
+}

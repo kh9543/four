@@ -8,6 +8,7 @@
       <link rel='stylesheet' href='/stylesheets/animate.css'>
       <link rel='stylesheet' href='/stylesheets/Register_Login.css'>
       <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.10/angular.min.js"></script>
       <script src="/javascript/clean.js"></script>
@@ -26,7 +27,7 @@
     <% } %>
     <div class="main">
         <div class="user_entrance">
-            <a href="/">
+            <a href="/create_case">
                 <div class="col-lg-4 col-md-4 demander">
                     <div class="backcolor"></div>
                     <p>我有製作影片的需求</p>
@@ -98,9 +99,8 @@
                 </div>
             </div>
         </div>
+        <%- include ../layout/footer %>
     </div>
 
-
-    <%- include ../layout/footer %>
   </body>
 </html>

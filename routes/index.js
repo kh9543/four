@@ -86,8 +86,19 @@ router.get('/mywork', function(req, res, next) {
       photo_url: req.session.photo_url
   });
 });
+router.get('/create_case', function(req, res, next) {
+  res.render('landing/create_case', {
+      //email: req.session.email,
+      name: req.session.name,
+      photo_url: req.session.photo_url
+  });
+});
 router.get('/test', function(req, res, next) {
-  res.render('landing/test')
+  res.render('landing/test', {
+      //email: req.session.email,
+      name: req.session.name,
+      photo_url: req.session.photo_url
+  });
 });
 
 
