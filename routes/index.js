@@ -5,7 +5,8 @@ var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 var mongoose = require('mongoose');
 // models
 var schema = require('../models/schema');
-var User = require('../models/user')
+var User = require('../models/user');
+var Profile = require('../models/profile');
 var db = require('../models/db');
 //
 
@@ -40,7 +41,7 @@ router.get('/auth/google/callback',
             photo_url : photo_resize,
             email : req.user.email
         });
-        console.log(newUser.photo_url);
+        //console.log(newUser.photo_url);
         delete req.session.passport;
         User.findUser(newUser.provider, newUser.id, function(err, user){
             if(user){
@@ -49,7 +50,6 @@ router.get('/auth/google/callback',
                 req.session.provider = user.provider;
                 req.session.photo_url = user.photo_url;
                 req.session.birthdate = user.birthdate;
-                req.session.profile = user.profile;
                 req.session.email = user.email;
                 res.redirect('/');
                 return;
@@ -133,13 +133,41 @@ router.get('/logout', function(req, res){
 });
 
 router.get('/profile',ensureAuthenticated, function(req, res, next) {
-  res.render('landing/profile', {
-      //email: req.session.email,
-      o_id: req.session.o_id,
-      name: req.session.name,
-      photo_url: req.session.photo_url,
-      email: req.session.email
+  Profile.findProfile(mongoose.Types.ObjectId.fromString(req.session.o_id), function(err, profile){
+      if(err){
+          console.log(err);
+          res.redirect('/');
+          return;
+      }
+      else if(profile){
+          res.render('landing/profile', {
+              o_id: req.session.o_id,
+              name: req.session.name,
+              photo_url: req.session.photo_url,
+              email: req.session.email,
+              intro: profile.intro,
+              s_exp: profile.s_exp,
+              w_exp: profile.w_exp,
+              achievement: profile.achievement
+          });
+          return;
+      }
+      else{
+          res.render('landing/profile', {
+              //email: req.session.email,
+              o_id: req.session.o_id,
+              name: req.session.name,
+              photo_url: req.session.photo_url,
+              email: req.session.email,
+              intro: null,
+              s_exp: null,
+              w_exp: null,
+              achievement: null
+          });
+      }
+
   });
+
 });
 router.get('/mycase', ensureAuthenticated,function(req, res, next) {
   res.render('landing/mycase', {
@@ -160,14 +188,7 @@ router.get('/test', function(req, res, next) {
   res.render('landing/test')
 });
 
-router.get('/manage', ensureAuthenticated, function(req,res){
-    res.render('landing/manage', {
-        id : req.session.o_id,
-        name : req.session.name,
-        photo_url : req.session.photo_url,
-        success: req.flash('success'),
-        error: req.flash('error')
-    });
+router.post('/profile/edit', ensureAuthenticated, function(req,res){
 });
 
 
