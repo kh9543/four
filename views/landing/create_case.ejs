@@ -1,21 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="four">
   <head>
       <title>四人幫</title>
       <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
+      <link rel='stylesheet' href='/components/angular-input-dropdown/inputDropdownStyles.css' />
       <link rel='stylesheet' href='/stylesheets/all.css'>
-      <link rel='stylesheet' href='/stylesheets/mycase.css'>
+      <link rel='stylesheet' href='/stylesheets/create_case.css'>
       <link rel='stylesheet' href='/stylesheets/animate.css'>
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+      <script src="/components/angular/angular.min.js"></script>
       <script src="/components/jquery/dist/jquery.min.js"></script>
       <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="/components/wowjs/dist/wow.min.js"></script>
       <script>new WOW().init();</script>
+      <script src="/javascript/event.js"></script>
+
+      <script src="/components/angular-input-dropdown/inputDropdown.js"></script>
   </head>
   <body>
-    <%-include ../layout/login-nav %>
+      <%-include ../layout/Register_Login %>
     <div class="main">
+        <%-include ../layout/login-nav %>
+        <div class="row">
+            <h2>建立專案</h2>
+            <div class="col-lg-6 col-md-6 case-detail">
+                <form ng-controller="caseFormController">
+                    <div class="input-box">
+                        <label for="name">專案名稱</label>
+                        <div class="input-field">
+                            <input type="text" name="title" ng-model="case.name" value="15字以內的專案名稱" placeholder="15字以內的專案名稱" onClick="this.select();" required>
+                        </div>
+                    </div>
+                    <div class="input-box">
+                        <label for="money">預算價格</label>
+                        <div class="input-field">
+                            <input type="number" name="money" class="ng-touched" ng-model="case.money" onClick="this.select();" required>
+                        </div>
+                    </div>
+                    <div class="input-box">
+                        <label>地區</label>
+                        <div ng-controller="InputDropdownController as dropdownCtrl" class="input-field">
+                            <input-dropdown selected-item="dropdownCtrl.selectedDropdownItem" default-dropdown-items="dropdownCtrl.defaultDropdownStrings" input-name="location" input-placeholder="請選擇一個地區" input-required="true" filter-list-method="dropdownCtrl.filterStringList(userInput)" item-selected-method="dropdownCtrl.itemStringSelected(item)">
+                            </input-dropdown>
+                        </div>
+                    </div>
+                    <input type="submit"></input>
+                </form>
+            </div>
+        </div>
+        <%- include ../layout/footer %>
     </div>
-    <%- include ../layout/footer %>
   </body>
 </html>

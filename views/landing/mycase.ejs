@@ -17,9 +17,9 @@
       <script src="/javascript/case.js"></script>
   </head>
   <body>
-      <%-include ../layout/login-nav %>
       <%-include ../layout/Register_Login %>
     <div class="main" ng-controller="mycaseController">
+        <%-include ../layout/login-nav %>
         <div class="row">
             <h2>我的提案</h2>
             <div class="col-lg-12 col-md-12">
@@ -129,7 +129,7 @@
                 </div>
             </div>
             </div>
-            <%- include ../layout/footer %>
         </div>
+        <%- include ../layout/footer %>
   </body>
 </html>

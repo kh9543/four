@@ -19,13 +19,13 @@
       <script>new WOW().init();</script>
   </head>
   <body>
-    <% if (!name) { %>
-        <%-include ../layout/Register_Login %>
-        <%-include ../layout/navbar %>
-    <% } else { %>
-        <%-include ../layout/login-nav %>
-    <% } %>
     <div class="main">
+        <% if (!name) { %>
+            <%-include ../layout/Register_Login %>
+            <%-include ../layout/navbar %>
+        <% } else { %>
+            <%-include ../layout/login-nav %>
+        <% } %>
         <div class="user_entrance">
             <a href="/create_case">
                 <div class="col-lg-4 col-md-4 demander">
