@@ -133,7 +133,7 @@ router.get('/logout', function(req, res){
 });
 
 router.get('/profile',ensureAuthenticated, function(req, res, next) {
-  Profile.findProfile(mongoose.Types.ObjectId.fromString(req.session.o_id), function(err, profile){
+  Profile.findProfile(req.session.provider ,req.session.o_id, function(err, profile){
       if(err){
           console.log(err);
           res.redirect('/');

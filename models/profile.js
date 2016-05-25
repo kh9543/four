@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Profile = require('./schema').Profile;
+var User = require('./user');
 
 exports.addProfile = function (profile, callback) {
     profile.save(function(err){
@@ -12,15 +13,23 @@ exports.addProfile = function (profile, callback) {
     });
 }
 
-exports.findProfile = function (o_id, callback) {
-    var query = Profile.where({ user: o_id });
-    query.findOne(function(err, profile){
-        if(err)
-            callback(err);
-        if(profile)
-            callback(null, profile);
-        else
-            callback(null, null);
+exports.findProfile = function (provider, o_id, callback) {
+    User.findUser(provider, o_id, function(err, user){
+        if(user){
+            var query = Profile.where({ user: user._id });
+            query.findOne(function(err, profile){
+                if(err)
+                    callback(err);
+                if(profile)
+                    callback(null, profile);
+                else
+                    callback(null, null);
+            });
+        }
+        else{
+            res.redirect('/');
+            return;
+        }
     });
 
 }

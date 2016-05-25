@@ -7,5 +7,4 @@ four.controller("LoginController", function($scope, $window){
     $scope.gp_login = function(){
             $scope.message = "登入中"
     };
-
 });

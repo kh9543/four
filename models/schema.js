@@ -26,7 +26,7 @@ var profile_pdf_s =  mongoose.Schema({
     file_path: String,
     p_type: String,
     user: [
-      {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+      {type: mongoose.Schema.Types.ObjectId, ref: 'Profile'}
     ]
 });
 
