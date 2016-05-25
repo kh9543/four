@@ -14,7 +14,10 @@
       <script src="/components/wowjs/dist/wow.min.js"></script>
       <script>new WOW().init();</script>
       <script src="/javascript/event.js"></script>
-
+      <script>
+        var four = angular.module('four');
+        four.requires.push('inputDropdown');
+      </script>
       <script src="/components/angular-input-dropdown/inputDropdown.js"></script>
   </head>
   <body>
