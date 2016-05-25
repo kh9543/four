@@ -1,22 +1,33 @@
 <!DOCTYPE html>
-
-
-
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>Hello React!</title>
-    <script src="bower_components/react/react.js"></script>
-    <script src="bower_components/react/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+      <title>四人幫</title>
+      <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
+      <link rel='stylesheet' href='/stylesheets/all.css'>
+      <link rel='stylesheet' href='/stylesheets/mycase.css'>
+      <link rel='stylesheet' href='/stylesheets/animate.css'>
+      <link rel='stylesheet' href='/stylesheets/case-box.css'>
+      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+      <script src="/components/angular/angular.min.js"></script>
+      <script src="/components/jquery/dist/jquery.min.js"></script>
+      <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="/components/wowjs/dist/wow.min.js"></script>
+      <script>new WOW().init();</script>
+      <script>
+  angular.module('bindExample', [])
+    .controller('ExampleController', ['$scope', function($scope) {
+      $scope.datas = [{name: 'Sean', birth:'4/6'},{name: 'Pinway', birth:'7/16'}];
+    }]);
+</script>
   </head>
-  <body>
-    <div id="example"></div>
-    <script type="text/babel">
-      ReactDOM.render(
-        <h1>Hello, world!</h1>,
-        document.getElementById('example')
-      );
-    </script>
+  <body ng-app="bindExample" class="ng-scope">
+<div ng-controller="ExampleController">
+    <div>
+    <div ng-repeat="data in datas">
+        <span ng-bind="data.name"></span>!
+        <span ng-bind="data.birth"></span>
+    </div>
+</div>
+</div>
   </body>
 </html>
