@@ -54,4 +54,25 @@
 .input-dropdown ul > li.active {
   background-color: #F8BAB5; }
 
+.md-datepicker-open .md-datepicker-calendar-icon {
+  fill: #ff715b; }
+
+input.md-datepicker-input {
+  background: white; }
+
+.md-datepicker-input-container {
+  margin-left: 0; }
+
+.md-datepicker-input-container.md-datepicker-focused {
+  border-bottom-color: #ff715b; }
+
+.md-calendar-date.md-focus.md-calendar-selected-date .md-calendar-date-selection-indicator {
+  background: #ff715b; }
+
+.md-calendar-date.md-calendar-date-today .md-calendar-date-selection-indicator {
+  border: 1px solid #ff715b; }
+
+.md-button.md-icon-button {
+  margin: 6px 8px; }
+
 /*# sourceMappingURL=create_case.css.map */
