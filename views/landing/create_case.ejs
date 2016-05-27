@@ -5,19 +5,21 @@
       <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
       <link rel='stylesheet' href='/components/angular-input-dropdown/inputDropdownStyles.css' />
       <link rel='stylesheet' href='/stylesheets/all.css'>
-      <link rel='stylesheet' href='/stylesheets/create_case.css'>
       <link rel='stylesheet' href='/stylesheets/animate.css'>
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-      <script src="/components/angular/angular.min.js"></script>
+      <link rel="stylesheet" href="/components/angular-material/angular-material.css">
+      <link rel='stylesheet' href='/stylesheets/create_case.css'>
       <script src="/components/jquery/dist/jquery.min.js"></script>
       <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="/components/wowjs/dist/wow.min.js"></script>
       <script>new WOW().init();</script>
+      <script src="/components/angular/angular.min.js"></script>
+      <script src="/components/angular-route/angular-route.min.js"></script>
+      <script src="/components/angular-aria/angular-aria.js"></script>
+      <script src="/components/angular-animate/angular-animate.js"></script>
+      <script src="/components/angular-material/angular-material.js"></script>
+       <script src="/components/angular-messages/angular-messages.js"></script>
       <script src="/javascript/event.js"></script>
-      <script>
-        var four = angular.module('four');
-        four.requires.push('inputDropdown');
-      </script>
       <script src="/components/angular-input-dropdown/inputDropdown.js"></script>
   </head>
   <body>
@@ -47,11 +49,18 @@
                             </input-dropdown>
                         </div>
                     </div>
+                    <div class="input-box" ng-controller="AppCtrl">
+                        <label>截止時間</label>
+                        <md-datepicker ng-model="myDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+                    </div>
                     <input type="submit"></input>
                 </form>
             </div>
         </div>
         <%- include ../layout/footer %>
     </div>
+    <script>
+        four.requires.push('ngMaterial', 'ngMessages', 'inputDropdown');
+    </script>
   </body>
 </html>
