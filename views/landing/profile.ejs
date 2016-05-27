@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="four">
   <head>
       <title>四人幫</title>
       <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
@@ -7,18 +7,32 @@
       <link rel='stylesheet' href='/stylesheets/animate.css'>
       <link rel='stylesheet' href='/stylesheets/profile.css'>
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+      <script src="/components/angular/angular.min.js"></script>
       <script src="/components/jquery/dist/jquery.min.js"></script>
+       <script src = "/components/jquery/dist/jquery.dateLists.dev.js"></script>
+       <script type = "text/javascript">
+         $(function(){
+           $('#SelectDate').dateDropDowns({
+              dateFormat:'yy-MM-DD',
+              monthNames:['01','02','03','04','05','06','07','08','09','10','11','12'],
+              yearStart:'1900', yearEnd:'2016',
+              yearOption:'年', monthOption: '月',  dayOption:'日'
+           });
+         });
+       </script>
       <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="/components/wowjs/dist/wow.min.js"></script>
+        <script src="/javascript/event.js"></script>
+      <script src = "/javascript/profile.js"></script>
       <script>new WOW().init();</script>
   </head>
   <body>
-
     <%-include ../layout/login-nav %>
     <%-include ../layout/Register_Login %>
-    <div class="main">
+    <div class="main" >
       <div class="container profile">
         <div class="info">
+          <h1>{{ hello }}</h1>
          <div class="left-part">
             <div class="leftwrapper">
               <div class="photo">
@@ -44,26 +58,34 @@
            <div class="tab-content">
              <div id="about-me" class="tab-pane fade in active">
                <h3>姓名：江孟軒</h3>
-               <h3>生日：1994年11月25日</h3>
+               <div class = "row">
+                 <div class = "col-sm-3">
+                   <h3>生日：</h3>
+                 </div>
+                 <div class = "col-sm-7">
+                   <h3><input type = "text" id = "SelectDate" value = ""/></h3>
+                 </div>
+              </div>
                <h3>Email: brian8311@gmail.com</h3>
                <h3>個人簡介:</h3>
                <p>積極學習，願意嘗試任何挑戰！</p>
                <a class="btn"> <i class="glyphicon glyphicon-check"></i>修改資料 </a>
             </div>
-            <div id="resume" class="tab-pane fade">
+            <div id="resume" class="tab-pane fade" >
+              <div ng-controller = "resumeController" ng-repeat ="resume in resumes">
                 <h3>學習歷程：</h3>
                 <div class="line"></div>
-                <p>國立台灣大學 資訊管理學系(在學中)</p>
+                <p>{{resume.education}}</p>
                 <h3>工作經驗：</h3>
                 <div class="line"></div>
-                <p>陳立數學輔導老師</p>
+                <p>{{resume.workExperience}}</p>
                 <h3>個人成就：</h3>
                 <div class="line"></div>
-                <p>在大二那年參加政大生活創客黑客松比賽在三天內架好了網站還有摸了一些java然後寫出一個android版本的app獲得評審的肯定。那幾天幾乎是挑戰自己的極限沒日沒夜討論跟努力趕出作品。
-                </p>
+                <p>{{resume.achievement}}</p>
                 <h3>過往作品：</h3>
                 <div class="line"></div>
-                 <a class="work-link" href="#">詳細履歷 </a
+                 <a class="work-link" href="#">{{resume.worklink}}</a>
+               </div>
             </div>
          </div>
        </div>
