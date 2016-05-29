@@ -2,12 +2,15 @@ var express = require('express');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
 var mongoose = require('mongoose');
 // models
 var schema = require('../models/schema');
 var User = require('../models/user');
 var Profile = require('../models/profile');
 var db = require('../models/db');
+
 //
 
 var router = express.Router();
@@ -168,6 +171,15 @@ router.get('/profile',ensureAuthenticated, function(req, res, next) {
 
   });
 
+router.post('/profile/upload', upload.single('img'), function(req, res){
+    console.log(req.file);
+    res.redirect("/profile");
+});
+
+router.post('/profile/edit/:action', ensureAuthenticated, function(req,res){
+    console.log(req.params.action);
+});
+
 });
 router.get('/mycase', ensureAuthenticated,function(req, res, next) {
   res.render('landing/mycase', {
@@ -191,6 +203,12 @@ router.get('/create_case', function(req, res, next) {
       photo_url: req.session.photo_url
   });
 });
+router.post('/create_case', function(req, res, next){
+
+    console.log(req.body.title);
+    console.log(req.body.money);
+    console.log(req.body.location);
+});
 
 router.get('/test', function(req, res, next) {
   res.render('landing/test', {
@@ -200,8 +218,6 @@ router.get('/test', function(req, res, next) {
   });
 });
 
-router.post('/profile/edit', ensureAuthenticated, function(req,res){
-});
 
 
 //check authentication
