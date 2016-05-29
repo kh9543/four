@@ -21,8 +21,8 @@
   display: block;
   text-align: center;
   margin-top: 50px; }
-  .btn-box .btn-submit {
-    font-size: 20px; }
+  .btn-box .md-button span {
+    font-size: 25px; }
 
 .case-detail {
   padding: 0 20px; }

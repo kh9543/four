@@ -51,11 +51,7 @@
                     <div class="input-box">
                         <label for="name">專案名稱</label>
                         <div class="input-field">
-                            <input type="text" name="title" ng-model="case.name" value="15字以內的專案名稱" placeholder="15字以內的專案名稱" onClick="this.select();" ng-required="true">
-                        </div>
-                        <div class="validation-messages" ng-messages="caseform.title.$error"
-                        ng-if="submitted">
-                            <div ng-message="required">請填寫此欄位</div>
+                            <input type="text" name="title" ng-model="case.name" value="15字以內的專案名稱" placeholder="15字以內的專案名稱" onClick="this.select();" required>
                         </div>
                     </div>
                     <div class="input-box">
@@ -65,7 +61,7 @@
                                 <label>城市</label>
                                 <md-select name="city" ng-model="case.location"
                                 md-on-close="clearSearchTerm()"
-                                data-md-container-class="selectdemoSelectHeader" ng-required="true">
+                                data-md-container-class="selectdemoSelectHeader" required>
                                 <md-select-header class="demo-select-header">
                                     <input ng-model="searchTerm"
                                     type="search"
@@ -80,48 +76,32 @@
                             </md-select>
                             </md-input-container>
                         </div>
-                        <div class="validation-messages" ng-messages="caseform.city.$error"
-                        ng-if="submitted">
-                            <div ng-message="required">請填寫此欄位</div>
-                        </div>
                     </div>
                     <div class="input-box" ng-controller="AppCtrl">
                         <label>截止時間</label>
-                        <md-datepicker name="endDate" ng-model="case.endDate" md-placeholder="End Date" md-min-date="minDate" ng-required="true"></md-datepicker>
-                        <div class="validation-messages" ng-messages="caseform.endDate.$error"
-                        ng-if="caseform.endDate.$dirty">
-                            <div ng-message="required">請填寫此欄位</div>
-                        </div>
+                        <md-datepicker name="endDate" ng-model="case.endDate" md-placeholder="End Date" md-min-date="minDate" required></md-datepicker>
                     </div>
                     <div class="input-box" ng-controller="AppCtrl">
                         <label>工作期間</label>
-                        <md-datepicker name="fromDate" ng-model="case.fromDate" md-placeholder="Begin" md-min-date="minDate" ></md-datepicker>
-                        <md-datepicker name="toDate" ng-model="case.toDate" md-placeholder="End" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+                        <md-datepicker name="fromDate" ng-model="case.fromDate" md-placeholder="Begin" md-min-date="minDate" required ></md-datepicker>
+                        <md-datepicker name="toDate" ng-model="case.toDate" md-placeholder="End" md-min-date="minDate" md-max-date="maxDate" required></md-datepicker>
                     </div>
                     <div class="input-box">
                         <label>專案描述</label>
-                        <textarea class="input-detail" ng-model="case.detail" name="detail" placeholder="請用200字以內簡單說明專案的內容" rows="5" ng-required="true"></textarea>
-                        <div class="validation-messages" ng-messages="caseform.detail.$error"
-                        ng-if="submitted">
-                            <div ng-message="required">請填寫此欄位</div>
-                        </div>
+                        <textarea class="input-detail" ng-model="case.detail" name="detail" placeholder="請用200字以內簡單說明專案的內容" rows="5" required></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 case-detail">
                     <div class="input-box">
                         <label for="money">預算價格</label>
                         <div class="input-field">
-                            <input type="number" name="money" class="ng-touched" ng-model="case.money" onClick="this.select();" ng-required="true">
-                        </div>
-                        <div class="validation-messages" ng-messages="caseform.money.$error"
-                        ng-if="submitted">
-                            <div ng-message="required">請填寫此欄位</div>
+                            <input type="number" name="money" class="ng-touched" ng-model="case.money" onClick="this.select();" required>
                         </div>
                     </div>
                     <div class="input-box">
                         <label>專案封面</label>
                         <div class="input-field">
-                            <input name="image" class="image-upload" type='file' onchange="readURL(this);">
+                            <input name="image" class="image-upload" type='file' onchange="readURL(this);" required>
                         </div>
                     </div>
                     <div class="display-box">
@@ -158,7 +138,7 @@
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-12 btn-box">
-                    <button type="submit" class="btn btn-default btn-submit" ng-click="submitted=true">提交專案</button>
+                    <md-button ng-disabled="caseform.$invalid">提交專案</md-button>
                 </div>
             </form>
         </div>
