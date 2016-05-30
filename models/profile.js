@@ -2,13 +2,13 @@ var mongoose = require('mongoose');
 var Profile = require('./schema').Profile;
 var User = require('./user');
 
-exports.addProfile = function (profile, callback) {
+exports.addProfile = function (profile,callback) {
     profile.save(function(err){
         if(err) {
             callback(err);
         }
         else{
-            callback(null, profile);
+            callback(null);
         }
     });
 }
@@ -31,5 +31,19 @@ exports.findProfile = function (provider, o_id, callback) {
             return;
         }
     });
+}
 
+exports.editProfile = function (uid,updatedata,callback){
+  console.log(updatedata);
+
+  var conditions = { user:uid};
+  console.log(conditions);
+  Profile.findOne(conditions,function(err,profile){
+    profile.intro= updatedata.intro;
+    profile.s_exp= updatedata.s_exp;
+    profile.w_exp= updatedata.w_exp;
+    profile.achievement= updatedata.achievement;
+    profile.save();
+    if (err){callback(err);}else{callback(null);}
+    }) ;
 }

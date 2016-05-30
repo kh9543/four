@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "angular-bootstrap-datetimepicker": "^1.0.1",
     "body-parser": "~1.13.2",
     "bootstrap": "^3.3.6",
     "connect-flash": "^0.1.1",

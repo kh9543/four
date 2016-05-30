@@ -8,6 +8,7 @@ var schema = require('../models/schema');
 var User = require('../models/user');
 var Profile = require('../models/profile');
 var db = require('../models/db');
+
 //
 
 var router = express.Router();
@@ -39,7 +40,8 @@ router.get('/auth/google/callback',
             provider : req.user.provider,
             name : req.user.displayName,
             photo_url : photo_resize,
-            email : req.user.email
+            email : req.user.email,
+            birthdate : req.user.birthdate
         });
         //console.log(newUser.photo_url);
         delete req.session.passport;
@@ -66,6 +68,7 @@ router.get('/auth/google/callback',
                     req.session.provider = user.provider;
                     req.session.photo_url = user.photo_url;
                     req.session.email = user.email;
+                    req.session.birthdate = user.birthdate;
                     res.redirect('/profile');
                 }
             });
@@ -118,6 +121,7 @@ router.get('/auth/facebook/callback',
                   req.session.provider = user.provider;
                   req.session.photo_url = user.photo_url;
                   req.session.email = user.email;
+                  req.session.birthdate= user.birthdate;
                   res.redirect('/profile');
               }
           });
@@ -145,20 +149,40 @@ router.get('/profile',ensureAuthenticated, function(req, res, next) {
               name: req.session.name,
               photo_url: req.session.photo_url,
               email: req.session.email,
+              birthdate: req.session.birthdate,
               intro: profile.intro,
               s_exp: profile.s_exp,
               w_exp: profile.w_exp,
               achievement: profile.achievement
+
           });
           return;
       }
       else{
+         var profile_s = schema.Profile;
+         User.findUser(req.session.provider, req.session.o_id, function(err, user){
+         if(user){
+           var newProfile = new profile_s ({
+             intro: null,
+             s_exp: null,
+             w_exp: null,
+             achievement: null,
+             user: user._id
+           });
+           Profile.addProfile(newProfile, function(err){
+           if(err){
+              req.flash('error', '失敗');
+            }
+          res.redirect('/profile');
+          });
+        }else {
+
           res.render('landing/profile', {
-              //email: req.session.email,
               o_id: req.session.o_id,
               name: req.session.name,
               photo_url: req.session.photo_url,
               email: req.session.email,
+              birthdate: req.session.birthdate,
               intro: null,
               s_exp: null,
               w_exp: null,
@@ -168,6 +192,8 @@ router.get('/profile',ensureAuthenticated, function(req, res, next) {
 
   });
 
+}
+});
 });
 router.get('/mycase', ensureAuthenticated,function(req, res, next) {
   res.render('landing/mycase', {
@@ -200,8 +226,47 @@ router.get('/test', function(req, res, next) {
   });
 });
 
-router.post('/profile/edit', ensureAuthenticated, function(req,res){
-});
+router.post('/profile/edit/user', ensureAuthenticated, function(req,res){
+  console.log(req.body);
+    req.session.birthdate=req.body.birthdate;
+    req.session.email=req.body.email;
+    var currentuser= req.session.o_id;
+    var updatedata ={
+      birthdate: req.body.birthdate,
+      email: req.body.email
+    };
+    User.editUser(currentuser,updatedata,function(err){
+      if (err) {
+        req.flash('error', err);
+      }
+      req.flash('success', '修改成功!');
+
+      res.redirect('/profile');
+    });
+})
+
+
+router.post('/profile/edit/profile', ensureAuthenticated, function(req,res){
+  var updatedata = {
+    intro: req.body.intro,
+    s_exp: req.body.s_exp,
+    w_exp: req.body.w_exp,
+    achievement: req.body.achievement
+  };
+  User.findUser(req.session.provider, req.session.o_id, function(err, user){
+    if (user)
+    {
+      var uid=user._id;
+      Profile.editProfile(uid,updatedata,function(err){
+        if (err) {
+          req.flash('error', err);
+        }
+        req.flash('success', '修改成功!');
+        res.end();
+      });
+    }
+  });
+})
 
 
 //check authentication
