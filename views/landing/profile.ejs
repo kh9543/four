@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html >
@@ -73,7 +74,7 @@
                 <p ng-hide="isEditIntro" ng-bind="Intro">
                 </p>
                 <div ng-show="isEditIntro">
-                <textarea cols=40 rows=4 ng-model="Intro"></textarea>
+                <textarea cols=30 rows=4 ng-model="Intro"></textarea>
                 <span>
                 <button ng-click="EditIntroCancel()">取消</button>
                 <button ng-click="EditIntroCheck()">確認</button>
@@ -84,7 +85,7 @@
                 <p ng-hide="isEditS_exp" ng-bind="S_exp">
                 </p>
                 <div ng-show="isEditS_exp">
-                <textarea cols=40 rows=4 ng-model="S_exp"></textarea>
+                <textarea cols=30 rows=4 ng-model="S_exp"></textarea>
                 <span>
                 <button ng-click="EditS_expCancel()">取消</button>
                 <button ng-click="EditS_expCheck()">確認</button>
@@ -95,7 +96,7 @@
                 <p ng-hide="isEditW_exp" ng-bind="W_exp">
                 </p>
                 <div ng-show="isEditW_exp">
-                <textarea cols=40 rows=4 ng-model="W_exp"></textarea>
+                <textarea cols=30 rows=4 ng-model="W_exp"></textarea>
                 <span>
                 <button ng-click="EditW_expCancel()">取消</button>
                 <button ng-click="EditW_expCheck()">確認</button>
@@ -106,7 +107,7 @@
                 <p ng-hide="isEditAchievement" ng-bind="Achievement">
                 </p>
                 <div ng-show="isEditAchievement" >
-                <textarea cols=40 rows=4 ng-model="Achievement"></textarea>
+                <textarea cols=30 rows=4 ng-model="Achievement"></textarea>
                 <span>
                 <button ng-click="EditAchievementCancel()">取消</button>
                 <button ng-click="EditAchievementCheck()">確認</button>
@@ -220,7 +221,11 @@
   });
     </script>
     <script>
-    $('#example1').datepicker();
+    $('#example1').datepicker({
+      changeYear: true,
+      yearRange: "-100:+0",
+      changeMonth: true
+    });
     </script>
 
 
