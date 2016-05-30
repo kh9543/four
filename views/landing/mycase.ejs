@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="case-date">
                                     截止日
-                                    <span ng-bind="case.date"></span>
+                                    <span>{{case.date | date: 'yyyy.MM.dd'}}</span>
                                 </div>
                             </div>
                         </div>

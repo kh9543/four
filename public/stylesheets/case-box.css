@@ -21,7 +21,10 @@
     overflow: hidden;
     height: 150px; }
     .case-box .img-container img {
-      height: 190px; }
+      width: 250px;
+      display: block;
+      margin-top: auto;
+      margin-bottom: auto; }
     .case-box .img-container .status-flag {
       background: #4d90fe;
       position: absolute;
