@@ -31,3 +31,18 @@ exports.findUser = function (provider, o_id, callback) {
         console.log("user error");
     }
 }
+
+exports.editUser = function (o_id,updatedata,callback){
+  console.log(updatedata.email);
+
+  var conditions = { id:o_id};
+    console.log(conditions);
+  User.findOne(conditions,function(err,user){
+  user.email= updatedata.email;
+  user.birthdate=updatedata.birthdate;
+  user.save();
+  if (err){callback(err);}else{callback(null);}
+
+  }) ;
+
+}

@@ -27,6 +27,9 @@
             <%-include ../layout/login-nav %>
         <% } %>
         <div class="user_entrance">
+            <% if (error) { %>
+                <h1> <%= error %></h1>
+            <% } %>
             <a href="/create_case">
                 <div class="col-lg-4 col-md-4 demander">
                     <div class="backcolor"></div>
