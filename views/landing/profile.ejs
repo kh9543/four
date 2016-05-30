@@ -8,23 +8,25 @@
       <link rel='stylesheet' href='/stylesheets/profile.css'>
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
       <script src="/components/angular/angular.min.js"></script>
+      <script src="/components/angular-route/angular-route.min.js"></script>
       <script src="/components/jquery/dist/jquery.min.js"></script>
-       <script src = "/components/jquery/dist/jquery.dateLists.dev.js"></script>
+      <link rel="stylesheet" href="/components/jquery-ui/jquery-ui.min.css">
+      <script src="/components/jquery-ui/external/jquery/jquery.js"></script>
+      <script src="/components/jquery-ui/jquery-ui.js"></script>
        <script type = "text/javascript">
-         $(function(){
-           $('#SelectDate').dateDropDowns({
-              dateFormat:'yy-MM-DD',
-              monthNames:['01','02','03','04','05','06','07','08','09','10','11','12'],
-              yearStart:'1900', yearEnd:'2016',
-              yearOption:'年', monthOption: '月',  dayOption:'日'
-           });
+       $(function() {
+         $( "#datepicker" ).datepicker({
+           changeMonth: true,
+           changeYear: true,
+           dateFormat: "yy-mm-dd",
+           yearRange: "-100:+0",
          });
+       });
        </script>
       <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="/components/wowjs/dist/wow.min.js"></script>
-        <script src="/javascript/event.js"></script>
-      <script src = "/javascript/profile.js"></script>
       <script>new WOW().init();</script>
+      <script src="/javascript/event.js"></script>
   </head>
   <body>
     <%-include ../layout/login-nav %>
@@ -32,7 +34,6 @@
     <div class="main" >
       <div class="container profile">
         <div class="info">
-          <h1>{{ hello }}</h1>
          <div class="left-part">
             <div class="leftwrapper">
               <div class="photo">
@@ -57,34 +58,84 @@
          <div class="right-part">
            <div class="tab-content">
              <div id="about-me" class="tab-pane fade in active">
-               <h3>姓名：江孟軒</h3>
-               <div class = "row">
-                 <div class = "col-sm-3">
-                   <h3>生日：</h3>
-                 </div>
-                 <div class = "col-sm-7">
-                   <h3><input type = "text" id = "SelectDate" value = ""/></h3>
-                 </div>
-              </div>
-               <h3>Email: brian8311@gmail.com</h3>
+               <h3>姓名：江孟軒 </h3>
+               <h3>生日：<span><input type = "text" id = "datepicker" placeholder="請選擇生日"/></span></h3>
+               <h3>Email:<input type = "text" id = "email" placeholder="請輸入電子信箱"/></span></h3>
                <h3>個人簡介:</h3>
                <p>積極學習，願意嘗試任何挑戰！</p>
-               <a class="btn"> <i class="glyphicon glyphicon-check"></i>修改資料 </a>
             </div>
             <div id="resume" class="tab-pane fade" >
-              <div ng-controller = "resumeController" ng-repeat ="resume in resumes">
-                <h3>學習歷程：</h3>
+              <div ng-controller = "resumeController" >
+                <h3 >學習歷程：</h3>
                 <div class="line"></div>
-                <p>{{resume.education}}</p>
+                <p ng-show = "!editingEducation">
+                    {{resume.education}}
+                    <span>
+                      <i class="fa fa-pencil" ng-click="editingEducation = true" ng-hide = "editingEducation === true"></i>
+                    </span>
+                </p>
+                <input
+                  type = "text"
+                  class = "form-control"
+                  id="editEducation"
+                  ng-show = "editingEducation"
+                  ng-model = "resume.education"
+                  value="{{resume.education}}">
+                <button class = "btn" ng-show = "editingEducation" ng-click="editingEducation = !editingEducation">取消</button>
+                <button class = "btn " ng-show = "editingEducation" ng-click="editingEducation = !editingEducation">確定</button>
                 <h3>工作經驗：</h3>
                 <div class="line"></div>
-                <p>{{resume.workExperience}}</p>
+                <p ng-show = "!editingExperience">
+                  {{resume.workExperience}}
+                  <span>
+                    <i class="fa fa-pencil" ng-click="editingExperience = true" ng-hide = "editingExperience === true"></i>
+                  </span>
+                </p>
+                <input
+                  type = "text"
+                  class = "form-control"
+                  id="editEducation"
+                  ng-show = "editingExperience"
+                  ng-model = "resume.workExperience"
+                  value="{{resume.workExperience}}">
+                <button class = "btn" ng-show = "editingExperience" ng-click="editingExperience = !editingExperience">取消</button>
+                <button class = "btn " ng-show = "editingExperience" ng-click="editingExperience = !editingExperience">確定</button>
                 <h3>個人成就：</h3>
                 <div class="line"></div>
-                <p>{{resume.achievement}}</p>
+                <p ng-show = "!editingAchievement">
+                  {{resume.achievement}}
+                  <span>
+                    <i class="fa fa-pencil" ng-click="editingAchievement = true" ng-hide = "editingAchievement === true"></i>
+                  </span>
+                </p>
+                <textarea
+                  type = "text"
+                  class = "form-control"
+                  id="editEducation"
+                  ng-show = "editingAchievement"
+                  ng-model = "resume.achievement"
+                  value="{{resume.achievement}}"></textarea>
+                <button class = "btn" ng-show = "editingAchievement" ng-click="editingAchievement = !editingAchievement">取消</button>
+                <button class = "btn " ng-show = "editingAchievement" ng-click="editingAchievement = !editingAchievement">確定</button>
                 <h3>過往作品：</h3>
                 <div class="line"></div>
                  <a class="work-link" href="#">{{resume.worklink}}</a>
+                 <h3>個人成就：</h3>
+                 <div class="line"></div>
+                 <p ng-show = "!editingAchievement">
+                   {{resume.achievement}}
+                   <span>
+                     <i class="fa fa-pencil" ng-click="editingAchievement = true" ng-hide = "editingAchievement === true"></i>
+                   </span>
+                 </p>
+                 <h3>個人成就：</h3>
+                 <div class="line"></div>
+                 <p ng-show = "!editingAchievement">
+                   {{resume.achievement}}
+                   <span>
+                     <i class="fa fa-pencil" ng-click="editingAchievement = true" ng-hide = "editingAchievement === true"></i>
+                   </span>
+                 </p>
                </div>
             </div>
          </div>
