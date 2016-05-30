@@ -26,7 +26,10 @@
         overflow: hidden;
         height: 150px;
         img {
-            height: 190px;
+            width: 250px;
+            display: block;
+            margin-top: auto;
+            margin-bottom: auto;
         }
         .status-flag {
             background: #4d90fe;

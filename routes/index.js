@@ -1,14 +1,18 @@
 var express = require('express');
+var path = require('path');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 var multer = require('multer');
-var upload = multer({ dest: 'uploads/' });
+var upload_img = multer({
+    dest: 'uploads/images',
+});
 var mongoose = require('mongoose');
 // models
 var schema = require('../models/schema');
 var User = require('../models/user');
 var Profile = require('../models/profile');
+var PM_Case = require('../models/pm_case');
 var db = require('../models/db');
 
 //
@@ -171,7 +175,7 @@ router.get('/profile',ensureAuthenticated, function(req, res, next) {
 
   });
 
-router.post('/profile/upload', upload.single('img'), function(req, res){
+router.post('/profile/upload', upload_img.single('img'), function(req, res){
     console.log(req.file);
     res.redirect("/profile");
 });
@@ -181,13 +185,23 @@ router.post('/profile/edit/:action', ensureAuthenticated, function(req,res){
 });
 
 });
-router.get('/mycase', ensureAuthenticated,function(req, res, next) {
+router.get('/mycase', ensureAuthenticated, function(req, res, next) {
   res.render('landing/mycase', {
       //email: req.session.email,
       name: req.session.name,
       photo_url: req.session.photo_url
+
   });
 });
+
+//#
+router.get('/cases/:target/list', ensureAuthenticated, function(req, res, next) {
+    // if(req.params.target="self")
+    // else if(req.params.target="any")
+    // else
+    // return res.json({ cases });
+});
+
 router.get('/mywork', ensureAuthenticated,function(req, res, next) {
   res.render('landing/mywork', {
       //email: req.session.email,
@@ -196,27 +210,46 @@ router.get('/mywork', ensureAuthenticated,function(req, res, next) {
   });
 });
 
-router.get('/create_case', function(req, res, next) {
+
+router.get('/create_case', ensureAuthenticated, function(req, res, next) {
   res.render('landing/create_case', {
       //email: req.session.email,
       name: req.session.name,
       photo_url: req.session.photo_url
   });
 });
-router.post('/create_case', function(req, res, next){
 
-    console.log(req.body.title);
-    console.log(req.body.money);
-    console.log(req.body.location);
+
+router.post('/create_case', ensureAuthenticated, upload_img.single('file'), function(req, res, next){
+    var pm_case = schema.PM_Case;
+    var newPM_Case = new pm_case ({
+        name: req.body.name,
+        money: req.body.money,
+        description: req.body.detail,
+        location: req.body.location,
+        recruit_dealine: req.body.endDate,
+        case_start: req.body.fromDate,
+        case_end: req.body.toDate,
+        status: "finding",
+        image_name: req.file.filename
+    });
+
+    PM_Case.addCase(newPM_Case, function(err){
+        if(err)
+            console.log('失敗');
+        else {
+            console.log("成功");
+            // res.redirect('/mycase');
+        }
+    });
+    // console.log(req.body);
+    // console.log(req.file);
 });
 
-router.get('/test', function(req, res, next) {
-  res.render('landing/test', {
-      //email: req.session.email,
-      name: req.session.name,
-      photo_url: req.session.photo_url
-  });
-});
+router.get('/images/:file', function(req,res,next){
+    var file = req.params.file;
+    res.sendFile('/uploads/images/'+file, { root : path.join(__dirname, '..')});
+})
 
 
 

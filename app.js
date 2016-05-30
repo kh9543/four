@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use(flash());
 app.use(session({
     secret:'four@group4',
-    cookie: { maxAge: 30*60000 }, //30 mins sessid cookie-session
+    cookie: { maxAge: 2*60*60000 }, //2 hours sessid cookie-session
     store: new MongoStore({
         url: 'mongodb://localhost/four',
         ttl: 14 * 24 * 60 * 60 //14 days

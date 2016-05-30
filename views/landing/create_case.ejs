@@ -4,21 +4,41 @@
       <title>四人幫</title>
       <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
       <link rel='stylesheet' href='/components/angular-input-dropdown/inputDropdownStyles.css' />
-      <link rel='stylesheet' href='/stylesheets/all.css'>
-      <link rel='stylesheet' href='/stylesheets/create_case.css'>
       <link rel='stylesheet' href='/stylesheets/animate.css'>
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-      <script src="/components/angular/angular.min.js"></script>
+      <link rel="stylesheet" href="/components/angular-material/angular-material.css">
+      <link rel='stylesheet' href='/stylesheets/all.css'>
+      <link rel='stylesheet' href='/stylesheets/case-box.css'>
+      <link rel='stylesheet' href='/stylesheets/create_case.css'>
       <script src="/components/jquery/dist/jquery.min.js"></script>
       <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="/components/wowjs/dist/wow.min.js"></script>
       <script>new WOW().init();</script>
+      <script src="/components/angular/angular.min.js"></script>
+      <script src="/components/angular-route/angular-route.min.js"></script>
+      <script src="/components/angular-aria/angular-aria.js"></script>
+      <script src="/components/angular-animate/angular-animate.js"></script>
+      <script src="/components/angular-material/angular-material.js"></script>
+       <script src="/components/angular-messages/angular-messages.js"></script>
       <script src="/javascript/event.js"></script>
       <script>
-        var four = angular.module('four');
-        four.requires.push('inputDropdown');
+          four.requires.push('ngMaterial', 'ngMessages');
       </script>
-      <script src="/components/angular-input-dropdown/inputDropdown.js"></script>
+      <script type="text/javascript">
+      function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width("250px");
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+      </script>
   </head>
   <body>
       <%-include ../layout/Register_Login %>
@@ -26,8 +46,8 @@
         <%-include ../layout/login-nav %>
         <div class="row">
             <h2>建立專案</h2>
-            <div class="col-lg-6 col-md-6 case-detail">
-                <form ng-controller="caseFormController" action="/create_case" method="post">
+            <form name="caseform" ng-controller="caseFormController" runat="server" ng-class="{true: 'error'}[submitted]">
+                <div class="col-lg-6 col-md-6 case-detail">
                     <div class="input-box">
                         <label for="name">專案名稱</label>
                         <div class="input-field">
@@ -35,21 +55,92 @@
                         </div>
                     </div>
                     <div class="input-box">
+                        <label>地區</label>
+                        <div ng-controller="SelectHeaderController" class="input-field">
+                            <md-input-container>
+                                <label>城市</label>
+                                <md-select name="city" ng-model="case.location"
+                                md-on-close="clearSearchTerm()"
+                                data-md-container-class="selectdemoSelectHeader" required>
+                                <md-select-header class="demo-select-header">
+                                    <input ng-model="searchTerm"
+                                    type="search"
+                                    placeholder="Search for a city.."
+                                    class="demo-header-searchbox md-text">
+                                </md-select-header>
+                                <md-optgroup label="cities">
+                                    <md-option ng-repeat="city in cities |
+                                    filter:searchTerm">{{city}}
+                                    </md-option>
+                                </md-optgroup>
+                            </md-select>
+                            </md-input-container>
+                        </div>
+                    </div>
+                    <div class="input-box" ng-controller="AppCtrl">
+                        <label>截止時間</label>
+                        <md-datepicker name="endDate" ng-model="case.endDate" md-placeholder="End Date" md-min-date="minDate" required></md-datepicker>
+                    </div>
+                    <div class="input-box" ng-controller="AppCtrl">
+                        <label>工作期間</label>
+                        <md-datepicker name="fromDate" ng-model="case.fromDate" md-placeholder="Begin" md-min-date="minDate" required ></md-datepicker>
+                        <md-datepicker name="toDate" ng-model="case.toDate" md-placeholder="End" md-min-date="minDate" md-max-date="maxDate" required></md-datepicker>
+                    </div>
+                    <div class="input-box">
+                        <label>專案描述</label>
+                        <textarea class="input-detail" ng-model="case.detail" name="detail" placeholder="請用200字以內簡單說明專案的內容" rows="5" required></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 case-detail">
+                    <div class="input-box">
                         <label for="money">預算價格</label>
                         <div class="input-field">
                             <input type="number" name="money" class="ng-touched" ng-model="case.money" onClick="this.select();" required>
                         </div>
                     </div>
                     <div class="input-box">
-                        <label>地區</label>
-                        <div ng-controller="InputDropdownController as dropdownCtrl" class="input-field">
-                            <input-dropdown selected-item="dropdownCtrl.selectedDropdownItem" default-dropdown-items="dropdownCtrl.defaultDropdownStrings" input-name="location" input-placeholder="請選擇一個地區" input-required="true" filter-list-method="dropdownCtrl.filterStringList(userInput)" item-selected-method="dropdownCtrl.itemStringSelected(item)">
-                            </input-dropdown>
+                        <label>專案封面</label>
+                        <div class="input-field">
+                            <input name="image" class="image-upload" type='file' onchange="readURL(this);" file-model="case.file" required>
                         </div>
                     </div>
-                    <input type="submit"></input>
-                </form>
-            </div>
+                    <div class="display-box">
+                        <label>專案預覽</label>
+                        <div class="case-container">
+                            <div class="case-box">
+                                <div class="img-container">
+                                    <div class="status-flag">草稿</div>
+                                    <div class="img-box">
+                                        <img id="blah">
+                                    </div>
+                                </div>
+                                <h4 ng-bind="case.name"></h4>
+                                <div class="case-intro">
+                                    <div class="case-money">
+                                        報酬
+                                        <span ng-bind="case.money"></span>
+                                    </div>
+                                    <div class="case-apply">
+                                        應徵人數
+                                        <span ng-bind="case.applicant+'人'"></span>
+                                    </div>
+                                    <div class="case-loc">
+                                        地點
+                                        <span ng-bind="case.location"></span>
+                                    </div>
+                                    <div class="case-date">
+                                        截止日
+                                        <span>{{case.endDate | date: 'yyyy.MM.dd'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 btn-box">
+                    <md-button ng-disabled="caseform.$invalid"  ng-click='submit()'>提交專案</md-button>
+                </div>
+            </form>
         </div>
         <%- include ../layout/footer %>
     </div>

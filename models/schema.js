@@ -38,8 +38,11 @@ var pm_case_s = mongoose.Schema({
     recruit_dealine: Date,
     case_start: Date,
     case_end: Date,
-    status: String,
-    image_path: String,
+    status: {type: String, enum: ['finding', 'found', 'finished']},
+    image_name: String,
+    applicants: [
+      {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    ],
     proposer: [
       {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
     ],
@@ -55,3 +58,4 @@ var ocupation_s = mongoose.Schema({
 
 exports.User = mongoose.model('User', user_s);
 exports.Profile = mongoose.model('Profile', profile_s);
+exports.PM_Case = mongoose.model('PM_Case', pm_case_s);
