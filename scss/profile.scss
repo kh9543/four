@@ -158,6 +158,12 @@
       box-shadow: 0 1px 2px;
       border-radius:15px 15px 0 0;
       overflow: hidden;
+      .tab-content{
+        height:800px;
+      }
+      p{
+        white-space: pre-wrap;
+      }
       #about-me{
         a:hover {
             .backcolor{
@@ -171,24 +177,38 @@
         a:hover{
           color:#ff715b;
         }
+        textarea{
+          height:80px;
+          font-weight: 400;
+        }
+        .btn{
+            font-size: 15px;
+            line-height: 15px;
+            color: inherit;
+            background-color: inherit;
+
+            text-align: center;
+
+            margin-top: 5px;
+            border: 2px solid #969696;
+            width: 100px;
+            &:hover{
+              background-color: #fdfbfb;
+              border: 2px solid #ff8d7b;
+              color: rgba(0,0,0,.75);
+
+            }
+        }
+        .fa{
+          color: #ff8d7b;
+        }
+        i{
+          cursor:pointer;
+        }
       }
       #about-me,#resume{
         font-family: "LiHei Pro";
         font-weight: 400;
-        .btn{
-            font-size: 18px;
-            line-height: 30px;
-            color: black;
-            display: inline-block;
-            text-align: center;
-            position: absolute;
-            top: 80%;
-            right: 50%;
-            margin-right: -100px;
-            border: 4px solid #ff715b;
-            width: 200px;
-
-        }
         h3{
           padding: 15px 0px;
         }
@@ -201,9 +221,13 @@
         background-color: #969696;
         margin:10px 0px;
       }
+      input{
+        font-size: 20px;
+      }
     }
   }
   .glyphicon{
     top:2px;
   }
+
 }
