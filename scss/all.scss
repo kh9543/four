@@ -146,9 +146,10 @@ footer {
 }
 .footer {
     position: relative;
-    width: 100%;
+    width: 98.5%;
     min-height: 70px;
     background-color: white;
+    margin: 0 auto;
     border-top: 1px solid rgba(0,0,0,0.2);
 }
 .footer-menu {
@@ -168,5 +169,5 @@ footer {
     span {
         color: rgba(0,0,0,.7);
     }
-    margin-right: 20px;
+
 }

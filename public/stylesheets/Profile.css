@@ -78,16 +78,13 @@
                   .container .info .left-part .leftwrapper .photo .item .selphie-info a:hover .glyphicon-camera {
                     color: #fff; }
                 .container .info .left-part .leftwrapper .photo .item .selphie-info a input[type=file] {
-                  position: absolute;
+                  position: fixed;
                   top: 0;
                   right: 0;
-                  min-width: 100%;
-                  min-height: 100%;
                   font-size: 100px;
                   text-align: right;
                   filter: alpha(opacity=0);
                   opacity: 0;
-                  background: red;
                   cursor: inherit;
                   display: block; }
             .container .info .left-part .leftwrapper .photo .item:hover {
@@ -95,9 +92,6 @@
               .container .info .left-part .leftwrapper .photo .item:hover .selphie-info {
                 transform: scale(1);
                 opacity: 1; }
-          .container .info .left-part .leftwrapper .photo .selphie {
-            background-image: url(/image/selphie.jpg);
-            background-size: contain; }
         .container .info .left-part .leftwrapper .name {
           margin-bottom: 20px;
           text-align: center;
@@ -120,6 +114,34 @@
           margin: 0px 10px; }
       .container .info .left-part .nav-pills > li.active > a {
         background-color: #fbf4f2; }
+      .container .info .left-part .btn {
+        position: relative;
+        margin: 5% 0 5% 0;
+        line-height: normal;
+        font-weight: 500;
+        font-size: 15px;
+        width: 40%; }
+        .container .info .left-part .btn input[type=file] {
+          position: absolute;
+          top: 0;
+          right: 0;
+          font-size: 20px;
+          filter: alpha(opacity=0);
+          opacity: 0;
+          cursor: inherit;
+          display: block; }
+      .container .info .left-part .upload {
+        font-weight: 500;
+        text-align: center;
+        margin-top: 5%; }
+        .container .info .left-part .upload h3, .container .info .left-part .upload p {
+          padding-bottom: 10px;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
+        .container .info .left-part .upload p {
+          text-align: left;
+          padding-top: 0;
+          padding-left: 15%;
+          padding-right: 15%; }
     .container .info .right-part {
       vertical-align: top;
       display: table-cell;
@@ -143,18 +165,7 @@
         height: 80px;
         font-weight: 400; }
       .container .info .right-part #resume .btn {
-        font-size: 15px;
-        line-height: 15px;
-        color: inherit;
-        background-color: inherit;
-        text-align: center;
-        margin-top: 5px;
-        border: 2px solid #969696;
         width: 100px; }
-        .container .info .right-part #resume .btn:hover {
-          background-color: #fdfbfb;
-          border: 2px solid #ff8d7b;
-          color: rgba(0, 0, 0, 0.75); }
       .container .info .right-part #resume .fa {
         color: #ff8d7b; }
       .container .info .right-part #resume i {
@@ -175,5 +186,18 @@
         font-size: 20px; }
   .container .glyphicon {
     top: 2px; }
+  .container .fa-upload::before {
+    margin-right: 4px; }
+  .container .btn {
+    font-size: 15px;
+    line-height: 15px;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    border: 2px solid #969696; }
+    .container .btn:hover {
+      background-color: #fdfbfb;
+      border: 2px solid #ff8d7b;
+      color: rgba(0, 0, 0, 0.75); }
 
 /*# sourceMappingURL=profile.css.map */

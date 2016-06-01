@@ -56,7 +56,14 @@
             <ul class="nav nav-pills nav-stacked nav-tabs">
               <li class="active"><a data-toggle="tab" href="#about-me"><span class="glyphicon glyphicon-user"></span>關於我</a></li>
               <li><a data-toggle="tab" href="#resume"><span class="glyphicon glyphicon-file"></span>我的履歷</a></li>
+
             </ul>
+            <div class = "upload">
+              <h3>上傳外部檔案</h3>
+              <div class="line"></div>
+              <p>在四人幫找到自喜所喜歡的專案嗎？分享自己更多的作品讓別人眼睛為之一亮吧！</p>
+            <button class ="btn fa fa-upload"><input  type="file" >上傳檔案</button>
+            </div>
          </div>
          <div class="right-part" >
            <div class="tab-content"  >
@@ -76,7 +83,7 @@
             </div>
 
             <div id="resume" class="tab-pane fade" ng-init="Intro='<%-intro%>';S_exp='<%-s_exp%>';W_exp='<%-w_exp%>';Achievement='<%-achievement%>'">
-                <h3>個人介紹:<i ng-hide="isEditIntro" ng-click="EditIntro()" class="fa fa-pencil"></i></h3>
+                <h3>個人介紹: <i ng-hide="isEditIntro" ng-click="EditIntro()" class="fa fa-pencil"></i></h3>
                 <div class="line"></div>
                 <p ng-hide="isEditIntro" ng-bind="Intro">
                 </p>
@@ -132,9 +139,9 @@
                     <button class ="btn" ng-click="EditAchievementCancel()">取消</button>
                     <button class ="btn" ng-click="EditAchievementCheck()">確認</button>
                 </div>
-                <h3>過往作品：</h3>
+                <h3>外部資料：</h3>
                 <div class="line"></div>
-                 <a class="work-link" href="#">詳細履歷 </a>
+
           </div>
        </div>
       </div>
