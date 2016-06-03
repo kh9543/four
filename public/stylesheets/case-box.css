@@ -8,6 +8,7 @@
       display: block; }
 
 .case-box {
+  background-color: white;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2); }
   .case-box h4 {
     border-top: 5px solid #ff715b;
@@ -21,7 +22,7 @@
     overflow: hidden;
     height: 150px; }
     .case-box .img-container img {
-      width: 250px;
+      object-fit: cover;
       display: block;
       margin-top: auto;
       margin-bottom: auto; }
@@ -88,5 +89,12 @@
     display: none; }
     .text_display a:hover {
       color: #ff715b; }
+
+.case-box-search img {
+  -webkit-transition: all 0.35s ease; }
+.case-box-search:hover img {
+  width: 300px;
+  height: 180px;
+  margin-left: -25px; }
 
 /*# sourceMappingURL=case-box.css.map */

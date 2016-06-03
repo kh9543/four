@@ -40,7 +40,6 @@
       </script>
   </head>
   <body>
-      <%-include ../layout/Register_Login %>
     <div class="main">
         <%-include ../layout/login-nav %>
         <div class="row">
@@ -78,12 +77,12 @@
                     </div>
                     <div class="input-box" ng-controller="AppCtrl">
                         <label>截止時間</label>
-                        <md-datepicker name="endDate" ng-model="case.endDate" md-placeholder="End Date" md-min-date="minDate" required></md-datepicker>
+                        <md-datepicker name="endDate" ng-model="case.endDate" md-placeholder="End Date" md-min-date="minDate" md-max-date="maxDate" required></md-datepicker>
                     </div>
                     <div class="input-box" ng-controller="AppCtrl">
                         <label>工作期間</label>
                         <md-datepicker name="fromDate" ng-model="case.fromDate" md-placeholder="Begin" md-min-date="minDate" required ></md-datepicker>
-                        <md-datepicker name="toDate" ng-model="case.toDate" md-placeholder="End" md-min-date="minDate" md-max-date="maxDate" required></md-datepicker>
+                        <md-datepicker name="toDate" ng-model="case.toDate" md-placeholder="End" md-min-date="minDate" required></md-datepicker>
                     </div>
                     <div class="input-box">
                         <label>專案描述</label>

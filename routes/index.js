@@ -215,6 +215,14 @@ router.get('/mywork', ensureAuthenticated,function(req, res, next) {
   });
 });
 
+router.get('/search_case', function(req, res, next) {
+  res.render('landing/search_case', {
+      error: req.flash('error'),
+      name: req.session.name,
+      photo_url: req.session.photo_url
+  });
+});
+
 
 router.get('/create_case', ensureAuthenticated, function(req, res, next) {
   res.render('landing/create_case', {
