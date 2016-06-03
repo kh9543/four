@@ -54,6 +54,7 @@ router.get('/auth/google/callback',
         delete req.session.passport;
         User.findUser(newUser.provider, newUser.id, function(err, user){
             if(user){
+                req.session._id = user._id;
                 req.session.o_id = user.id;
                 req.session.name = user.name;
                 req.session.provider = user.provider;
@@ -70,6 +71,7 @@ router.get('/auth/google/callback',
                 }
                 else{
                     req.flash('success', '註冊成功');
+                    req.session._id = user._id;
                     req.session.o_id = user.id;
                     req.session.name = user.name;
                     req.session.provider = user.provider;
@@ -106,6 +108,7 @@ router.get('/auth/facebook/callback',
       delete req.session.passport;
       User.findUser(newUser.provider, newUser.id, function(err, user){
           if(user){
+              req.session._id = user._id;
               req.session.o_id = user.id;
               req.session.name = user.name;
               req.session.provider = user.provider;
@@ -123,6 +126,7 @@ router.get('/auth/facebook/callback',
               }
               else{
                   req.flash('success', '註冊成功');
+                  req.session._id = user._id;
                   req.session.o_id = user.id;
                   req.session.name = user.name;
                   req.session.provider = user.provider;
@@ -161,7 +165,6 @@ router.get('/profile',ensureAuthenticated, function(req, res, next) {
               s_exp: profile.s_exp,
               w_exp: profile.w_exp,
               achievement: profile.achievement
-
           });
           return;
       }
@@ -188,68 +191,6 @@ router.get('/profile',ensureAuthenticated, function(req, res, next) {
 });
 });
 
-
-router.get('/mycase', ensureAuthenticated, function(req, res, next) {
-  res.render('landing/mycase', {
-      //email: req.session.email,
-      name: req.session.name,
-      photo_url: req.session.photo_url
-
-  });
-});
-
-//#
-router.get('/cases/:target/list', ensureAuthenticated, function(req, res, next) {
-    // if(req.params.target="self")
-    // else if(req.params.target="any")
-    // else
-    // return res.json({ cases });
-    console.log('fixing');
-});
-
-router.get('/mywork', ensureAuthenticated,function(req, res, next) {
-  res.render('landing/mywork', {
-      //email: req.session.email,
-      name: req.session.name,
-      photo_url: req.session.photo_url
-  });
-});
-
-
-router.get('/create_case', ensureAuthenticated, function(req, res, next) {
-  res.render('landing/create_case', {
-      //email: req.session.email,
-      name: req.session.name,
-      photo_url: req.session.photo_url
-  });
-});
-
-
-router.post('/create_case', ensureAuthenticated, upload_img.single('file'), function(req, res, next){
-    var pm_case = schema.PM_Case;
-    var newPM_Case = new pm_case ({
-        name: req.body.name,
-        money: req.body.money,
-        description: req.body.detail,
-        location: req.body.location,
-        recruit_dealine: req.body.endDate,
-        case_start: req.body.fromDate,
-        case_end: req.body.toDate,
-        status: "finding",
-        image_name: req.file.filename
-    });
-
-    PM_Case.addCase(newPM_Case, function(err){
-        if(err)
-            console.log('失敗');
-        else {
-            console.log("成功");
-            // res.redirect('/mycase');
-        }
-    });
-    // console.log(req.body);
-    // console.log(req.file);
-});
 
 router.post('/profile/edit/user', ensureAuthenticated, function(req,res){
   console.log(req.body);
@@ -291,6 +232,115 @@ router.post('/profile/edit/profile', ensureAuthenticated, function(req,res){
     }
   });
 });
+
+
+//#
+router.get('/cases/:target/list', ensureAuthenticated, function(req, res, next) {
+    // if(req.params.target="self")
+    // else if(req.params.target="any")
+    // else
+    // return res.json({ cases });
+    console.log('fixing');
+});
+
+router.get('/mywork', ensureAuthenticated,function(req, res, next) {
+  res.render('landing/mywork', {
+      //email: req.session.email,
+      name: req.session.name,
+      photo_url: req.session.photo_url
+  });
+});
+
+
+router.get('/create_case', ensureAuthenticated, function(req, res, next) {
+  res.render('landing/create_case', {
+      //email: req.session.email,
+      name: req.session.name,
+      photo_url: req.session.photo_url
+  });
+});
+
+
+router.post('/create_case', ensureAuthenticated, upload_img.single('file'), function(req, res, next){
+    var pm_case = schema.PM_Case;
+    var newPM_Case = new pm_case ({
+        name: req.body.name,
+        money: req.body.money,
+        description: req.body.detail,
+        location: req.body.location,
+        recruit_dealine: req.body.endDate,
+        case_start: req.body.fromDate,
+        case_end: req.body.toDate,
+        status: "finding",
+        image_name: req.file.filename,
+        proposer: req.session._id
+    });
+
+    PM_Case.addCase(newPM_Case, function(err){
+        if(err)
+            console.log('失敗');
+        else {
+            console.log("成功");
+            // res.redirect('/mycase');
+        }
+    });
+    // console.log(req.body);
+    // console.log(req.file);
+});
+
+
+router.get('/mycase', ensureAuthenticated, function(req, res, next) {
+    PM_Case.listMyCase(req.session._id, function(err, mycases){
+        if (err) {
+            req.flash("error", "找不到案件")
+            return res.redirect('/');
+        }
+        else if (mycases)
+        {
+            var result = new Array();
+            for(var i = 0; i < mycases.length; i++)
+            {
+                var applicants = mycases[i].applicants.length;
+                var url = '/images/'+mycases[i].image_name;
+                var date = mycases[i].recruit_dealine;
+                var d = date.getFullYear()+'.'+date.getMonth()+'.'+date.getDay();
+                var word = null;
+
+                switch (mycases[i].status) {
+                    case 'finding':
+                        word = "找人中";
+                        break;
+                    case 'found':
+                        word = "找人成功";
+                        break;
+                    case 'finished':
+                        word = "已完工";
+                        break;
+                }
+                var temp = {
+                    name: mycases[i].name,
+                    applicant: applicants,
+                    date: d,
+                    location: mycases[i].location,
+                    money: mycases[i].money,
+                    pic_url: url,
+                    status: mycases[i].status,
+                    status_word: word
+                };
+                result.push(temp);
+                // console.log(mycases[i]);
+                // console.log(temp);
+            }
+            res.render('landing/mycase', {
+                name: req.session.name,
+                photo_url: req.session.photo_url,
+                cases: result
+            });
+            return;
+        }
+    });
+});
+
 
 router.get('/images/:file', function(req,res,next){
     var file = req.params.file;

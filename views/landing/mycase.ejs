@@ -15,6 +15,9 @@
       <script src="/components/wowjs/dist/wow.min.js"></script>
       <script>new WOW().init();</script>
       <script src="/javascript/event.js"></script>
+      <script>
+            var cases = <%- JSON.stringify(cases) %>;
+      </script>
   </head>
   <body>
       <%-include ../layout/Register_Login %>

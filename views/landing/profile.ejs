@@ -1,6 +1,5 @@
 
 <!DOCTYPE html>
-
 <html >
   <head>
       <title>四人幫</title>
@@ -53,8 +52,7 @@
              <form id="form1" name="f1">
                <h3>姓名：{{ name }}</h3>
                <h3>生日：
-
-                 <input name="birthdate" type="text" id="example1" ng-model="birthdate | date:'yyyy/MM/dd'">
+                 <input type="text" id="example1" ng-model="birthdate">
                </h3>
                <h3 style="display:inline-block;">Email:</h3>
                    <% if(email) { %>
@@ -127,7 +125,6 @@
     <script>
     var four = angular.module('four',[] );
     four.controller('profileController',function($http,$scope){
-
     $scope.myTxt = "";
     $scope.sendPost = function() {
       $scope.myTxt = "";
@@ -137,22 +134,21 @@
         w_exp: $scope.W_exp,
         achievement: $scope.Achievement
       }). then(function(data) {
-            console.log("posted successfully");
+            // console.log("posted successfully");
         },function(data) {
-            console.error("error in posting");
+            // console.error("error in posting");
         });
      }
 
      $scope.sendPostUser = function() {
-       var birth= $("#example1").val();
        $scope.myTxt = "修改成功!";
        $http.post('/profile/edit/user', {
-         birthdate: birth,
+         birthdate: $scope.birthdate,
          email: $scope.email
        }). then(function(data) {
-             console.log("posted successfully");
+            //  console.log("posted successfully");
          },function(data) {
-             console.error("error in posting");
+            //  console.error("error in posting");
          });
       }
 
@@ -220,6 +216,7 @@
     </script>
     <script>
     $('#example1').datepicker({
+      dateFormat: 'yy-mm-dd',
       changeYear: true,
       yearRange: "-100:+0",
       changeMonth: true
