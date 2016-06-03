@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html >
+<html ng-app="four">
   <head>
       <title>四人幫</title>
       <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
@@ -8,20 +7,32 @@
       <link rel='stylesheet' href='/stylesheets/animate.css'>
       <link rel='stylesheet' href='/stylesheets/Profile.css'>
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+      <script src="/components/angular/angular.min.js"></script>
+      <script src="/components/angular-route/angular-route.min.js"></script>
       <script src="/components/jquery/dist/jquery.min.js"></script>
-      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.10/angular.min.js"></script>
+      <link rel="stylesheet" href="/components/jquery-ui/jquery-ui.min.css">
+      <script src="/components/jquery-ui/external/jquery/jquery.js"></script>
+      <script src="/components/jquery-ui/jquery-ui.js"></script>
+       <script type = "text/javascript">
+       $(function() {
+         $( "#birthday" ).datepicker({
+           changeMonth: true,
+           changeYear: true,
+           dateFormat: "yy-mm-dd",
+           yearRange: "-100:+0",
+         });
+       });
+       </script>
       <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="/components/wowjs/dist/wow.min.js"></script>
        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
       <script>new WOW().init();</script>
-
+      <script src="/javascript/event.js"></script>
   </head>
-  <body >
+  <body>
     <%-include ../layout/login-nav %>
-    <%-include ../layout/Register_Login %>
-    <div class="main" ng-app="four" ng-controller="profileController">
-      <div class="container profile" >
+    <div class="main" ng-controller="profileController">
+        <div class="container profile" >
         <div class="info">
          <div class="left-part">
             <div class="leftwrapper">
@@ -45,186 +56,93 @@
               <li class="active"><a data-toggle="tab" href="#about-me"><span class="glyphicon glyphicon-user"></span>關於我</a></li>
               <li><a data-toggle="tab" href="#resume"><span class="glyphicon glyphicon-file"></span>我的履歷</a></li>
             </ul>
+            <div class = "upload">
+              <h3>上傳外部檔案</h3>
+              <div class="line"></div>
+              <p>在四人幫找到自喜所喜歡的專案嗎？分享自己更多的作品讓別人眼睛為之一亮吧！</p>
+            <button class ="btn fa fa-upload"><input  type="file" >上傳檔案</button>
+            </div>
          </div>
          <div class="right-part" >
-           <div class="tab-content"  >
+           <div class="tab-content">
              <div id="about-me" class="tab-pane fade in active" ng-init="name='<%-name%>';email='<%-email%>';birthdate='<%-birthdate%>'">
              <form id="form1" name="f1">
                <h3>姓名：{{ name }}</h3>
                <h3>生日：
-                 <input type="text" id="example1" ng-model="birthdate">
+                 <input name="birthdate" type="text" id="birthday" ng-model="birthdate | date:'yyyy/MM/dd'">
                </h3>
-               <h3 style="display:inline-block;">Email:</h3>
-                   <% if(email) { %>
-                       <input name="email" id="example2" style="padding-left: 10px;" type="email" ng-model="email" required>
-                   <% } else {  %>
-                       <input name="email" type="email" ng-model="email" placeholder="請輸入Email" required>
-                   <% } %>
-               <button class="btn" ng-disabled="f1.$invalid" ng-click="sendPostUser()"/><i class="glyphicon glyphicon-check"></i></button>
+               <h3 style="display:inline-block;">Email:
+                  <input name="email" type="email" ng-model="email" placeholder="請輸入Email" required>
+                  <span><button class="btn" ng-disabled="f1.$invalid" ng-click="sendPostUser()"/><i class="fa fa-check"></i></button></span>
+               </h3>
                <p>{{myTxt}}</p>
             </form>
             </div>
-
             <div id="resume" class="tab-pane fade" ng-init="Intro='<%-intro%>';S_exp='<%-s_exp%>';W_exp='<%-w_exp%>';Achievement='<%-achievement%>'">
-                <h3>個人介紹:<i ng-hide="isEditIntro" ng-click="EditIntro()" class="glyphicon glyphicon-pencil"></i></h3>
+                <h3>個人介紹: <i ng-hide="isEditIntro" ng-click="EditIntro()" class="fa fa-pencil"></i></h3>
                 <div class="line"></div>
                 <p ng-hide="isEditIntro" ng-bind="Intro">
                 </p>
                 <div ng-show="isEditIntro">
-                <textarea cols=30 rows=4 ng-model="Intro"></textarea>
-                <span>
-                <button ng-click="EditIntroCancel()">取消</button>
-                <button ng-click="EditIntroCheck()">確認</button>
-                </span>
+                    <textarea
+                        type = "text"
+                        class = "form-control"
+                        ng-show = "isEditIntro"
+                        ng-model = "Intro"
+                        value="{{Intro}}"></textarea>
+                    <button class ="btn" ng-click="EditIntroCancel()">取消</button>
+                    <button class ="btn" ng-click="EditIntroCheck()">確認</button>
                 </div>
-                <h3>學習歷程：<i ng-hide="isEditS_exp" ng-click="EditS_exp()" class="glyphicon glyphicon-pencil"></i></h3>
+                <h3>學習歷程：<i ng-hide="isEditS_exp" ng-click="EditS_exp()" class="fa fa-pencil"></i></h3>
                 <div class="line"></div>
                 <p ng-hide="isEditS_exp" ng-bind="S_exp">
                 </p>
                 <div ng-show="isEditS_exp">
-                <textarea cols=30 rows=4 ng-model="S_exp"></textarea>
-                <span>
-                <button ng-click="EditS_expCancel()">取消</button>
-                <button ng-click="EditS_expCheck()">確認</button>
-                </span>
+                    <textarea
+                      type = "text"
+                      class = "form-control"
+                      ng-show = "isEditS_exp"
+                      ng-model="S_exp"
+                      value = "{{S_exp}}"></textarea>
+                    <button class ="btn" ng-click="EditS_expCancel()">取消</button>
+                    <button class ="btn" ng-click="EditS_expCheck()">確認</button>
                 </div>
-                <h3>工作經驗：<i ng-hide="isEditW_exp" ng-click="EditW_exp()" class="glyphicon glyphicon-pencil"></i></h3>
+                <h3>工作經驗：<i ng-hide="isEditW_exp" ng-click="EditW_exp()" class="fa fa-pencil"></i></h3>
                 <div class="line"></div>
                 <p ng-hide="isEditW_exp" ng-bind="W_exp">
                 </p>
                 <div ng-show="isEditW_exp">
-                <textarea cols=30 rows=4 ng-model="W_exp"></textarea>
-                <span>
-                <button ng-click="EditW_expCancel()">取消</button>
-                <button ng-click="EditW_expCheck()">確認</button>
-                </span>
+                    <textarea
+                      type = "text"
+                      ng-show = "isEditW_exp"
+                      class = "form-control"
+                      ng-model="W_exp"
+                      value = "{{W_exp}}"></textarea>
+                    <button class ="btn" ng-click="EditW_expCancel()">取消</button>
+                    <button class ="btn" ng-click="EditW_expCheck()">確認</button>
                 </div>
-                <h3>個人成就：<i ng-hide="isEditAchievement" ng-click="EditAchievement()" class="glyphicon glyphicon-pencil"></i></h3>
+                <h3>個人成就：<i ng-hide="isEditAchievement" ng-click="EditAchievement()" class="fa fa-pencil"></i></h3>
                 <div class="line"></div>
                 <p ng-hide="isEditAchievement" ng-bind="Achievement">
                 </p>
                 <div ng-show="isEditAchievement" >
-                <textarea cols=30 rows=4 ng-model="Achievement"></textarea>
-                <span>
-                <button ng-click="EditAchievementCancel()">取消</button>
-                <button ng-click="EditAchievementCheck()">確認</button>
-                </span>
+                    <textarea
+                      type = "text"
+                      class = "form-control"
+                      ng-show ="isEditAchievement"
+                      ng-model="Achievement"
+                      value = "{{Achievement}}"></textarea>
+                    <button class ="btn" ng-click="EditAchievementCancel()">取消</button>
+                    <button class ="btn" ng-click="EditAchievementCheck()">確認</button>
                 </div>
-                <h3>過往作品：</h3>
+                <h3>外部資料：</h3>
                 <div class="line"></div>
-                 <a class="work-link" href="#">詳細履歷 </a>
+                </div>
             </div>
-          </div>
          </div>
-       </div>
-       </div>
-      </div>
-    </div>
-
+        </div>
+        </div>
     <%- include ../layout/footer %>
-    <script>
-    var four = angular.module('four',[] );
-    four.controller('profileController',function($http,$scope){
-    $scope.myTxt = "";
-    $scope.sendPost = function() {
-      $scope.myTxt = "";
-      $http.post('/profile/edit/profile', {
-        intro: $scope.Intro,
-        s_exp: $scope.S_exp,
-        w_exp: $scope.W_exp,
-        achievement: $scope.Achievement
-      }). then(function(data) {
-            // console.log("posted successfully");
-        },function(data) {
-            // console.error("error in posting");
-        });
-     }
-
-     $scope.sendPostUser = function() {
-       $scope.myTxt = "修改成功!";
-       $http.post('/profile/edit/user', {
-         birthdate: $scope.birthdate,
-         email: $scope.email
-       }). then(function(data) {
-            //  console.log("posted successfully");
-         },function(data) {
-            //  console.error("error in posting");
-         });
-      }
-
-
-
-
-    $scope.isEditIntro=false;
-    $scope.EditIntro = function () {
-      $scope.tempIntro = $scope.Intro;
-      $scope.isEditIntro = !$scope.isEditIntro;
-    }
-    $scope.EditIntroCancel = function () {
-      $scope.Intro=$scope.tempIntro;
-      $scope.isEditIntro = !$scope.isEditIntro;
-    }
-    $scope.EditIntroCheck = function () {
-      $scope.tempIntro="";
-      $scope.isEditIntro = !$scope.isEditIntro;
-      $scope.sendPost();//http
-    }
-    $scope.isEditS_exp=false;
-    $scope.EditS_exp = function () {
-      $scope.tempS_exp = $scope.S_exp;
-      $scope.isEditS_exp = !$scope.isEditS_exp;
-    }
-    $scope.EditS_expCancel = function () {
-      $scope.S_exp=$scope.tempS_exp;
-      $scope.isEditS_exp = !$scope.isEditS_exp;
-    }
-    $scope.EditS_expCheck = function () {
-      $scope.tempS_exp="";
-      $scope.isEditS_exp = !$scope.isEditS_exp;
-      $scope.sendPost();//http
-    }
-    $scope.isEditW_exp=false;
-    $scope.EditW_exp = function () {
-      $scope.tempW_exp = $scope.W_exp;
-      $scope.isEditW_exp = !$scope.isEditW_exp;
-    }
-    $scope.EditW_expCancel = function () {
-      $scope.W_exp=$scope.tempW_exp;
-      $scope.isEditW_exp = !$scope.isEditW_exp;
-    }
-    $scope.EditW_expCheck = function () {
-      $scope.tempW_exp="";
-      $scope.isEditW_exp = !$scope.isEditW_exp;
-      $scope.sendPost();//http
-    }
-    $scope.isEditAchievement=false;
-    $scope.EditAchievement = function () {
-      $scope.tempmyTxt = $scope.myTxt;
-      $scope.isEditAchievement = !$scope.isEditAchievement;
-    }
-    $scope.EditAchievementCancel = function () {
-      $scope.myTxt=$scope.tempmyTxt;
-      $scope.isEditAchievement = !$scope.isEditAchievement;
-    }
-    $scope.EditAchievementCheck = function () {
-      $scope.tempmyTxt="";
-      $scope.isEditAchievement = !$scope.isEditAchievement;
-      $scope.sendPost();//http
-    }
-
-  });
-    </script>
-    <script>
-    $('#example1').datepicker({
-      dateFormat: 'yy-mm-dd',
-      changeYear: true,
-      yearRange: "-100:+0",
-      changeMonth: true
-    });
-    </script>
-
-
-
-
+    </div>
   </body>
 </html>

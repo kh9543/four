@@ -1,0 +1,25 @@
+.row {
+    min-height: 100%;
+    margin: 0 auto;
+    padding: 40px 60px;
+    
+    h2 {
+        text-align: center;
+        font-weight: bold;
+    }
+    hr {
+        border-color: rbga(0,0,0,0.2);
+    }
+    .col-lg-4 {
+        margin-top: 25px;
+    }
+    @media (min-width: 768px) {
+        width: 750px;
+    }
+    @media (min-width: 992px) {
+        width: 970px;
+    }
+    @media (min-width: 1200px) {
+        width: 1170px;
+    }
+}

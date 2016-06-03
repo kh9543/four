@@ -31,15 +31,7 @@ four.service('multipartForm', ['$http', function($http){
 }])
 
 //controller
-four.controller("LoginController", function($scope, $window){
-    $scope.message = "請登入";
-    $scope.fb_login = function(){
-        $scope.message = "登入中";
-    };
-    $scope.gp_login = function(){
-            $scope.message = "登入中"
-    };
-});
+
 
 four.controller('caseFormController', ['$scope', 'multipartForm', '$location', function($scope, multipartForm ,$location) {
      $scope.case = {
@@ -92,3 +84,98 @@ four.controller('mycaseController', ['$scope', '$http', '$window', function($sco
      $scope.cases = $window.cases;
 	 console.log(cases);
 }]);
+
+
+four.controller('resumeController', function($scope,resumeFactory){
+    $scope.resume = resumeFactory;
+});
+four.controller('profileController',function($http,$scope){
+
+$scope.sendPost = function() {
+	$scope.myTxt = "";
+	$http.post('/profile/edit/profile', {
+		intro: $scope.Intro,
+		s_exp: $scope.S_exp,
+		w_exp: $scope.W_exp,
+		achievement: $scope.Achievement
+	}). then(function(data) {
+				console.log("posted successfully");
+		},function(data) {
+				console.error("error in posting");
+		});
+ }
+
+ $scope.sendPostUser = function() {
+	 var birth= $("#birthday").val();
+	 $scope.myTxt = "修改成功!";
+	 $http.post('/profile/edit/user', {
+		 birthdate: birth,
+		 email: $scope.email
+	 }). then(function(data) {
+				 console.log("posted successfully");
+		 },function(data) {
+				 console.error("error in posting");
+		 });
+	}
+
+
+
+
+
+$scope.EditIntro = function () {
+	$scope.tempIntro = $scope.Intro;
+	$scope.isEditIntro = !$scope.isEditIntro;
+}
+$scope.EditIntroCancel = function () {
+	$scope.Intro=$scope.tempIntro;
+	$scope.isEditIntro = !$scope.isEditIntro;
+}
+$scope.EditIntroCheck = function () {
+	$scope.tempIntro="";
+	$scope.isEditIntro = !$scope.isEditIntro;
+	$scope.sendPost();//http
+}
+$scope.isEditS_exp=false;
+$scope.EditS_exp = function () {
+	$scope.tempS_exp = $scope.S_exp;
+	$scope.isEditS_exp = !$scope.isEditS_exp;
+}
+$scope.EditS_expCancel = function () {
+	$scope.S_exp=$scope.tempS_exp;
+	$scope.isEditS_exp = !$scope.isEditS_exp;
+}
+$scope.EditS_expCheck = function () {
+	$scope.tempS_exp="";
+	$scope.isEditS_exp = !$scope.isEditS_exp;
+	$scope.sendPost();//http
+}
+$scope.isEditW_exp=false;
+$scope.EditW_exp = function () {
+	$scope.tempW_exp = $scope.W_exp;
+	$scope.isEditW_exp = !$scope.isEditW_exp;
+}
+$scope.EditW_expCancel = function () {
+	$scope.W_exp=$scope.tempW_exp;
+	$scope.isEditW_exp = !$scope.isEditW_exp;
+}
+$scope.EditW_expCheck = function () {
+	$scope.tempW_exp="";
+	$scope.isEditW_exp = !$scope.isEditW_exp;
+	$scope.sendPost();//http
+}
+$scope.isEditAchievement=false;
+$scope.EditAchievement = function () {
+	$scope.tempmyTxt = $scope.myTxt;
+	$scope.isEditAchievement = !$scope.isEditAchievement;
+}
+$scope.EditAchievementCancel = function () {
+	$scope.myTxt=$scope.tempmyTxt;
+	$scope.isEditAchievement = !$scope.isEditAchievement;
+}
+$scope.EditAchievementCheck = function () {
+	$scope.tempmyTxt="";
+	$scope.isEditAchievement = !$scope.isEditAchievement;
+	$scope.sendPost();//http
+}
+
+});

@@ -1,0 +1,22 @@
+.row {
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 40px 60px; }
+  .row h2 {
+    text-align: center;
+    font-weight: bold; }
+  .row hr {
+    border-color: rbga(0, 0, 0, 0.2); }
+  .row .col-lg-4 {
+    margin-top: 25px; }
+  @media (min-width: 768px) {
+    .row {
+      width: 750px; } }
+  @media (min-width: 992px) {
+    .row {
+      width: 970px; } }
+  @media (min-width: 1200px) {
+    .row {
+      width: 1170px; } }
+
+/*# sourceMappingURL=search_case.css.map */

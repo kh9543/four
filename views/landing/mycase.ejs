@@ -20,7 +20,6 @@
       </script>
   </head>
   <body>
-      <%-include ../layout/Register_Login %>
     <div class="main" ng-controller="mycaseController">
         <%-include ../layout/login-nav %>
         <div class="row">
@@ -36,7 +35,7 @@
                         <div class="case-box">
                             <div class="img-container">
                                 <div class="status-flag" ng-class="case.status" >{{case.status_word}}</div>
-                                <img ng-src="{{case.pic_url}}" class="case-pic">
+                                <img ng-src="{{case.pic_url}}" width="250" height="150" class="case-pic">
                             </div>
                             <h4 ng-bind="case.name"></h4>
                             <div class="case-intro">
