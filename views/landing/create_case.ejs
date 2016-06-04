@@ -11,8 +11,6 @@
       <link rel='stylesheet' href='/stylesheets/create_case.css'>
       <script src="/components/jquery/dist/jquery.min.js"></script>
       <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
-      <script src="/components/wowjs/dist/wow.min.js"></script>
-      <script>new WOW().init();</script>
       <script src="/components/angular/angular.min.js"></script>
       <script src="/components/angular-route/angular-route.min.js"></script>
       <script src="/components/angular-aria/angular-aria.js"></script>
@@ -54,7 +52,7 @@
                     </div>
                     <div class="input-box">
                         <label>地區</label>
-                        <div ng-controller="SelectHeaderController" class="input-field">
+                        <div class="input-field">
                             <md-input-container>
                                 <label>城市</label>
                                 <md-select name="city" ng-model="case.location"
