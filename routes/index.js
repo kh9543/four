@@ -54,7 +54,7 @@ router.get('/auth/google/callback',
         delete req.session.passport;
         User.findUser(newUser.provider, newUser.id, function(err, user){
             if(user){
-                req.session._id = user._id;
+                req.session.a_id = user._id;
                 req.session.o_id = user.id;
                 req.session.name = user.name;
                 req.session.provider = user.provider;
@@ -71,7 +71,7 @@ router.get('/auth/google/callback',
                 }
                 else{
                     req.flash('success', '註冊成功');
-                    req.session._id = user._id;
+                    req.session.a_id = user._id;
                     req.session.o_id = user.id;
                     req.session.name = user.name;
                     req.session.provider = user.provider;
@@ -108,7 +108,7 @@ router.get('/auth/facebook/callback',
       delete req.session.passport;
       User.findUser(newUser.provider, newUser.id, function(err, user){
           if(user){
-              req.session._id = user._id;
+              req.session.a_id = user._id;
               req.session.o_id = user.id;
               req.session.name = user.name;
               req.session.provider = user.provider;
@@ -116,6 +116,8 @@ router.get('/auth/facebook/callback',
               req.session.birthdate = user.birthdate;
               req.session.profile = user.profile;
               req.session.email = user.email;
+              console.log(user._id);
+              console.log(req.session.a_id);
               res.redirect('/');
               return;
           }
@@ -126,17 +128,17 @@ router.get('/auth/facebook/callback',
               }
               else{
                   req.flash('success', '註冊成功');
-                  req.session._id = user._id;
+                  req.session.a_id = user._id;
                   req.session.o_id = user.id;
                   req.session.name = user.name;
                   req.session.provider = user.provider;
                   req.session.photo_url = user.photo_url;
                   req.session.email = user.email;
                   req.session.birthdate= user.birthdate;
+                  console.log(req.session.a_id);
                   res.redirect('/profile');
               }
           });
-
       });
   }
 );
@@ -205,7 +207,7 @@ router.post('/profile/edit/user', ensureAuthenticated, function(req,res){
       if (err) {
         req.flash('error', err);
       }
-      req.flash('success', '修改成功!');
+       req.flash('success', '修改成功!');
       res.redirect('/profile');
     });
 });
@@ -226,7 +228,7 @@ router.post('/profile/edit/profile', ensureAuthenticated, function(req,res){
         if (err) {
           req.flash('error', err);
         }
-        req.flash('success', '修改成功!');
+         req.flash('success', '修改成功!');
         res.end();
       });
     }
@@ -281,14 +283,14 @@ router.post('/create_case', ensureAuthenticated, upload_img.single('file'), func
         case_end: req.body.toDate,
         status: "finding",
         image_name: req.file.filename,
-        proposer: req.session._id
+        proposer: req.session.a_id
     });
-
+    // console.log(req.session.id);
     PM_Case.addCase(newPM_Case, function(err){
         if(err)
-            console.log('失敗');
+            console.log(err);
         else {
-            console.log("成功");
+            console.log("新增案件成功");
             // res.redirect('/mycase');
         }
     });
@@ -298,7 +300,7 @@ router.post('/create_case', ensureAuthenticated, upload_img.single('file'), func
 
 
 router.get('/mycase', ensureAuthenticated, function(req, res, next) {
-    PM_Case.listMyCase(req.session._id, function(err, mycases){
+    PM_Case.listMyCase(req.session.a_id, function(err, mycases){
         if (err) {
             req.flash("error", "找不到案件")
             return res.redirect('/');
@@ -326,6 +328,7 @@ router.get('/mycase', ensureAuthenticated, function(req, res, next) {
                         break;
                 }
                 var temp = {
+                    id: mycases[i]._id,
                     name: mycases[i].name,
                     applicant: applicants,
                     date: d,
@@ -336,8 +339,8 @@ router.get('/mycase', ensureAuthenticated, function(req, res, next) {
                     status_word: word
                 };
                 result.push(temp);
-                // console.log(mycases[i]);
-                // console.log(temp);
+                //console.log(mycases[i]);
+                //console.log(temp);
             }
             res.render('landing/mycase', {
                 name: req.session.name,
@@ -349,6 +352,19 @@ router.get('/mycase', ensureAuthenticated, function(req, res, next) {
     });
 });
 
+router.post('/mycase/remove/:id', ensureAuthenticated, function(req, res) {
+    //need to sanitize params
+    var case_id = req.params.id;
+    console.log(req.session.a_id);
+    PM_Case.removeCase(case_id ,req.session.a_id, function(err){
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log("success");
+        }
+    })
+}) ;
 
 router.get('/images/:file', function(req,res,next){
     var file = req.params.file;

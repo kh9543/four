@@ -43,12 +43,8 @@ var pm_case_s = mongoose.Schema({
     applicants: [
       {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
     ],
-    proposer: [
-      {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
-    ],
-    pm: [
-      {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
-    ]
+    proposer: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    pm: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 /*
 var ocupation_s = mongoose.Schema({
