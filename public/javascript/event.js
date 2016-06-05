@@ -18,7 +18,7 @@ four.directive('fileModel', ['$parse', function($parse){
 }])
 
 //service
-four.service('multipartForm', ['$http', function($http){
+four.service('multipartForm', ['$http', '$window', function($http, $window){
 	this.post = function(uploadUrl, data){
 		var fd = new FormData();
 		for(var key in data)
@@ -26,6 +26,11 @@ four.service('multipartForm', ['$http', function($http){
 		$http.post(uploadUrl, fd, {
 			transformRequest: angular.indentity,
 			headers: { 'Content-Type': undefined }
+		}).then(function success(response){
+			$window.location.href="/mycase";
+			// console.log(response);
+		},function error(response){
+			console.log(response);
 		});
 	}
 }])
@@ -48,7 +53,6 @@ four.controller('caseFormController', ['$scope', 'multipartForm', '$window', fun
         // alert($scope.case.location);
         var uploadUrl = '/create_case';
 		multipartForm.post(uploadUrl, $scope.case);
-		$window.location.reload();
     }
 }]);
 

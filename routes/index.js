@@ -237,14 +237,6 @@ router.post('/profile/edit/profile', ensureAuthenticated, function(req,res){
 
 
 //#
-router.get('/cases/:target/list', ensureAuthenticated, function(req, res, next) {
-    // if(req.params.target="self")
-    // else if(req.params.target="any")
-    // else
-    // return res.json({ cases });
-    console.log('fixing');
-});
-
 router.get('/mywork', ensureAuthenticated,function(req, res, next) {
   res.render('landing/mywork', {
       //email: req.session.email,
@@ -285,11 +277,13 @@ router.post('/create_case', ensureAuthenticated, upload_img.single('file'), func
         image_name: req.file.filename,
         proposer: req.session.a_id
     });
-    // console.log(req.session.id);
     PM_Case.addCase(newPM_Case, function(err){
-        if(err)
+        if(err){
+            res.status(500).send("failed");
             console.log(err);
+        }
         else {
+            res.send("success");
             console.log("新增案件成功");
             // res.redirect('/mycase');
         }
