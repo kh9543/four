@@ -24,7 +24,7 @@
         <%-include ../layout/login-nav %>
         <div class="row">
             <h2>我的提案</h2>
-            <div class="col-lg-12 col-md-12">
+            <div class="no-case" class="col-lg-12 col-md-12">
                 <h3>正在進行的提案</h3>
                 <hr>
                 <div ng-show="cases.length == 0">
@@ -87,7 +87,7 @@
             <div class="col-lg-12 col-md-12">
                 <h3>已經結束的提案</h3>
                 <hr>
-                <div ng-show="cases.length == 0">
+                <div class="no-case" ng-show="cases.length == 0">
                     <p>目前還沒有提任何案子耶....</p>
                 </div>
                 <div class="col-lg-4 col-md-6" ng-repeat="case in cases" ng-if="case.status == 'finished'">
