@@ -3,6 +3,7 @@
   <head>
     <title>四人幫</title>
     <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/components/angular-material/angular-material.css">
     <link rel='stylesheet' href='/stylesheets/all.css'>
     <link rel='stylesheet' href='/stylesheets/index.css'>
     <link rel='stylesheet' href='/stylesheets/animate.css'>
@@ -12,12 +13,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="/components/angular/angular.min.js"></script>
     <script src="/components/angular-route/angular-route.min.js"></script>
+    <script src="/components/angular-aria/angular-aria.js"></script>
+    <script src="/components/angular-animate/angular-animate.js"></script>
+    <script src="/components/angular-material/angular-material.js"></script>
+     <script src="/components/angular-messages/angular-messages.js"></script>
     <script src="/javascript/clean.js"></script>
     <script src="/javascript/event.js"></script>
     <script src="/components/jquery/dist/jquery.min.js"></script>
     <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/components/wowjs/dist/wow.min.js"></script>
     <script>new WOW().init();</script>
+    <script>
+        four.requires.push('ngMaterial');
+    </script>
   </head>
   <body>
     <div class="main">
@@ -102,6 +110,5 @@
         </div>
         <%- include ../layout/footer %>
     </div>
-
   </body>
 </html>

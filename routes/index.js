@@ -188,7 +188,6 @@ router.get('/profile',ensureAuthenticated, function(req, res, next) {
 });
 });
 
-
 router.get('/mycase', ensureAuthenticated, function(req, res, next) {
   res.render('landing/mycase', {
       //email: req.session.email,
