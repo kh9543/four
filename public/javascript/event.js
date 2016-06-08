@@ -41,7 +41,7 @@ four.controller('caseFormController', function($element, $scope, multipartForm ,
      $scope.case = {
          name: "我的案子",
          money: 20000,
-         endDate: null,
+         endDate: new Date(),
          fromDate: null,
          toDate: null,
          applicant: 0,
@@ -59,27 +59,8 @@ four.controller('caseFormController', function($element, $scope, multipartForm ,
 	$scope.clearSearchTerm = function() {
 	  $scope.searchTerm = '';
 	};
-	// The md-select directive eats keydown events for some quick select
-	// logic. Since we have a search input here, we don't need that logic.
-	$element.find('input').on('keydown', function(ev) {
-		ev.stopPropagation();
-	});
-	$scope.cases = [
-     {name: '那些年我們一起追的女孩', applicant: 20, date: '2016.5.10', location: '台北市', money: 20000, pic_url: '/image/thatyear.jpg', status: 'finding', status_word: '找人中'},
-     {name: '等一個人咖啡', applicant: 5, date: '2016.5.20', location: '台中市', money: 50000, pic_url: '/image/waiting.jpg', status: 'found', status_word: '找人成功'},
-     {name: '我的少女時代', applicant: 0, date: '2016.5.15', location: '新北市', money: 25000, pic_url: '/image/ourtime.jpg', status: 'finding', status_word: '找人中'},
-     {name: '那些年我們一起追的女孩', applicant: 20, date: '2016.5.10', location: '台北市', money: 20000, pic_url: '/image/thatyear.jpg', status: 'found', status_word: '找人成功'},
-     {name: '那些年我們一起追的女孩', applicant: 20, date: '2016.5.10', location: '台北市', money: 20000, pic_url: '/image/thatyear.jpg', status: 'found', status_word: '找人成功'},
-     {name: '那些年我們一起追的女孩', applicant: 20, date: '2016.5.10', location: '台北市', money: 20000, pic_url: '/image/thatyear.jpg', status: 'finding', status_word: '找人中'},
-     {name: '那些年我們一起追的女孩', applicant: 20, date: '2016.5.10', location: '台北市', money: 20000, pic_url: '/image/thatyear.jpg', status: 'finding', status_word: '找人中'},
-     {name: '那些年我們一起追的女孩', applicant: 20, date: '2016.5.10', location: '台北市', money: 20000, pic_url: '/image/thatyear.jpg', status: 'finished', status_word: '已完工'},
-     {name: '那些年我們一起追的女孩', applicant: 20, date: '2016.5.10', location: '台北市', money: 20000, pic_url: '/image/thatyear.jpg', status: 'finished', status_word: '已完工'},
-     {name: '那些年我們一起追的女孩', applicant: 20, date: '2016.5.10', location: '台北市', money: 20000, pic_url: '/image/thatyear.jpg', status: 'finished', status_word: '已完工'}
-    ];
-});
 
-four.controller('AppCtrl', function($scope) {
-    $scope.endDate = new Date();
+	$scope.endDate = new Date();
 
     $scope.minDate = new Date(
     $scope.endDate.getFullYear(),
@@ -90,11 +71,21 @@ four.controller('AppCtrl', function($scope) {
     $scope.endDate.getFullYear(),
     $scope.endDate.getMonth() + 2,
     $scope.endDate.getDate());
+
+
+
+	// The md-select directive eats keydown events for some quick select
+	// logic. Since we have a search input here, we don't need that logic.
+	$element.find('input').on('keydown', function(ev) {
+		ev.stopPropagation();
+	});
+	$scope.numberWithCommas = function(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 });
 
 
-
-four.controller('mycaseController', ['$scope', '$http', '$window', function($scope, $http, $window) {
+four.controller('mycaseController', function($scope, $http, $window) {
      $scope.cases = $window.cases;
 	 $scope.remove = function(casee){
 		 url = '/mycase/remove/'+casee.id;
@@ -104,8 +95,34 @@ four.controller('mycaseController', ['$scope', '$http', '$window', function($sco
  					console.error("error in posting");
  			});
 	 }
-}]);
+	 $scope.isFinished = function() {
+		 for (var i = 0; i < cases.length; i++) {
+			if(cases[i].status == 'finished')
+				return false;
+		 }
+		 return true;
+	 }
+	 $scope.numberWithCommas = function(x) {
+	     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	 }
+});
+four.controller('displayCaseController', function($scope, $element, $window) {
+    $scope.cases = $window.cases;
 
+	$scope.cities = ['不限', '基隆市', '台北市', '新北市', '桃園市', '新竹市', '新竹縣', '苗栗縣', '台中市', '彰化縣', '雲林縣', '嘉義市', '嘉義縣', '台南市', '台南縣', '高雄市', '高雄縣', '屏東縣', '宜蘭縣', '花蓮縣', '台東縣', '澎湖縣', '其他'];
+	$scope.searchTerm;
+	$scope.clearSearchTerm = function() {
+		$scope.searchTerm = '';
+	};
+	// The md-select directive eats keydown events for some quick select
+	// logic. Since we have a search input here, we don't need that logic.
+	$element.find('input').on('keydown', function(ev) {
+		ev.stopPropagation();
+	});
+	$scope.numberWithCommas = function(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+});
 
 four.controller('resumeController', function($scope,resumeFactory){
     $scope.resume = resumeFactory;
@@ -196,9 +213,7 @@ four.controller('profileController',function($http,$scope){
 	}
 });
 
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+
 
 
 

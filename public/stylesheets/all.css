@@ -6,13 +6,13 @@ body {
   -webkit-font-smoothing: antialiased;
   background-color: #F0F0F0;
   margin: 0;
-  height: auto;
-  width: 100%; }
+  width: 100%;
+  position: relative;
+  height: auto; }
 
 .main {
   margin-top: 55px;
   position: relative;
-  height: auto;
   min-height: 100%;
   margin-right: auto;
   margin-left: auto; }
@@ -121,13 +121,9 @@ body {
       border-bottom-color: white;
       z-index: 1; }
 
-footer {
+.footer {
   position: absolute;
   bottom: 0;
-  width: 100%; }
-
-.footer {
-  position: relative;
   width: 100%;
   min-height: 70px;
   background-color: white;

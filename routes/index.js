@@ -245,11 +245,44 @@ router.get('/mywork', ensureAuthenticated,function(req, res, next) {
 });
 
 router.get('/search_case', function(req, res, next) {
-  res.render('landing/search_case', {
-      error: req.flash('error'),
-      name: req.session.name,
-      photo_url: req.session.photo_url
-  });
+    PM_Case.listAllCase(function(err, allcases){
+        if (err) {
+            req.flash("error", "找不到案件")
+            return res.redirect('/');
+        }
+        else if (allcases)
+        {
+            var result = new Array();
+            for(var i = 0; i < allcases.length; i++)
+            {
+                var applicants = allcases[i].applicants.length;
+                var url = '/images/'+allcases[i].image_name;
+                var date = allcases[i].recruit_dealine;
+                var d = date.getFullYear()+'.'+date.getMonth()+'.'+date.getDay();
+
+                var temp = {
+                    id: allcases[i]._id,
+                    name: allcases[i].name,
+                    applicant: applicants,
+                    date: d,
+                    location: allcases[i].location,
+                    money: allcases[i].money,
+                    pic_url: url,
+                    status: allcases[i].status,
+                };
+                result.push(temp);
+                //console.log(allcases[i]);
+                //console.log(temp);
+            }
+            res.render('landing/search_case', {
+                error: req.flash('error'),
+                name: req.session.name,
+                photo_url: req.session.photo_url,
+                cases: result
+            });
+            return;
+        }
+    });
 });
 
 

@@ -39,6 +39,9 @@
         margin-bottom: 15px;
         label {
             width: 20%;
+            span {
+                color: red;
+            }
         }
         input{
             width: 100%;
