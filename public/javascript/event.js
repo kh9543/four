@@ -128,7 +128,7 @@ four.controller('resumeController', function($scope,resumeFactory){
     $scope.resume = resumeFactory;
 });
 
-four.controller('caseController',['$scope',function($scope){
+four.controller('caseController',function($scope){
 		$scope.caseDescriptions = [
 			{info:'《伏地，挺伸》是一部關於臺灣大學資訊管理學系林翰伸同學的一部紀錄片。內容為翰伸同學親自講述關於未來即將競選總統的政見發表與他的的半自傳小說《我與九把刀的雙胞胎故事》改編而成，這部片也是臺大資管第一位未來總統參選人的真實紀錄片。電影男主角為林翰伸飾演、喜歡唱林俊傑的歌，熱愛籃球的柯景騰，女主角則是涂靖雯飾演、受班上大鐵錘喜歡的優秀女學生。電影拍攝的地點大都選在臺灣大學管院五樓，主要場景包括朱瑤章大一幫翰伸約舞伴不成，但卻把資管大象吳乙瑩耍的團團轉的故事與林翰伸的練球哲學與系藍人生。九把刀還幫翰伸創作電影主題曲《那些年，我們班上的翰伸》的歌詞，並交由日本作曲家木村充利作曲、歌手資管胡抽抽演唱；這首歌後來獲得許多學長姐語學弟妹的喜愛。',finished:'	紀錄片初版劇本撰寫'},
 			{info:'	目前預計於2017年6月5日，《伏地，挺伸》將首次在第XX屆資管系系卡上映，期望能為翰伸在大四那年發表他的畢業宣言與總統參選人證件，也預計吸引美國、澳洲、韓國等國家接洽版權。隨著同年8月19日於臺灣各家電影院上映後，這部電影之後希望接連在澳門、香港、新加坡、馬來西亞、中國大陸、韓國、日本等地上映。'}
@@ -163,7 +163,7 @@ four.controller('caseController',['$scope',function($scope){
 			{name:'Win姐', response:'到底誰是大象啊＝　＝╬', pic_url:'/image/elephant.jpg'},
 			{name:'TengaMan', response:'這計劃到底是三～小～', pic_url:'/image/TengaMan.jpg'}
 		];
-}]);
+});
 
 four.controller('profileController',function($http,$scope){
 $scope.getbirth= function(date1){

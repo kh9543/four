@@ -238,8 +238,8 @@ router.get('/case_description',ensureAuthenticated, function(req, res, next) {
   res.render('landing/case_description', {
       //email: req.session.email,
       name: req.session.name,
-      photo_url: req.session.photo_url
-
+      photo_url: req.session.photo_url,
+      error: req.flash('error')
   });
 });
 //#
