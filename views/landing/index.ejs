@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html ng-app="four">
   <head>
-      <title>四人幫</title>
-      <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
-      <link rel='stylesheet' href='/stylesheets/all.css'>
-      <link rel='stylesheet' href='/stylesheets/index.css'>
-      <link rel='stylesheet' href='/stylesheets/animate.css'>
-      <link rel='stylesheet' href='/stylesheets/register_login.css'>
-      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.10/angular.min.js"></script>
-      <script src="/javascript/clean.js"></script>
-      <script src="/javascript/event.js"></script>
-      <script src="/components/jquery/dist/jquery.min.js"></script>
-      <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
-      <script src="/components/wowjs/dist/wow.min.js"></script>
-      <script>new WOW().init();</script>
+    <title>四人幫</title>
+    <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/all.css'>
+    <link rel='stylesheet' href='/stylesheets/index.css'>
+    <link rel='stylesheet' href='/stylesheets/animate.css'>
+    <link rel='stylesheet' href='/stylesheets/Register_Login.css'>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="/components/angular/angular.min.js"></script>
+    <script src="/components/angular-route/angular-route.min.js"></script>
+    <script src="/javascript/clean.js"></script>
+    <script src="/javascript/event.js"></script>
+    <script src="/components/jquery/dist/jquery.min.js"></script>
+    <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/components/wowjs/dist/wow.min.js"></script>
+    <script>new WOW().init();</script>
   </head>
   <body>
     <div class="main">
@@ -27,9 +28,6 @@
             <%-include ../layout/login-nav %>
         <% } %>
         <div class="user_entrance">
-            <% if (error) { %>
-                <h1> <%= error %></h1>
-            <% } %>
             <a href="/create_case">
                 <div class="col-lg-4 col-md-4 demander">
                     <div class="backcolor"></div>
@@ -37,7 +35,7 @@
                     <h2>我要提案</h2>
                 </div>
             </a>
-            <a href="/">
+            <a href="/search_case">
                 <div class="col-lg-4 col-md-4 PM">
                     <div class="backcolor"></div>
                     <p>我想要當案子的負責人</p>
@@ -102,8 +100,7 @@
                 </div>
             </div>
         </div>
-        <%- include ../layout/footer %>
     </div>
-
+    <%- include ../layout/footer %>
   </body>
 </html>

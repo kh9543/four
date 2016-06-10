@@ -8,7 +8,7 @@
       <link rel='stylesheet' href='/stylesheets/Profile.css'>
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
       <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
-      
+
       <script src="/components/angular-route/angular-route.min.js"></script>
       <script src="/components/jquery/dist/jquery.min.js"></script>
       <link rel="stylesheet" href="/components/jquery-ui/jquery-ui.min.css">
@@ -30,11 +30,10 @@
       <script>new WOW().init();</script>
       <script src="/javascript/event.js"></script>
   </head>
-  <body >
+  <body>
     <%-include ../layout/login-nav %>
-    <%-include ../layout/Register_Login %>
     <div class="main" ng-controller="profileController">
-      <div class="container profile" >
+        <div class="container profile" >
         <div class="info">
          <div class="left-part">
             <div class="leftwrapper">
@@ -57,7 +56,6 @@
             <ul class="nav nav-pills nav-stacked nav-tabs">
               <li class="active"><a data-toggle="tab" href="#about-me"><span class="glyphicon glyphicon-user"></span>關於我</a></li>
               <li><a data-toggle="tab" href="#resume"><span class="glyphicon glyphicon-file"></span>我的履歷</a></li>
-
             </ul>
             <div class = "upload">
               <h3>上傳外部檔案</h3>
@@ -67,21 +65,20 @@
             </div>
          </div>
          <div class="right-part" >
-           <div class="tab-content"  >
-             <div id="about-me" class="tab-pane fade in active" ng-init="name='<%-name%>';email='<%-email%>';getbirth('<%-birthdate%>')">
-                <form id="form1" name="f1">
-                   <h3>姓名：{{ name }}</h3>
-                   <h3>生日：
-                     <input name="birthdate" type="text" id="birthday" ng-model="birthdate">
-                   </h3>
-                   <h3 style="display:inline-block;">Email:
-                      <input name="email" type="email" ng-model="email" placeholder="請輸入Email" required>
-                      <span><button class="btn" ng-disabled="f1.$invalid" ng-click="sendPostUser()"/><i class="fa fa-check"></i></button></span>
-                   </h3>
-                   <p>{{myTxt}}</p>
-                </form>
+           <div class="tab-content">
+             <div id="about-me" class="tab-pane fade in active" ng-init="name='<%-name%>';email='<%-email%>';birthdate='<%-birthdate%>'">
+             <form id="form1" name="f1">
+               <h3>姓名：{{ name }}</h3>
+               <h3>生日：
+                 <input name="birthdate" type="text" id="birthday" ng-model="birthdate | date:'yyyy/MM/dd'">
+               </h3>
+               <h3 style="display:inline-block;">Email:
+                  <input name="email" type="email" ng-model="email" placeholder="請輸入Email" required>
+                  <span><button class="btn" ng-disabled="f1.$invalid" ng-click="sendPostUser()"/><i class="fa fa-check"></i></button></span>
+               </h3>
+               <p>{{myTxt}}</p>
+            </form>
             </div>
-
             <div id="resume" class="tab-pane fade" ng-init="Intro='<%-intro%>';S_exp='<%-s_exp%>';W_exp='<%-w_exp%>';Achievement='<%-achievement%>'">
                 <h3>個人介紹: <i ng-hide="isEditIntro" ng-click="EditIntro()" class="fa fa-pencil"></i></h3>
                 <div class="line"></div>
@@ -164,5 +161,6 @@
       </div>
     </div>
     <%- include ../layout/footer %>
+    </div>
   </body>
 </html>

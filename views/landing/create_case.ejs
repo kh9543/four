@@ -11,8 +11,6 @@
       <link rel='stylesheet' href='/stylesheets/create_case.css'>
       <script src="/components/jquery/dist/jquery.min.js"></script>
       <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
-      <script src="/components/wowjs/dist/wow.min.js"></script>
-      <script>new WOW().init();</script>
       <script src="/components/angular/angular.min.js"></script>
       <script src="/components/angular-route/angular-route.min.js"></script>
       <script src="/components/angular-aria/angular-aria.js"></script>
@@ -40,7 +38,6 @@
       </script>
   </head>
   <body>
-      <%-include ../layout/Register_Login %>
     <div class="main">
         <%-include ../layout/login-nav %>
         <div class="row">
@@ -48,14 +45,14 @@
             <form name="caseform" ng-controller="caseFormController" runat="server" ng-class="{true: 'error'}[submitted]">
                 <div class="col-lg-6 col-md-6 case-detail">
                     <div class="input-box">
-                        <label for="name">專案名稱</label>
+                        <label for="name">專案名稱<span ng-show="case.name==null">*</span></label>
                         <div class="input-field">
                             <input type="text" name="title" ng-model="case.name" value="15字以內的專案名稱" placeholder="15字以內的專案名稱" onClick="this.select();" required>
                         </div>
                     </div>
                     <div class="input-box">
-                        <label>地區</label>
-                        <div ng-controller="SelectHeaderController" class="input-field">
+                        <label>地區<span ng-show="case.location=='地區'">*</span></label>
+                        <div class="input-field">
                             <md-input-container>
                                 <label>城市</label>
                                 <md-select name="city" ng-model="case.location"
@@ -76,29 +73,29 @@
                             </md-input-container>
                         </div>
                     </div>
-                    <div class="input-box" ng-controller="AppCtrl">
-                        <label>截止時間</label>
-                        <md-datepicker name="endDate" ng-model="case.endDate" md-placeholder="End Date" md-min-date="minDate" required></md-datepicker>
-                    </div>
-                    <div class="input-box" ng-controller="AppCtrl">
-                        <label>工作期間</label>
-                        <md-datepicker name="fromDate" ng-model="case.fromDate" md-placeholder="Begin" md-min-date="minDate" required ></md-datepicker>
-                        <md-datepicker name="toDate" ng-model="case.toDate" md-placeholder="End" md-min-date="minDate" md-max-date="maxDate" required></md-datepicker>
+                    <div class="input-box">
+                        <label>截止時間<span ng-show="case.endDate==null">*</span></label>
+                        <md-datepicker name="endDate" ng-model="case.endDate" md-placeholder="End Date" md-min-date="minDate" md-max-date="maxDate" required></md-datepicker>
                     </div>
                     <div class="input-box">
-                        <label>專案描述</label>
+                        <label>工作期間<span ng-show="case.fromDate==null || case.toDate==null">*</span></label>
+                        <md-datepicker name="fromDate" ng-model="case.fromDate" md-placeholder="Begin" md-min-date="minDate=case.endDate" required ></md-datepicker>
+                        <md-datepicker name="toDate" ng-model="case.toDate" md-placeholder="End" md-min-date="minDate=case.fromDate" required></md-datepicker>
+                    </div>
+                    <div class="input-box">
+                        <label>專案描述<span ng-show="case.detail==null">*</span></label>
                         <textarea class="input-detail" ng-model="case.detail" name="detail" placeholder="請用200字以內簡單說明專案的內容" rows="5" required></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 case-detail">
                     <div class="input-box">
-                        <label for="money">預算價格</label>
+                        <label for="money">預算價格<span ng-show="case.money==null">*</span></label>
                         <div class="input-field">
                             <input type="number" name="money" class="ng-touched" ng-model="case.money" onClick="this.select();" required>
                         </div>
                     </div>
                     <div class="input-box">
-                        <label>專案封面</label>
+                        <label>專案封面<span ng-show="case.file==null">*</span></label>
                         <div class="input-field">
                             <input name="image" class="image-upload" type='file' onchange="readURL(this);" file-model="case.file" required>
                         </div>
@@ -117,7 +114,7 @@
                                 <div class="case-intro">
                                     <div class="case-money">
                                         報酬
-                                        <span ng-bind="case.money"></span>
+                                        <span ng-bind="numberWithCommas(case.money)"></span>
                                     </div>
                                     <div class="case-apply">
                                         應徵人數
@@ -141,7 +138,7 @@
                 </div>
             </form>
         </div>
-        <%- include ../layout/footer %>
     </div>
+    <%- include ../layout/footer %>
   </body>
 </html>

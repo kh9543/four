@@ -1,7 +1,9 @@
 .row {
-  min-height: 100%;
+  height: 100%;
   margin: 0 auto;
-  padding: 40px 60px;
+  padding: 0 60px;
+  padding-top: 40px;
+  padding-bottom: 70px;
   background-color: white; }
   .row h2 {
     text-align: center;
@@ -19,5 +21,8 @@
   @media (min-width: 1200px) {
     .row {
       width: 1170px; } }
+
+.no-case {
+  min-height: 260px; }
 
 /*# sourceMappingURL=mycase.css.map */

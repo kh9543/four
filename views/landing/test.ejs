@@ -3,83 +3,31 @@
   <head>
       <title>四人幫</title>
       <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/components/angular-material/angular-material.css">
       <link rel='stylesheet' href='/stylesheets/all.css'>
-      <link rel='stylesheet' href='/stylesheets/mycase.css'>
+      <link rel='stylesheet' href='/stylesheets/index.css'>
       <link rel='stylesheet' href='/stylesheets/animate.css'>
-      <link rel='stylesheet' href='/stylesheets/test.css'>
-      <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+      <link rel='stylesheet' href='/stylesheets/Register_Login.css'>
+      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
       <script src="/components/angular/angular.min.js"></script>
       <script src="/components/angular-route/angular-route.min.js"></script>
       <script src="/components/angular-aria/angular-aria.js"></script>
       <script src="/components/angular-animate/angular-animate.js"></script>
       <script src="/components/angular-material/angular-material.js"></script>
        <script src="/components/angular-messages/angular-messages.js"></script>
-
-  </head>
-  <body ng-app="MyApp" class="ng-scope">
-      <div ng-controller="AppCtrl" style="padding: 40px;" ng-cloak="" class="datepickerdemoBasicUsage" ng-app="MyApp">
-        <md-content>
-
-          <h4>Standard date-picker</h4>
-          <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
-
-          <h4>Disabled date-picker</h4>
-          <md-datepicker ng-model="myDate" md-placeholder="Enter date" disabled=""></md-datepicker>
-
-          <h4>Date-picker with min date and max date</h4>
-          <md-datepicker ng-model="myDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
-          <h4>Only weekends are selectable</h4>
-          <md-datepicker ng-model="myDate" md-placeholder="Enter date" md-date-filter="onlyWeekendsPredicate"></md-datepicker>
-
-          <h4>Only weekends within given range are selectable</h4>
-          <md-datepicker ng-model="myDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate" md-date-filter="onlyWeekendsPredicate"></md-datepicker>
-
-          <h4>With ngMessages</h4>
-          <form name="myForm">
-            <md-datepicker name="dateField" ng-model="myDate" md-placeholder="Enter date" required="" md-min-date="minDate" md-max-date="maxDate" md-date-filter="onlyWeekendsPredicate"></md-datepicker>
-
-            <div class="validation-messages" ng-messages="myForm.dateField.$error">
-              <div ng-message="valid">The entered value is not a date!</div>
-              <div ng-message="required">This date is required!</div>
-              <div ng-message="mindate">Date is too early!</div>
-              <div ng-message="maxdate">Date is too late!</div>
-              <div ng-message="filtered">Only weekends are allowed!</div>
-            </div>
-          </form>
-
-        </md-content>
-      </div>
+      <script src="/javascript/clean.js"></script>
+      <script src="/javascript/event.js"></script>
+      <script src="/components/jquery/dist/jquery.min.js"></script>
+      <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="/components/wowjs/dist/wow.min.js"></script>
+      <script>new WOW().init();</script>
       <script>
-      var MyApp = angular.module('MyApp', ['ngRoute']);
-      MyApp.requires.push('ngMaterial', 'ngMessages');
-      MyApp.controller('AppCtrl', function($scope) {
-      $scope.myDate = new Date();
-
-      $scope.minDate = new Date(
-      $scope.myDate.getFullYear(),
-      $scope.myDate.getMonth() - 2,
-      $scope.myDate.getDate());
-
-      $scope.maxDate = new Date(
-      $scope.myDate.getFullYear(),
-      $scope.myDate.getMonth() + 2,
-      $scope.myDate.getDate());
-
-      $scope.onlyWeekendsPredicate = function(date) {
-      var day = date.getDay();
-      return day === 0 || day === 6;
-      }
-      });
-
-
-      /**
-      Copyright 2016 Google Inc. All Rights Reserved.
-      Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
-      **/
+          four.requires.push('ngMaterial');
       </script>
-      <!--
-      Copyright 2016 Google Inc. All Rights Reserved.
-      Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
-      -->
+  </head>
+  <body ng-app="four">
+      <%- include ../layout/error_dialog %>
   </body>
 </html>

@@ -34,6 +34,8 @@
     margin-bottom: 15px; }
     .case-detail .input-box label {
       width: 20%; }
+      .case-detail .input-box label span {
+        color: red; }
     .case-detail .input-box input {
       width: 100%;
       padding: 8px 10px;

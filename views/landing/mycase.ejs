@@ -16,14 +16,16 @@
       <script src="/components/wowjs/dist/wow.min.js"></script>
       <script>new WOW().init();</script>
       <script src="/javascript/event.js"></script>
+      <script>
+            var cases = <%- JSON.stringify(cases) %>;
+      </script>
   </head>
   <body>
-      <%-include ../layout/Register_Login %>
     <div class="main" ng-controller="mycaseController">
         <%-include ../layout/login-nav %>
         <div class="row">
             <h2>我的提案</h2>
-            <div class="col-lg-12 col-md-12">
+            <div class="col-lg-12 col-md-12 no-case">
                 <h3>正在進行的提案</h3>
                 <hr>
                 <div ng-show="cases.length == 0">
@@ -34,13 +36,13 @@
                         <div class="case-box">
                             <div class="img-container">
                                 <div class="status-flag" ng-class="case.status" >{{case.status_word}}</div>
-                                <img ng-src="{{case.pic_url}}" class="case-pic">
+                                <img ng-src="{{case.pic_url}}" width="250" height="150" class="case-pic">
                             </div>
                             <h4 ng-bind="case.name"></h4>
                             <div class="case-intro">
                                 <div class="case-money">
                                     報酬
-                                    <span ng-bind="case.money"></span>
+                                    <span ng-bind="numberWithCommas(case.money)"></span>
                                 </div>
                                 <div class="case-apply">
                                     應徵人數
@@ -65,8 +67,8 @@
                                 <i class="glyphicon glyphicon-list-alt"></i>
                                 <span>名單</span>
                             </a>
-                            <a href="/">
-                                <i class="glyphicon glyphicon-trash"></i>
+                            <a href="/mycase" ng-click="remove(case)">
+                                <i class="glyphicon glyphicon-trash" ></i>
                                 <span>下架</span>
                             </a>
                         </div>
@@ -83,11 +85,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 col-md-12">
+            <div class="col-lg-12 col-md-12 no-case">
                 <h3>已經結束的提案</h3>
                 <hr>
-                <div ng-show="cases.length == 0">
-                    <p>目前還沒有提任何案子耶....</p>
+                <div ng-show="isFinished()">
+                    <p>目前還沒有完成的案子耶....</p>
                 </div>
                 <div class="col-lg-4 col-md-6" ng-repeat="case in cases" ng-if="case.status == 'finished'">
                     <div class="case-container">

@@ -54,6 +54,7 @@ router.get('/auth/google/callback',
         delete req.session.passport;
         User.findUser(newUser.provider, newUser.id, function(err, user){
             if(user){
+                req.session.a_id = user._id;
                 req.session.o_id = user.id;
                 req.session.name = user.name;
                 req.session.provider = user.provider;
@@ -70,6 +71,7 @@ router.get('/auth/google/callback',
                 }
                 else{
                     req.flash('success', '註冊成功');
+                    req.session.a_id = user._id;
                     req.session.o_id = user.id;
                     req.session.name = user.name;
                     req.session.provider = user.provider;
@@ -106,6 +108,7 @@ router.get('/auth/facebook/callback',
       delete req.session.passport;
       User.findUser(newUser.provider, newUser.id, function(err, user){
           if(user){
+              req.session.a_id = user._id;
               req.session.o_id = user.id;
               req.session.name = user.name;
               req.session.provider = user.provider;
@@ -113,6 +116,8 @@ router.get('/auth/facebook/callback',
               req.session.birthdate = user.birthdate;
               req.session.profile = user.profile;
               req.session.email = user.email;
+              console.log(user._id);
+              console.log(req.session.a_id);
               res.redirect('/');
               return;
           }
@@ -123,16 +128,17 @@ router.get('/auth/facebook/callback',
               }
               else{
                   req.flash('success', '註冊成功');
+                  req.session.a_id = user._id;
                   req.session.o_id = user.id;
                   req.session.name = user.name;
                   req.session.provider = user.provider;
                   req.session.photo_url = user.photo_url;
                   req.session.email = user.email;
                   req.session.birthdate= user.birthdate;
+                  console.log(req.session.a_id);
                   res.redirect('/profile');
               }
           });
-
       });
   }
 );
@@ -161,7 +167,6 @@ router.get('/profile',ensureAuthenticated, function(req, res, next) {
               s_exp: profile.s_exp,
               w_exp: profile.w_exp,
               achievement: profile.achievement
-
           });
           return;
       }
@@ -189,12 +194,43 @@ router.get('/profile',ensureAuthenticated, function(req, res, next) {
 });
 
 
-router.get('/mycase', ensureAuthenticated, function(req, res, next) {
-  res.render('landing/mycase', {
-      //email: req.session.email,
-      name: req.session.name,
-      photo_url: req.session.photo_url
+router.post('/profile/edit/user', ensureAuthenticated, function(req,res){
+  console.log(req.body);
+    req.session.birthdate=req.body.birthdate;
+    req.session.email=req.body.email;
+    var currentuser= req.session.o_id;
+    var updatedata ={
+      birthdate: req.body.birthdate,
+      email: req.body.email
+    };
+    User.editUser(currentuser,updatedata,function(err){
+      if (err) {
+        req.flash('error', err);
+      }
+       req.flash('success', '修改成功!');
+      res.redirect('/profile');
+    });
+});
 
+router.post('/profile/edit/profile', ensureAuthenticated, function(req,res){
+  var updatedata = {
+    intro: req.body.intro,
+    s_exp: req.body.s_exp,
+    w_exp: req.body.w_exp,
+    achievement: req.body.achievement
+  };
+  User.findUser(req.session.provider, req.session.o_id, function(err, user){
+    if (user)
+    {
+      var uid=user._id;
+      Profile.editProfile(uid,updatedata,function(err){
+        if (err) {
+          req.flash('error', err);
+        }
+         req.flash('success', '修改成功!');
+        res.end();
+      });
+    }
   });
 });
 
@@ -215,12 +251,55 @@ router.get('/cases/:target/list', ensureAuthenticated, function(req, res, next) 
     console.log('fixing');
 });
 
+
+//#
 router.get('/mywork', ensureAuthenticated,function(req, res, next) {
   res.render('landing/mywork', {
       //email: req.session.email,
       name: req.session.name,
       photo_url: req.session.photo_url
   });
+});
+
+router.get('/search_case', function(req, res, next) {
+    PM_Case.listAllCase(function(err, allcases){
+        if (err) {
+            req.flash("error", "找不到案件")
+            return res.redirect('/');
+        }
+        else if (allcases)
+        {
+            var result = new Array();
+            for(var i = 0; i < allcases.length; i++)
+            {
+                var applicants = allcases[i].applicants.length;
+                var url = '/images/'+allcases[i].image_name;
+                var date = allcases[i].recruit_dealine;
+                var d = date.getFullYear()+'.'+date.getMonth()+'.'+date.getDay();
+
+                var temp = {
+                    id: allcases[i]._id,
+                    name: allcases[i].name,
+                    applicant: applicants,
+                    date: d,
+                    location: allcases[i].location,
+                    money: allcases[i].money,
+                    pic_url: url,
+                    status: allcases[i].status,
+                };
+                result.push(temp);
+                //console.log(allcases[i]);
+                //console.log(temp);
+            }
+            res.render('landing/search_case', {
+                error: req.flash('error'),
+                name: req.session.name,
+                photo_url: req.session.photo_url,
+                cases: result
+            });
+            return;
+        }
+    });
 });
 
 
@@ -244,14 +323,17 @@ router.post('/create_case', ensureAuthenticated, upload_img.single('file'), func
         case_start: req.body.fromDate,
         case_end: req.body.toDate,
         status: "finding",
-        image_name: req.file.filename
+        image_name: req.file.filename,
+        proposer: req.session.a_id
     });
-
     PM_Case.addCase(newPM_Case, function(err){
-        if(err)
-            console.log('失敗');
+        if(err){
+            res.status(500).send("failed");
+            console.log(err);
+        }
         else {
-            console.log("成功");
+            res.send("success");
+            console.log("新增案件成功");
             // res.redirect('/mycase');
         }
     });
@@ -259,46 +341,73 @@ router.post('/create_case', ensureAuthenticated, upload_img.single('file'), func
     // console.log(req.file);
 });
 
-router.post('/profile/edit/user', ensureAuthenticated, function(req,res){
-  console.log(req.body);
-    req.session.birthdate=req.body.birthdate;
-    req.session.email=req.body.email;
-    var currentuser= req.session.o_id;
-    var updatedata ={
-      birthdate: req.body.birthdate,
-      email: req.body.email
-    };
-    User.editUser(currentuser,updatedata,function(err){
-      if (err) {
-        req.flash('error', err);
-      }
-      req.flash('success', '修改成功!');
-      res.redirect('/profile');
+
+router.get('/mycase', ensureAuthenticated, function(req, res, next) {
+    PM_Case.listMyCase(req.session.a_id, function(err, mycases){
+        if (err) {
+            req.flash("error", "找不到案件")
+            return res.redirect('/');
+        }
+        else if (mycases)
+        {
+            var result = new Array();
+            for(var i = 0; i < mycases.length; i++)
+            {
+                var applicants = mycases[i].applicants.length;
+                var url = '/images/'+mycases[i].image_name;
+                var date = mycases[i].recruit_dealine;
+                var d = date.getFullYear()+'.'+date.getMonth()+'.'+date.getDay();
+                var word = null;
+
+                switch (mycases[i].status) {
+                    case 'finding':
+                        word = "找人中";
+                        break;
+                    case 'found':
+                        word = "找人成功";
+                        break;
+                    case 'finished':
+                        word = "已完工";
+                        break;
+                }
+                var temp = {
+                    id: mycases[i]._id,
+                    name: mycases[i].name,
+                    applicant: applicants,
+                    date: d,
+                    location: mycases[i].location,
+                    money: mycases[i].money,
+                    pic_url: url,
+                    status: mycases[i].status,
+                    status_word: word
+                };
+                result.push(temp);
+                //console.log(mycases[i]);
+                //console.log(temp);
+            }
+            res.render('landing/mycase', {
+                name: req.session.name,
+                photo_url: req.session.photo_url,
+                cases: result
+            });
+            return;
+        }
     });
 });
 
-
-router.post('/profile/edit/profile', ensureAuthenticated, function(req,res){
-  var updatedata = {
-    intro: req.body.intro,
-    s_exp: req.body.s_exp,
-    w_exp: req.body.w_exp,
-    achievement: req.body.achievement
-  };
-  User.findUser(req.session.provider, req.session.o_id, function(err, user){
-    if (user)
-    {
-      var uid=user._id;
-      Profile.editProfile(uid,updatedata,function(err){
-        if (err) {
-          req.flash('error', err);
+router.post('/mycase/remove/:id', ensureAuthenticated, function(req, res) {
+    //need to sanitize params
+    var case_id = req.params.id;
+    console.log(req.session.a_id);
+    PM_Case.removeCase(case_id ,req.session.a_id, function(err){
+        if(err){
+            console.log(err);
         }
-        req.flash('success', '修改成功!');
-        res.end();
-      });
-    }
-  });
-});
+        else{
+            console.log("success");
+        }
+    })
+}) ;
 
 router.get('/images/:file', function(req,res,next){
     var file = req.params.file;

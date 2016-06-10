@@ -1,4 +1,11 @@
 <!--Register&Login Modal-->
+<% if (error == "未登入") { %>
+<script>
+    $(document).ready(function(){
+        $("#Login").modal();
+    });
+</script>
+<% } %>
 <div class="modal fade Register_Login" id="Login" role="dialog">
     <div class="modal-dialog Register_Login">
       <div class="modal-content">
@@ -7,7 +14,7 @@
             <img class="logo" src="/image/logo.png">
          </div>
          <!--Modal Body-->
-         <div class="modal-body" ng-controller="LoginController">
+         <div class="modal-body">
            <div class="box">
                 <div class="content">
                    <div class="social">
@@ -40,4 +47,3 @@
       </div>
     </div>
   </div>
-</div>
