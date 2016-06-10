@@ -1,0 +1,271 @@
+.upperContent {
+  padding-top: 45px; }
+  .upperContent .container {
+    margin: 0 auto; }
+    .upperContent .container .title {
+      margin-bottom: 44px;
+      position: relative;
+      text-align: center;
+      line-height: 3em;
+      font: inherit; }
+    .upperContent .container .row .col-sm-8 {
+      width: 68%; }
+      .upperContent .container .row .col-sm-8 .case_image {
+        position: relative;
+        height: 400px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url(/image/handsomelin.png); }
+    .upperContent .container .row .col-sm-4 {
+      width: 32%; }
+      .upperContent .container .row .col-sm-4 .requirement {
+        position: relative;
+        height: 400px; }
+        .upperContent .container .row .col-sm-4 .requirement h1 {
+          font-family: "Roboto", sans-serif;
+          font-size: 35px;
+          margin-bottom: 15px;
+          font-weight: 600;
+          line-height: 45px; }
+        .upperContent .container .row .col-sm-4 .requirement p {
+          font-weight: 400;
+          font-size: 15px;
+          font-family: "LiHei Pro";
+          letter-spacing: .07em; }
+        .upperContent .container .row .col-sm-4 .requirement div {
+          display: inline-block;
+          position: relative;
+          margin-bottom: 15px; }
+      .upperContent .container .row .col-sm-4 .work-date, .upperContent .container .row .col-sm-4 .end-date {
+        padding-left: 15px; }
+    .upperContent .container .case-info {
+      height: 110px;
+      background: #fff;
+      margin-top: 15px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.24); }
+      .upperContent .container .case-info .leftbar {
+        padding: 15px 0;
+        float: left;
+        position: relative;
+        width: 69.4%;
+        text-align: center;
+        display: flex;
+        justify-content: space-around; }
+        .upperContent .container .case-info .leftbar .info {
+          padding-top: 3px;
+          display: block;
+          position: relative;
+          text-align: center; }
+        .upperContent .container .case-info .leftbar .apply {
+          display: inline-block; }
+          .upperContent .container .case-info .leftbar .apply .number {
+            margin: 0 auto;
+            width: 60px;
+            height: 60px;
+            background-image: url(/image/users-applied.png);
+            background-repeat: no-repeat;
+            background-size: cover; }
+        .upperContent .container .case-info .leftbar .film {
+          display: inline-block; }
+          .upperContent .container .case-info .leftbar .film .film-camera {
+            margin: 0 auto;
+            width: 60px;
+            height: 60px;
+            background-image: url(/image/video-camera.png);
+            background-repeat: no-repeat;
+            background-size: cover; }
+        .upperContent .container .case-info .leftbar .direct {
+          display: inline-block; }
+          .upperContent .container .case-info .leftbar .direct .director {
+            margin: 0 auto;
+            width: 60px;
+            height: 60px;
+            background-image: url(/image/film-clapper.png);
+            background-repeat: no-repeat;
+            background-size: cover; }
+        .upperContent .container .case-info .leftbar .script {
+          display: inline-block; }
+          .upperContent .container .case-info .leftbar .script .movie-script {
+            margin: 0 auto;
+            width: 60px;
+            height: 60px;
+            background-image: url(/image/write.png);
+            background-repeat: no-repeat;
+            background-size: cover; }
+          .upperContent .container .case-info .leftbar .script .info {
+            padding-right: 10px; }
+      .upperContent .container .case-info .rightbar {
+        padding: 15px;
+        height: 110px;
+        float: left;
+        position: relative;
+        width: 30.6%;
+        text-align: center;
+        border-left: 2px solid rgba(0, 0, 0, 0.12); }
+        .upperContent .container .case-info .rightbar .btn-orange {
+          margin: 20px 15px 0px 0px; }
+
+.bottomContent {
+  margin-top: 50px; }
+  .bottomContent .container {
+    margin: 0 auto;
+    display: table; }
+    .bottomContent .container .left-panel {
+      vertical-align: top;
+      display: table-cell;
+      position: relative;
+      text-align: left;
+      width: 60%; }
+      .bottomContent .container .left-panel h4 {
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        font-size: 1.438em;
+        font-weight: bolder;
+        color: rgba(0, 0, 0, 0.65);
+        letter-spacing: .05em; }
+      .bottomContent .container .left-panel p {
+        text-indent: 2em; }
+      .bottomContent .container .left-panel .Caseinfo, .bottomContent .container .left-panel .QandA {
+        margin-bottom: 20px; }
+      .bottomContent .container .left-panel .Actor {
+        margin: 20px auto; }
+        .bottomContent .container .left-panel .Actor .character .row {
+          margin: 20px auto; }
+          .bottomContent .container .left-panel .Actor .character .row img {
+            width: 180px;
+            height: 180px;
+            padding: 0; }
+          .bottomContent .container .left-panel .Actor .character .row .person {
+            border: 4px solid #eccbc0; }
+          .bottomContent .container .left-panel .Actor .character .row .character-info {
+            padding-left: 30px;
+            padding-right: 0px; }
+            .bottomContent .container .left-panel .Actor .character .row .character-info .line {
+              width: 50px;
+              height: 4px;
+              background-color: #969696;
+              margin: 10px 0px; }
+          .bottomContent .container .left-panel .Actor .character .row p {
+            text-indent: 0; }
+      .bottomContent .container .left-panel .QA p.strongfont {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 16px;
+        font-weight: bolder; }
+      .bottomContent .container .left-panel .QA p {
+        text-indent: 0; }
+      .bottomContent .container .left-panel .celebrity-response {
+        margin: 10px auto;
+        display: block;
+        background: #fff;
+        box-shadow: 0 1px 2px;
+        border-radius: 3px;
+        padding: 20px;
+        height: auto; }
+        .bottomContent .container .left-panel .celebrity-response .col-sm-4 {
+          text-align: center; }
+          .bottomContent .container .left-panel .celebrity-response .col-sm-4 img {
+            display: inline-block;
+            margin: 0 auto;
+            width: 120px;
+            height: 120px;
+            padding: 0;
+            border: 2px solid; }
+          .bottomContent .container .left-panel .celebrity-response .col-sm-4 p {
+            margin: 0 auto;
+            font-size: 12px;
+            font-weight: lighter;
+            padding-top: 3px;
+            display: block;
+            position: relative;
+            text-align: center;
+            text-indent: -0.2em; }
+        .bottomContent .container .left-panel .celebrity-response .fa-quote-left {
+          font-size: 20px;
+          margin-top: 20px; }
+        .bottomContent .container .left-panel .celebrity-response blockquote {
+          white-space: pre-wrap; }
+      .bottomContent .container .left-panel h5 {
+        font-size: 1.238em;
+        font-weight: bolder;
+        letter-spacing: .03em; }
+    .bottomContent .container .border {
+      vertical-align: top;
+      display: table-cell;
+      position: relative;
+      width: 10%; }
+    .bottomContent .container .right-panel {
+      vertical-align: top;
+      display: table-cell;
+      position: relative;
+      width: 30%; }
+      .bottomContent .container .right-panel .founder-profile {
+        display: block;
+        background: #fff;
+        box-shadow: 0 1px 2px;
+        border-radius: 3px;
+        padding: 20px;
+        height: auto; }
+        .bottomContent .container .right-panel .founder-profile h4 {
+          margin: 0 auto;
+          padding: 0 0 20px 0;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+          text-align: center;
+          font-size: 1.438em;
+          font-weight: bolder;
+          letter-spacing: .05em; }
+        .bottomContent .container .right-panel .founder-profile .founder-photo {
+          margin: 15px auto;
+          display: inline block;
+          border-radius: 50%;
+          overflow: hidden;
+          width: 180px;
+          height: 180px;
+          background-size: cover;
+          position: relative;
+          border: 4px solid #eccbc0;
+          box-shadow: inset 0 0 0 0 rgba(200, 95, 66, 0.2), 0 0 0 8px rgba(255, 255, 255, 0.6), 0 1px 2px rgba(0, 0, 0, 0.1);
+          transition: all 0.2s ease-in-out; }
+        .bottomContent .container .right-panel .founder-profile p {
+          margin: 10px auto;
+          text-align: left;
+          padding-right: 30px;
+          padding-left: 30px;
+          font-weight: 400; }
+      .bottomContent .container .right-panel .follow {
+        display: block;
+        background: #fff;
+        box-shadow: 0 1px 2px;
+        border-radius: 3px;
+        margin-top: 15px;
+        text-align: center; }
+        .bottomContent .container .right-panel .follow .btn-orange {
+          margin: 20px auto;
+          width: 70%;
+          padding: 10px; }
+        .bottomContent .container .right-panel .follow .fa {
+          font-size: 1.25em;
+          font-weight: 700;
+          letter-spacing: 2px; }
+        .bottomContent .container .right-panel .follow .fa-bookmark::before {
+          padding-right: 2px; }
+  .bottomContent p {
+    letter-spacing: .15em;
+    font-weight: 700;
+    line-height: 1.8em; }
+
+.btn-orange {
+  position: relative;
+  width: 80%;
+  background: #ff7f6b;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 1.25em;
+  font-weight: 700; }
+  .btn-orange:hover {
+    color: #fff;
+    background: #e56551; }
+
+/*# sourceMappingURL=case_description.css.map */

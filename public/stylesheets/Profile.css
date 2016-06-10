@@ -150,8 +150,6 @@
       box-shadow: 0 1px 2px;
       border-radius: 15px 15px 0 0;
       overflow: hidden; }
-      .container .info .right-part .tab-content {
-        height: 800px; }
       .container .info .right-part p {
         white-space: pre-wrap; }
       .container .info .right-part #about-me a:hover {

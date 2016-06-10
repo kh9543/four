@@ -7,7 +7,8 @@
       <link rel='stylesheet' href='/stylesheets/animate.css'>
       <link rel='stylesheet' href='/stylesheets/Profile.css'>
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-      <script src="/components/angular/angular.min.js"></script>
+      <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+      
       <script src="/components/angular-route/angular-route.min.js"></script>
       <script src="/components/jquery/dist/jquery.min.js"></script>
       <link rel="stylesheet" href="/components/jquery-ui/jquery-ui.min.css">
@@ -67,19 +68,18 @@
          </div>
          <div class="right-part" >
            <div class="tab-content"  >
-             <div id="about-me" class="tab-pane fade in active" ng-init="name='<%-name%>';email='<%-email%>';birthdate='<%-birthdate%>'">
-             <form id="form1" name="f1">
-               <h3>姓名：{{ name }}</h3>
-               <h3>生日：
-
-                 <input name="birthdate" type="text" id="birthday" ng-model="birthdate | date:'yyyy/MM/dd'">
-               </h3>
-               <h3 style="display:inline-block;">Email:
-                  <input name="email" type="email" ng-model="email" placeholder="請輸入Email" required>
-                  <span><button class="btn" ng-disabled="f1.$invalid" ng-click="sendPostUser()"/><i class="fa fa-check"></i></button></span>
-               </h3>
-               <p>{{myTxt}}</p>
-            </form>
+             <div id="about-me" class="tab-pane fade in active" ng-init="name='<%-name%>';email='<%-email%>';getbirth('<%-birthdate%>')">
+                <form id="form1" name="f1">
+                   <h3>姓名：{{ name }}</h3>
+                   <h3>生日：
+                     <input name="birthdate" type="text" id="birthday" ng-model="birthdate">
+                   </h3>
+                   <h3 style="display:inline-block;">Email:
+                      <input name="email" type="email" ng-model="email" placeholder="請輸入Email" required>
+                      <span><button class="btn" ng-disabled="f1.$invalid" ng-click="sendPostUser()"/><i class="fa fa-check"></i></button></span>
+                   </h3>
+                   <p>{{myTxt}}</p>
+                </form>
             </div>
 
             <div id="resume" class="tab-pane fade" ng-init="Intro='<%-intro%>';S_exp='<%-s_exp%>';W_exp='<%-w_exp%>';Achievement='<%-achievement%>'">
@@ -141,7 +141,24 @@
                 </div>
                 <h3>外部資料：</h3>
                 <div class="line"></div>
-
+                 <table id ="externalInFo"class="table table-bordered">
+                   <thead>
+                         <tr>
+                           <th>資料名稱</th>
+                           <th>上傳時間</th>
+                         </tr>
+                   </thead>
+                   <tbody>
+                          <tr>
+                            <td><a href = "#">詳細履歷</a></td>
+                            <td>2016/2/20</td>
+                          </tr>
+                          <tr>
+                            <td><a href = "#">個人作品集</a></td>
+                            <td>2015/8/9</td>
+                          </tr>
+                    </tbody>
+                 </table>
           </div>
        </div>
       </div>
