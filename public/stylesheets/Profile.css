@@ -3,6 +3,7 @@
 
 .container {
   margin: 0 auto;
+  padding-bottom: 70px;
   display: block; }
   .container .info {
     width: 100%;
