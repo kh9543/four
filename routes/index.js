@@ -234,6 +234,23 @@ router.post('/profile/edit/profile', ensureAuthenticated, function(req,res){
   });
 });
 
+router.get('/case_description',ensureAuthenticated, function(req, res, next) {
+  res.render('landing/case_description', {
+      //email: req.session.email,
+      name: req.session.name,
+      photo_url: req.session.photo_url,
+      error: req.flash('error')
+  });
+});
+//#
+router.get('/cases/:target/list', ensureAuthenticated, function(req, res, next) {
+    // if(req.params.target="self")
+    // else if(req.params.target="any")
+    // else
+    // return res.json({ cases });
+    console.log('fixing');
+});
+
 
 //#
 router.get('/mywork', ensureAuthenticated,function(req, res, next) {

@@ -8,6 +8,7 @@
       <link rel='stylesheet' href='/stylesheets/animate.css'>
       <link rel='stylesheet' href='/stylesheets/case-box.css'>
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+      
       <script src="/components/angular/angular.min.js"></script>
       <script src="/components/angular-route/angular-route.min.js"></script>
       <script src="/components/jquery/dist/jquery.min.js"></script>
@@ -58,7 +59,7 @@
                             </div>
                         </div>
                         <div class="text_display" ng-if="case.status == 'finding'">
-                            <a href="/">
+                            <a href="/case_description">
                                 <i class="glyphicon glyphicon-eye-open"></i>
                                 <span>查看</span>
                             </a>
@@ -72,7 +73,7 @@
                             </a>
                         </div>
                         <div class="text_display" ng-if="case.status == 'found'">
-                            <a href="/">
+                            <a href="/case_description">
                                 <i class="glyphicon glyphicon-eye-open"></i>
                                 <span>查看</span>
                             </a>
@@ -118,7 +119,7 @@
                             </div>
                         </div>
                         <div class="text_display">
-                            <a href="/">
+                            <a href="/case_description">
                                 <i class="glyphicon glyphicon-eye-open"></i>
                                 <span>查看</span>
                             </a>

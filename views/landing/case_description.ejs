@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html ng-app = "four">
+    <head>
+        <title>四人幫</title>
+        <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel='stylesheet' href='/stylesheets/all.css'>
+        <link rel='stylesheet' href='/stylesheets/case_description.css'>
+        <link rel='stylesheet' href='/stylesheets/animate.css'>
+        <link rel='stylesheet' href='/stylesheets/case-box.css'>
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500,900' rel='stylesheet' type='text/css'>
+        <script src="/components/angular/angular.min.js"></script>
+        <script src="/components/angular-route/angular-route.min.js"></script>
+        <script src="/components/jquery/dist/jquery.min.js"></script>
+        <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/components/wowjs/dist/wow.min.js"></script>
+        <script>new WOW().init();</script>
+        <script src="/javascript/event.js"></script>
+    </head>
+    <body>
+      <%-include ../layout/Register_Login %>
+      <div class = "main" ng-controller = "caseController">
+        <%-include ../layout/login-nav %>
+        <section class="upperContent">
+          <div class="container">
+            <div class="title">
+                <h1>微電影製作：伏地，挺伸</h1>
+            </div>
+            <div class="row">
+              <div class="col-sm-8">
+                  <div class="case_image"></div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="requirement">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h1>$45,000</h1>
+                        <p>專案報酬</p>
+                      </div>
+                      <div class = "col-sm-6">
+                        <h1>臺北</h1>
+                        <p>地點</p>
+                      </div>
+                      <div class="end-date">
+                        <h1>2016.6.20</h1>
+                          <p>
+                            專案申請截止
+                          </p>
+                      </div>
+                      <div class="work-date">
+                          <h1>2016.6.30~2017.3.30
+                              </h1>
+                        <p>專案工作時間</p>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="case-info">
+              <div class="row">
+                <div class="leftbar">
+                  <div class="apply">
+                    <div class="number"></div>
+                    <div class="info">202 人申請</div>
+                  </div>
+                  <div class="film">
+                    <div class="film-camera"></div>
+                    <div class="info">攝影需求</div>
+                  </div>
+                  <div class="direct">
+                    <div class="director"></div>
+                    <div class="info">後制需求</div>
+                  </div>
+                  <div class="script">
+                    <div class="movie-script"></div>
+                    <div class="info">文案需求</div>
+                  </div>
+                </div>
+                <div class="rightbar">
+                  <a href = "/create_case" class="btn btn-orange" >申請專案</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+        <section class="bottomContent">
+          <div class="container">
+            <div class="left-panel" >
+              <div class="Caseinfo" >
+                <!--Case Intro-->
+                <h4>專案簡介</h4>
+                <div ng-repeat = "caseDescription in caseDescriptions">
+                  <p>{{caseDescription.info}}</p>
+                </div>
+                <!--Achievement-->
+                <h4>我們已經做了</h4>
+                <div ng-repeat = "check in finished">
+                  <p><span><i class = "fa fa-check-square-o"></i></span>{{check.finished}}</p>
+                </div>
+                <!--Future Plan-->
+                <h4>未來的計劃</h4>
+                <div ng-repeat = "work in future">
+                  <p><span><i class = "fa fa-thumbs-o-up"></i></span>{{work.plan}}</p>
+                </div>
+              </div>
+              <!--characters-->
+              <div class="Actor">
+                <h4>角色簡介</h4>
+                <div class="character"  ng-repeat = "character in characters">
+                  <div class="row">
+                      <img class = "img-circle person col-sm-4" ng-src="{{character.pic_url}}" alt="" />
+                      <div class="character-info col-sm-8">
+                        <h5>{{character.name}}</h5>
+                        <div class="line"></div>
+                        <p>配偶：{{character.mate}}</p>
+                        <p>個人資料：{{character.info}}</p>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <!--Q&A-->
+              <div class="QandA">
+                <h4>常見問題</h4>
+                <div class="QA" ng-repeat = "Question in Questions">
+                  <p class = "strongfont">Q:{{Question.Q}}</p>
+                  <p>A:{{Question.A}}</p>
+                </div>
+              </div>
+              <!--Recommendations-->
+              <h4>回應與建議</h4>
+              <div class="celebrity-response" ng-repeat = "celebrity in celebrities">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <img class = "img-circle " ng-src="{{celebrity.pic_url}}" alt="" />
+                      <p>{{celebrity.name}}</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <span><i class = "fa fa-quote-left"></i></span>
+                      <blockquote>{{celebrity.response}}</blockquote>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="border"></div>
+            <div class="right-panel">
+                <div class="founder-profile">
+                  <h4>關於案主  <%-name%></h4>
+                  <div class="founder-photo" style="background-image: url(<%= photo_url %>)" ></div>
+                    <div ng-repeat = "founder in founders">
+                    <p>{{founder.profile}}</p>
+                    </div>
+                </div>
+                <div class="follow">
+                  <a href = "#" class="btn btn-orange fa fa-bookmark" >加入追蹤</a>
+                </div>
+          </div>
+        </section>
+      </div>
+      <%- include ../layout/footer %>
+    </body>
+</html>

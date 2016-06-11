@@ -7,7 +7,8 @@
       <link rel='stylesheet' href='/stylesheets/animate.css'>
       <link rel='stylesheet' href='/stylesheets/Profile.css'>
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-      <script src="/components/angular/angular.min.js"></script>
+      <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+
       <script src="/components/angular-route/angular-route.min.js"></script>
       <script src="/components/jquery/dist/jquery.min.js"></script>
       <link rel="stylesheet" href="/components/jquery-ui/jquery-ui.min.css">
@@ -137,11 +138,28 @@
                 </div>
                 <h3>外部資料：</h3>
                 <div class="line"></div>
-                </div>
-            </div>
-         </div>
-        </div>
-        </div>
+                 <table id ="externalInFo"class="table table-bordered">
+                   <thead>
+                         <tr>
+                           <th>資料名稱</th>
+                           <th>上傳時間</th>
+                         </tr>
+                   </thead>
+                   <tbody>
+                          <tr>
+                            <td><a href = "#">詳細履歷</a></td>
+                            <td>2016/2/20</td>
+                          </tr>
+                          <tr>
+                            <td><a href = "#">個人作品集</a></td>
+                            <td>2015/8/9</td>
+                          </tr>
+                    </tbody>
+                 </table>
+          </div>
+       </div>
+      </div>
+    </div>
     <%- include ../layout/footer %>
     </div>
   </body>
