@@ -165,8 +165,22 @@ four.controller('caseController',function($scope){
 		];
 });
 
+
+
 four.controller('profileController',function($http,$scope){
-$scope.getbirth= function(date1){
+	$scope.LookAtResume = false;
+	$scope.tempispublic = true;
+	$scope.newInfo = { ispublic:true};
+	$scope.AddResume = function(newInfo){
+		$scope.resumes.push(newInfo);
+	}
+	$scope.resumes = [
+		{ name:'攝影作品', type:'攝影',uploaddate:'2013/3/20',ispublic:true},
+		{ name:'後製影片簡介', type:'後製',uploaddate:'2015/4/21',ispublic:true},
+		{ name:'文案與企劃', type:'文案',uploaddate:'2015/8/8',ispublic:true},
+		{ name:'詳細履歷', type:'其他',uploaddate:'2015/8/8',ispublic:true}
+	];
+	$scope.getbirth= function(date1){
     var b = new Date(date1);
     $scope.birthdate =b.getFullYear()+"/" + ("0" + (b.getMonth() + 1)).slice(-2)+"/"+("0" + b.getDate()).slice(-2);
   }
@@ -254,6 +268,20 @@ $scope.getbirth= function(date1){
 		$scope.tempmyTxt="";
 		$scope.isEditAchievement = !$scope.isEditAchievement;
 		$scope.sendPost();//http
+	}
+
+	$scope.isEditResume=false;
+	$scope.EditResume = function () {
+		$scope.isEditResume = !$scope.isEditResume;
+	}
+	$scope.EditPublic = function (resume) {
+		resume.ispublic= !resume.ispublic;
+	}
+	$scope.EditResumeCancel = function () {
+		$scope.isEditResume = !$scope.isEditResume;
+	}
+	$scope.EditResumeCheck = function () {
+		$scope.isEditResume = !$scope.isEditResume;
 	}
 });
 

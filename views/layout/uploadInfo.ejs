@@ -1,0 +1,19 @@
+<!--外部檔案上傳modal-->
+<div id = "uploadInfo" class="modal fade" role = "dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>上傳外部檔案</h2>
+            </div>
+            <div class="modal-body">
+                  <div class="row">
+                      <button class ="btn fa fa-upload col-sm-4"><input type="file">上傳</button>
+                      <input type="text" placeholder="輸入檔名" class = "form-control col-sm-4" ng-model = "newInfo.name">
+                      <label class = "col-sm-4"><input type="checkbox" checked="checked" ng-click = "newInfo.ispublic = !newInfo.ispublic">公開資料</label>
+                  </div>
+                  <button class ="btn" data-dismiss="modal">取消</button>
+                  <button class ="btn" ng-click="AddResume(newInfo)">確認</button>
+            </div>
+        </div>
+    </div>
+</div>
