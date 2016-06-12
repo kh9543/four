@@ -152,7 +152,7 @@
                                   <tr>
                                     <td><a href = "#">{{resume.name}}</a></td>
                                     <td>{{resume.type}}</td>
-                                    <td>{{resume.uploaddate}}</td>
+                                    <td>{{resume.uploaddate|date:'yyyy/MM/dd'}}</td>
                                     <td ng-show = "!isEditResume">
                                       <span ng-show = "resume.ispublic">
                                         <i  class = "fa fa-check-circle"></i>公開</span>
