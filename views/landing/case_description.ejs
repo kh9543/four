@@ -24,32 +24,33 @@
         <section class="upperContent">
           <div class="container">
             <div class="title">
-                <h1>微電影製作：伏地，挺伸</h1>
+                <!-- <h1>微電影製作：伏地，挺伸</h1> -->
+                <h1><%-case_name%></h1>
             </div>
             <div class="row">
               <div class="col-sm-8">
-                  <div class="case_image"></div>
+                  <!-- <div class="case_image" ></div> -->
+                  <div class="case_image" style="background-image: url(<%= case_photo %>)" ></div>
               </div>
               <div class="col-sm-4">
                   <div class="requirement">
                     <div class="row">
                       <div class="col-sm-6">
-                        <h1>$45,000</h1>
+                        <h1>$<%-case_money%></h1>
                         <p>專案報酬</p>
                       </div>
                       <div class = "col-sm-6">
-                        <h1>臺北</h1>
+                        <h1><%-case_location%></h1>
                         <p>地點</p>
                       </div>
                       <div class="end-date">
-                        <h1>2016.6.20</h1>
+                        <h1><%-recruit_dealine%></h1>
                           <p>
                             專案申請截止
                           </p>
                       </div>
                       <div class="work-date">
-                          <h1>2016.6.30~2017.3.30
-                              </h1>
+                          <h1><%-case_start%>~<%-case_end%></h1>
                         <p>專案工作時間</p>
                         </div>
                     </div>
@@ -61,7 +62,7 @@
                 <div class="leftbar">
                   <div class="apply">
                     <div class="number"></div>
-                    <div class="info">202 人申請</div>
+                    <div class="info"><%= case_applyNum %> 人申請</div>
                   </div>
                   <div class="film">
                     <div class="film-camera"></div>
@@ -91,7 +92,8 @@
                 <!--Case Intro-->
                 <h4>專案簡介</h4>
                 <div ng-repeat = "caseDescription in caseDescriptions">
-                  <p>{{caseDescription.info}}</p>
+                  <p><%= case_description %></p>
+                  <!-- <p>{{caseDescription.info}}</p> -->
                 </div>
                 <!--Achievement-->
                 <h4>我們已經做了</h4>
@@ -146,10 +148,11 @@
             <div class="border"></div>
             <div class="right-panel">
                 <div class="founder-profile">
-                  <h4>關於案主  <%-name%></h4>
-                  <div class="founder-photo" style="background-image: url(<%= photo_url %>)" ></div>
+                  <h4>關於案主  <%-proposer_name%></h4>
+                  <div class="founder-photo" style="background-image: url(<%= proposer_photo %>)"></div>
                     <div ng-repeat = "founder in founders">
-                    <p>{{founder.profile}}</p>
+                    <p> <%= proposer_intro%> </p>
+                    <!-- <p>{{founder.profile}}</p> -->
                     </div>
                 </div>
                 <div class="follow">

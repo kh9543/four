@@ -7,11 +7,15 @@ var multer = require('multer');
 var upload_img = multer({
     dest: 'uploads/images',
 });
+var upload_pdf = multer({
+    dest: 'uploads/pdfs',
+});
 var mongoose = require('mongoose');
 // models
 var schema = require('../models/schema');
 var User = require('../models/user');
 var Profile = require('../models/profile');
+var Profile_pdf = require('../models/profile_pdf');
 var PM_Case = require('../models/pm_case');
 var db = require('../models/db');
 
@@ -157,18 +161,60 @@ router.get('/profile',ensureAuthenticated, function(req, res, next) {
           return;
       }
       else if(profile){
-          res.render('landing/profile', {
-              o_id: req.session.o_id,
-              name: req.session.name,
-              photo_url: req.session.photo_url,
-              email: req.session.email,
-              birthdate: req.session.birthdate,
-              intro: profile.intro,
-              s_exp: profile.s_exp,
-              w_exp: profile.w_exp,
-              achievement: profile.achievement
+          Profile_pdf.getProfilePDf(profile._id, function(err, pdfs){
+              if(err){
+                  console.log(err);
+              }
+              else if(pdfs)
+              {
+                  var result = new Array();
+                  for(var i = 0; i < pdfs.length; i++)
+                  {
+                      var url = '/pdfs/'+pdfs[i].pdf_name;
+                      var date = new Date(pdfs[i].upload_time);
+                      var d = date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate();
+
+                      var word = null;
+                      switch (pdfs[i].p_type) {
+                          case 'photograph':
+                              word = "拍攝";
+                              break;
+                          case 'postProduction':
+                              word = "後製";
+                              break;
+                          case 'word':
+                              word = "文案";
+                              break;
+                          case 'others':
+                              word = "其他";
+                              break;
+                      }
+                      var temp = {
+                          name: pdfs[i].name,
+                          type: word,
+                          uploaddate: d,
+                          ispublic: pdfs[i].ispublic,
+                          pdf_url: url
+                      };
+                      result.push(temp);
+                  }
+                  res.render('landing/profile', {
+                      o_id: req.session.o_id,
+                      name: req.session.name,
+                      photo_url: req.session.photo_url,
+                      email: req.session.email,
+                      birthdate: req.session.birthdate,
+                      intro: profile.intro,
+                      s_exp: profile.s_exp,
+                      w_exp: profile.w_exp,
+                      achievement: profile.achievement,
+                      pdfs:  result
+                  });
+                  return;
+              }
+
           });
-          return;
+
       }
       else{
          var profile_s = schema.Profile;
@@ -234,23 +280,116 @@ router.post('/profile/edit/profile', ensureAuthenticated, function(req,res){
   });
 });
 
-router.get('/case_description',ensureAuthenticated, function(req, res, next) {
-  res.render('landing/case_description', {
-      //email: req.session.email,
-      name: req.session.name,
-      photo_url: req.session.photo_url,
-      error: req.flash('error')
-  });
-});
-//#
-router.get('/cases/:target/list', ensureAuthenticated, function(req, res, next) {
-    // if(req.params.target="self")
-    // else if(req.params.target="any")
-    // else
-    // return res.json({ cases });
-    console.log('fixing');
+router.post('/profile/edit/pdfs', ensureAuthenticated, upload_pdf.single('file'), function(req,res){
+      if(!req.file){
+          res.status(500).send("failed");
+          console.log(err)
+          return;
+      }
+      Profile.findProfile(req.session.provider ,req.session.o_id, function(err, profile){
+          if(err){
+                res.status(500).send("failed");
+                console.log(err)
+                return;
+          }
+          else if(profile)
+          {
+              var word = null;
+              switch (req.body.type) {
+                  case '拍攝':
+                      word = "photograph";
+                      break;
+                  case '後製':
+                      word = "postProduction";
+                      break;
+                  case '文案':
+                      word = "word";
+                      break;
+                  case '其他':
+                      word = "others";
+                      break;
+              }
+              var profile_pdf = schema.Profile_pdf;
+              var newProfile_pdf = new profile_pdf ({
+                  name: req.body.name,
+                  ispublic: req.body.ispublic,
+                  p_type: word,
+                  pdf_name: req.file.filename,
+                  user: profile._id
+              });
+              Profile_pdf.addProfilePDF(newProfile_pdf, function(err){
+                  if(err){
+                      res.status(500).send("failed");
+                      console.log(err);
+                      return;
+                  }
+                  else{
+                      res.send("success");
+                      console.log("新增案件成功");
+                      return;
+                  }
+              });
+          }
+          else {
+                res.status(500).send("Profile not found");
+          }
+
+      });
+      console.log(req.body);
+      console.log(req.file);
 });
 
+router.get('/pm_case/:id',ensureAuthenticated, function(req, res, next) {
+    PM_Case.getACase(req.params.id, function(err, pm_case){
+        if(err){
+            console.log(err);
+            res.redirect('/');
+        }
+        else if(pm_case){
+            User.getUser(pm_case.proposer, function(err, proposer){
+                if(err){
+                    res.redirect('/');
+                    return;
+                }
+                else if(proposer){
+                    Profile.getProfileByUserID(proposer._id, function(err, profile){
+                        var intro = null;
+                        if(profile)
+                            intro = profile.intro;
+                        res.render('landing/case_description', {
+                            //email: req.session.email,
+                            name: req.session.name,
+                            photo_url: req.session.photo_url,
+                            proposer_name: proposer.name,
+                            proposer_intro: intro,
+                            proposer_photo: proposer.photo_url,
+                            case_name: pm_case.name,
+                            case_money: pm_case.money,
+                            case_photo: imageRoute(pm_case.image_name),
+                            recruit_dealine: dateParser(pm_case.recruit_dealine),
+                            case_start: dateParser(pm_case.case_start),
+                            case_end: dateParser(pm_case.case_end),
+                            case_location: pm_case.location,
+                            case_description: pm_case.description,
+                            case_applyNum: pm_case.applicants.length,
+                            error: req.flash('error')
+                        });
+                    })
+                }
+                else {
+                    req.flash('error', 'No proposer for the case... please contact web manger')
+                    res.redirect('/');
+                    return;
+                }
+            });
+
+        }
+        else {
+            res.redirect('/');
+        }
+    });
+
+});
 
 //#
 router.get('/mywork', ensureAuthenticated,function(req, res, next) {
@@ -275,7 +414,7 @@ router.get('/search_case', function(req, res, next) {
                 var applicants = allcases[i].applicants.length;
                 var url = '/images/'+allcases[i].image_name;
                 var date = allcases[i].recruit_dealine;
-                var d = date.getFullYear()+'.'+date.getMonth()+'.'+date.getDay();
+                var d = date.getFullYear()+'.'+(date.getMonth()+1)+'.'+date.getDate();
 
                 var temp = {
                     id: allcases[i]._id,
@@ -334,7 +473,6 @@ router.post('/create_case', ensureAuthenticated, upload_img.single('file'), func
         else {
             res.send("success");
             console.log("新增案件成功");
-            // res.redirect('/mycase');
         }
     });
     // console.log(req.body);
@@ -356,7 +494,7 @@ router.get('/mycase', ensureAuthenticated, function(req, res, next) {
                 var applicants = mycases[i].applicants.length;
                 var url = '/images/'+mycases[i].image_name;
                 var date = mycases[i].recruit_dealine;
-                var d = date.getFullYear()+'.'+date.getMonth()+'.'+date.getDay();
+                var d = date.getFullYear()+'.'+(date.getMonth()+1)+'.'+date.getDate();
                 var word = null;
 
                 switch (mycases[i].status) {
@@ -382,8 +520,6 @@ router.get('/mycase', ensureAuthenticated, function(req, res, next) {
                     status_word: word
                 };
                 result.push(temp);
-                //console.log(mycases[i]);
-                //console.log(temp);
             }
             res.render('landing/mycase', {
                 name: req.session.name,
@@ -414,6 +550,11 @@ router.get('/images/:file', function(req,res,next){
     res.sendFile('/uploads/images/'+file, { root : path.join(__dirname, '..')});
 });
 
+router.get('/pdfs/:file', function(req, res, next){
+    var file = req.params.file;
+    res.sendFile('/uploads/pdfs/'+file, { root : path.join(__dirname, '..')});
+});
+
 //check authentication
 function ensureAuthenticated(req, res, next) {
   if (req.session.o_id) { return next(); }
@@ -426,6 +567,14 @@ function checkNotLogin(req, res, next) {
     if (!req.session.o_id) { return next(); }
     res.redirect('/');
     return;
+}
+
+function imageRoute(name)  {
+    return '/images/'+name;
+}
+
+function dateParser(d) {
+    return d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate();
 }
 
 module.exports = router;

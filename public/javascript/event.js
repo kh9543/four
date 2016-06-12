@@ -19,7 +19,7 @@ four.directive('fileModel', ['$parse', function($parse){
 
 //service
 four.service('multipartForm', ['$http', '$window', function($http, $window){
-	this.post = function(uploadUrl, data){
+	this.post = function(uploadUrl, successurl, reload, data){
 		var fd = new FormData();
 		for(var key in data)
 			fd.append(key, data[key]);
@@ -27,7 +27,10 @@ four.service('multipartForm', ['$http', '$window', function($http, $window){
 			transformRequest: angular.indentity,
 			headers: { 'Content-Type': undefined }
 		}).then(function success(response){
-			$window.location.href="/mycase";
+			if(reload)
+				$window.location.reload();
+			else
+				$window.location.href=successurl;
 			// console.log(response);
 		},function error(response){
 			console.log(response);
@@ -51,7 +54,9 @@ four.controller('caseFormController', function($element, $scope, multipartForm ,
     $scope.submit = function() {
         // alert($scope.case.location);
         var uploadUrl = '/create_case';
-		multipartForm.post(uploadUrl, $scope.case);
+				var successurl = "/mycase";
+				var reload = false;
+				multipartForm.post(uploadUrl, "/mycase", reload, $scope.case);
     }
 
 	$scope.cities = ['不限', '基隆市', '台北市', '新北市', '桃園市', '新竹市', '新竹縣', '苗栗縣', '台中市', '彰化縣', '雲林縣', '嘉義市', '嘉義縣', '台南市', '台南縣', '高雄市', '高雄縣', '屏東縣', '宜蘭縣', '花蓮縣', '台東縣', '澎湖縣', '其他'];
@@ -167,22 +172,24 @@ four.controller('caseController',function($scope){
 
 
 
-four.controller('profileController',function($http,$scope){
+four.controller('profileController',function($http,multipartForm, $window  ,$scope){
+
 	$scope.LookAtResume = false;
+
 	$scope.tempispublic = true;
-	$scope.newInfo = { ispublic:true};
+
+	$scope.newInfo = {ispublic:true};
 
 	$scope.newInfo.uploaddate=new Date();
 
 	$scope.AddResume = function(newInfo){
-		$scope.resumes.push(newInfo);
+		var uploadUrl = '/profile/edit/pdfs';
+		var successurl = '';
+		var reload = true;
+		multipartForm.post(uploadUrl, successurl, reload, $scope.newInfo);
 	}
-	$scope.resumes = [
-		{ name:'攝影作品', type:'攝影',uploaddate:'2013/3/20',ispublic:true},
-		{ name:'後製影片簡介', type:'後製',uploaddate:'2015/4/21',ispublic:true},
-		{ name:'文案與企劃', type:'文案',uploaddate:'2015/8/8',ispublic:true},
-		{ name:'詳細履歷', type:'其他',uploaddate:'2015/8/8',ispublic:true}
-	];
+	$scope.resumes = $window.pdfs;
+
 	$scope.getbirth= function(date1){
     var b = new Date(date1);
     $scope.birthdate =b.getFullYear()+"/" + ("0" + (b.getMonth() + 1)).slice(-2)+"/"+("0" + b.getDate()).slice(-2);

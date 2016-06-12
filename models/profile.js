@@ -33,6 +33,19 @@ exports.findProfile = function (provider, o_id, callback) {
     });
 }
 
+exports.getProfileByUserID = function (id, callback) {
+      var query = Profile.where({ user: id });
+      query.findOne(function(err, profile){
+          if(err)
+              callback(err);
+          if(profile)
+              callback(null, profile);
+          else
+              callback(null, null);
+      });
+}
+
+
 exports.editProfile = function (uid,updatedata,callback){
   console.log(updatedata);
 

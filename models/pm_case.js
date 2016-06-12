@@ -67,6 +67,14 @@ exports.listAllCase = function(callback) {
 }
 
 
-exports.getMyCase = function () {
-
+exports.getACase = function (id, callback) {
+    var query = PM_Case.where({ _id: id});
+    query.findOne(function(err, pm_case){
+        if(err)
+            callback(err);
+        if(pm_case)
+            callback(null, pm_case);
+        else
+            callback(null, null);
+    });
 }

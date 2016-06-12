@@ -5,16 +5,16 @@
             <div class="modal-header">
               <div class="row">
                 <h2 class = "col-sm-6">上傳外部檔案</h2>
-                <button class ="btn fa fa-upload col-sm-2 " style="margin-top:20px;"><input type="file">上傳</button>
+                <input type="file" file-model="newInfo.file" required>
               </div>
             </div>
             <div class="modal-body">
                   <div class="row">
                       <div class="col-sm-5">
                         <label>檔名:</label>
-                        <input type="text" placeholder="輸入檔名" class= "form-control" ng-model = "newInfo.name">
+                        <input type="text" placeholder="輸入檔名" class= "form-control" ng-model = "newInfo.name" required>
                       </div>
-                      <select class="form-control col-sm-4" type="select"  name="type"  ng-model="newInfo.type">
+                      <select class="form-control col-sm-4" type="select"  name="type"  ng-model="newInfo.type" required>
                         <option value="" disabled selected>選擇履歷種類</option>
                         <option>拍攝</option>
                         <option>後製</option>

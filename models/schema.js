@@ -15,19 +15,16 @@ var profile_s = mongoose.Schema({
     s_exp: {type:String, default: null},
     w_exp: {type:String, default: null},
     achievement: {type:String, default: null},
-    user: [
-      {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
-    ]
+    user:{type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 var profile_pdf_s =  mongoose.Schema({
+    name : {type:String, default: null},
     upload_time : { type: Date, default: Date.now },
     ispublic: { type: Boolean, default: false },
-    file_path: String,
-    p_type: String,
-    user: [
-      {type: mongoose.Schema.Types.ObjectId, ref: 'Profile'}
-    ]
+    pdf_name: String,
+    p_type: {type: String, enum: ['photograph', 'postProduction', 'word', 'others']},
+    user:{type: mongoose.Schema.Types.ObjectId, ref: 'Profile'}
 });
 
 var pm_case_s = mongoose.Schema({
@@ -54,4 +51,5 @@ var ocupation_s = mongoose.Schema({
 
 exports.User = mongoose.model('User', user_s);
 exports.Profile = mongoose.model('Profile', profile_s);
+exports.Profile_pdf = mongoose.model('Profile_pdf', profile_pdf_s);
 exports.PM_Case = mongoose.model('PM_Case', pm_case_s);

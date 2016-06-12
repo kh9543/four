@@ -29,7 +29,9 @@
       <script src="/components/wowjs/dist/wow.min.js"></script>
        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
       <script>new WOW().init();</script>
-      <script src="/javascript/event.js"></script>
+      <script src="/javascript/clean.js"> </script>
+      <script src="/javascript/event.js"> </script>
+      <script> var pdfs = <%- JSON.stringify(pdfs) %>;</script>
   </head>
   <body>
     <div class="main" ng-controller="profileController">
@@ -150,7 +152,7 @@
                            </thead>
                            <tbody ng-repeat = "resume in resumes">
                                   <tr>
-                                    <td><a href = "#">{{resume.name}}</a></td>
+                                    <td><a href = "{{resume.pdf_url}}">{{resume.name}}</a></td>
                                     <td>{{resume.type}}</td>
                                     <td>{{resume.uploaddate|date:'yyyy/M/dd'}}</td>
                                     <td ng-show = "!isEditResume">
