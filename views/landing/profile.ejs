@@ -6,6 +6,7 @@
       <link rel='stylesheet' href='/stylesheets/all.css'>
       <link rel='stylesheet' href='/stylesheets/animate.css'>
       <link rel='stylesheet' href='/stylesheets/Profile.css'>
+      <link rel='stylesheet' href='/stylesheets/uploadInfo.css'>
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
       <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
 
@@ -35,144 +36,144 @@
         <%-include ../layout/login-nav %>
         <div class="container profile" >
             <div class="info">
-               <div class="left-part">
-                  <div class="leftwrapper">
-                    <div class="photo">
-                      <li>
-                        <div class="item" style="background-image: url(<%= photo_url %>); background-size:contain;">
-                          <div class="selphie-info">
-                            <form id="photo_form" action="/profile/upload" method="post" enctype="multipart/form-data">
-                                <a href="#" ><i class="glyphicon glyphicon-camera"><input id="file" type="file" name="img"></i>更新大頭貼</a>
-                            </form>
-                          </div>
+                   <div class="left-part">
+                      <div class="leftwrapper">
+                        <div class="photo">
+                          <li>
+                            <div class="item" style="background-image: url(<%= photo_url %>); background-size:contain;">
+                              <div class="selphie-info">
+                                <form id="photo_form" action="/profile/upload" method="post" enctype="multipart/form-data">
+                                    <a href="#" ><i class="glyphicon glyphicon-camera"><input id="file" type="file" name="img"></i>更新大頭貼</a>
+                                </form>
+                              </div>
+                            </div>
+                          </li>
                         </div>
-                      </li>
+                        <div class="name">
+                           <%-name%>
+                        </div>
+                      </div>
+                      <!--Tab & Pills-->
+                      <ul class="nav nav-pills nav-stacked nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#about-me"><span class="glyphicon glyphicon-user"></span>關於我</a></li>
+                        <li><a data-toggle="tab" href="#resume" ng-click = "LookAtResume = !LookAtResume"><span class="glyphicon glyphicon-file"></span>我的履歷</a></li>
+                      </ul>
+                      <div class = "upload" ng-show = "LookAtResume">
+                        <h3>上傳外部檔案</h3>
+                        <div class="line"></div>
+                        <p>在四人幫找到自喜所喜歡的專案嗎？分享自己更多的作品讓別人眼睛為之一亮吧！</p>
+                      <button class ="btn fa fa-plus-circle" data-toggle="modal" data-target="#uploadInfo">上傳</button>
+                      </div>
+                   </div>
+                 <div class="right-part" >
+                   <div class="tab-content">
+                     <div id="about-me" class="tab-pane fade in active" ng-init="name='<%-name%>';email='<%-email%>';birthdate='<%-birthdate%>'">
+                         <form id="form1" name="f1">
+                           <h3>姓名：{{ name }}</h3>
+                           <h3>生日：
+                             <input name="birthdate" type="text" id="birthday" ng-model="birthdate | date:'yyyy/MM/dd'">
+                           </h3>
+                           <h3 style="display:inline-block;">Email:
+                              <input name="email" type="email" ng-model="email" placeholder="請輸入Email" required>
+                              <span><button class="btn" ng-disabled="f1.$invalid" ng-click="sendPostUser()"/><i class="fa fa-check"></i></button></span>
+                           </h3>
+                           <p>{{myTxt}}</p>
+                        </form>
                     </div>
-                    <div class="name">
-                       <%-name%>
-                    </div>
-                  </div>
-                  <!--Tab & Pills-->
-                  <ul class="nav nav-pills nav-stacked nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#about-me"><span class="glyphicon glyphicon-user"></span>關於我</a></li>
-                    <li><a data-toggle="tab" href="#resume" ng-click = "LookAtResume = !LookAtResume"><span class="glyphicon glyphicon-file"></span>我的履歷</a></li>
-                  </ul>
-                  <div class = "upload" ng-show = "LookAtResume">
-                    <h3>上傳外部檔案</h3>
-                    <div class="line"></div>
-                    <p>在四人幫找到自喜所喜歡的專案嗎？分享自己更多的作品讓別人眼睛為之一亮吧！</p>
-                  <button class ="btn fa fa-plus-circle" data-toggle="modal" data-target = "#uploadInfo">上傳</button>
-                  </div>
-               </div>
-               <div class="right-part" >
-                 <div class="tab-content">
-                   <div id="about-me" class="tab-pane fade in active" ng-init="name='<%-name%>';email='<%-email%>';birthdate='<%-birthdate%>'">
-                   <form id="form1" name="f1">
-                     <h3>姓名：{{ name }}</h3>
-                     <h3>生日：
-                       <input name="birthdate" type="text" id="birthday" ng-model="birthdate | date:'yyyy/MM/dd'">
-                     </h3>
-                     <h3 style="display:inline-block;">Email:
-                        <input name="email" type="email" ng-model="email" placeholder="請輸入Email" required>
-                        <span><button class="btn" ng-disabled="f1.$invalid" ng-click="sendPostUser()"/><i class="fa fa-check"></i></button></span>
-                     </h3>
-                     <p>{{myTxt}}</p>
-                  </form>
-                  </div>
-                  <div id="resume" class="tab-pane fade" ng-init="Intro='<%-intro%>';S_exp='<%-s_exp%>';W_exp='<%-w_exp%>';Achievement='<%-achievement%>'">
-                      <h3>個人介紹: <i ng-hide="isEditIntro" ng-click="EditIntro()" class="fa fa-pencil"></i></h3>
-                      <div class="line"></div>
-                      <p ng-hide="isEditIntro" ng-bind="Intro">
-                      </p>
-                      <div ng-show="isEditIntro">
-                          <textarea
+                    <div id="resume" class="tab-pane fade" ng-init="Intro='<%-intro%>';S_exp='<%-s_exp%>';W_exp='<%-w_exp%>';Achievement='<%-achievement%>'">
+                        <h3>個人介紹: <i ng-hide="isEditIntro" ng-click="EditIntro()" class="fa fa-pencil"></i></h3>
+                        <div class="line"></div>
+                        <p ng-hide="isEditIntro" ng-bind="Intro">
+                        </p>
+                        <div ng-show="isEditIntro">
+                            <textarea
+                                type = "text"
+                                class = "form-control"
+                                ng-show = "isEditIntro"
+                                ng-model = "Intro"
+                                value="{{Intro}}"></textarea>
+                            <button class ="btn" ng-click="EditIntroCancel()">取消</button>
+                            <button class ="btn" ng-click="EditIntroCheck()">確認</button>
+                        </div>
+                        <h3>學習歷程：<i ng-hide="isEditS_exp" ng-click="EditS_exp()" class="fa fa-pencil"></i></h3>
+                        <div class="line"></div>
+                        <p ng-hide="isEditS_exp" ng-bind="S_exp">
+                        </p>
+                        <div ng-show="isEditS_exp">
+                            <textarea
                               type = "text"
                               class = "form-control"
-                              ng-show = "isEditIntro"
-                              ng-model = "Intro"
-                              value="{{Intro}}"></textarea>
-                          <button class ="btn" ng-click="EditIntroCancel()">取消</button>
-                          <button class ="btn" ng-click="EditIntroCheck()">確認</button>
-                      </div>
-                      <h3>學習歷程：<i ng-hide="isEditS_exp" ng-click="EditS_exp()" class="fa fa-pencil"></i></h3>
-                      <div class="line"></div>
-                      <p ng-hide="isEditS_exp" ng-bind="S_exp">
-                      </p>
-                      <div ng-show="isEditS_exp">
-                          <textarea
-                            type = "text"
-                            class = "form-control"
-                            ng-show = "isEditS_exp"
-                            ng-model="S_exp"
-                            value = "{{S_exp}}"></textarea>
-                          <button class ="btn" ng-click="EditS_expCancel()">取消</button>
-                          <button class ="btn" ng-click="EditS_expCheck()">確認</button>
-                      </div>
-                      <h3>工作經驗：<i ng-hide="isEditW_exp" ng-click="EditW_exp()" class="fa fa-pencil"></i></h3>
-                      <div class="line"></div>
-                      <p ng-hide="isEditW_exp" ng-bind="W_exp">
-                      </p>
-                      <div ng-show="isEditW_exp">
-                          <textarea
-                            type = "text"
-                            ng-show = "isEditW_exp"
-                            class = "form-control"
-                            ng-model="W_exp"
-                            value = "{{W_exp}}"></textarea>
-                          <button class ="btn" ng-click="EditW_expCancel()">取消</button>
-                          <button class ="btn" ng-click="EditW_expCheck()">確認</button>
-                      </div>
-                      <h3>個人成就：<i ng-hide="isEditAchievement" ng-click="EditAchievement()" class="fa fa-pencil"></i></h3>
-                      <div class="line"></div>
-                      <p ng-hide="isEditAchievement" ng-bind="Achievement">
-                      </p>
-                      <div ng-show="isEditAchievement" >
-                          <textarea
-                            type = "text"
-                            class = "form-control"
-                            ng-show ="isEditAchievement"
-                            ng-model="Achievement"
-                            value = "{{Achievement}}"></textarea>
-                          <button class ="btn" ng-click="EditAchievementCancel()">取消</button>
-                          <button class ="btn" ng-click="EditAchievementCheck()">確認</button>
-                      </div>
-                      <h3>外部資料：</h3>
-                      <div class="line"></div>
-                       <table id ="externalInFo"class="table table-bordered">
-                         <thead>
-                               <tr>
-                                 <th>履歷名稱</th>
-                                 <th>履歷種類</th>
-                                 <th>上傳時間</th>
-                                 <th>是否公開<i ng-hide="isEditResume" ng-click="EditResume()" class="fa fa-pencil"></i></th>
-                               </tr>
-                         </thead>
-                         <tbody ng-repeat = "resume in resumes">
-                                <tr>
-                                  <td><a href = "#">{{resume.name}}</a></td>
-                                  <td>{{resume.type}}</td>
-                                  <td>{{resume.uploaddate}}</td>
-                                  <td ng-show = "!isEditResume">
-                                    <span ng-show = "resume.ispublic">
-                                      <i  class = "fa fa-check-circle"></i>公開</span>
-                                    <span ng-show = "!resume.ispublic">
-                                    <i  class = "fa fa-times-circle"></i>未公開</span>
-                                  </td>
-                                  <td ng-show = "isEditResume">
-                                    <label><input type="checkbox" checked="checked" ng-click = "EditPublic(resume)">公開資料</label>
-                                  </td>
-                                </tr>
-                          </tbody>
-                       </table>
-                       <div ng-show = "isEditResume">
-                         <button class ="btn" ng-click="EditResumeCancel()">取消</button>
-                         <button class ="btn" ng-click="EditResumeCheck()">確認</button>
-                       </div>
+                              ng-show = "isEditS_exp"
+                              ng-model="S_exp"
+                              value = "{{S_exp}}"></textarea>
+                            <button class ="btn" ng-click="EditS_expCancel()">取消</button>
+                            <button class ="btn" ng-click="EditS_expCheck()">確認</button>
+                        </div>
+                        <h3>工作經驗：<i ng-hide="isEditW_exp" ng-click="EditW_exp()" class="fa fa-pencil"></i></h3>
+                        <div class="line"></div>
+                        <p ng-hide="isEditW_exp" ng-bind="W_exp">
+                        </p>
+                        <div ng-show="isEditW_exp">
+                            <textarea
+                              type = "text"
+                              ng-show = "isEditW_exp"
+                              class = "form-control"
+                              ng-model="W_exp"
+                              value = "{{W_exp}}"></textarea>
+                            <button class ="btn" ng-click="EditW_expCancel()">取消</button>
+                            <button class ="btn" ng-click="EditW_expCheck()">確認</button>
+                        </div>
+                        <h3>個人成就：<i ng-hide="isEditAchievement" ng-click="EditAchievement()" class="fa fa-pencil"></i></h3>
+                        <div class="line"></div>
+                        <p ng-hide="isEditAchievement" ng-bind="Achievement">
+                        </p>
+                        <div ng-show="isEditAchievement" >
+                            <textarea
+                              type = "text"
+                              class = "form-control"
+                              ng-show ="isEditAchievement"
+                              ng-model="Achievement"
+                              value = "{{Achievement}}"></textarea>
+                            <button class ="btn" ng-click="EditAchievementCancel()">取消</button>
+                            <button class ="btn" ng-click="EditAchievementCheck()">確認</button>
+                        </div>
+                        <h3>外部資料：</h3>
+                        <div class="line"></div>
+                         <table id ="externalInFo"class="table table-bordered">
+                           <thead>
+                                 <tr>
+                                   <th>履歷名稱</th>
+                                   <th>履歷種類</th>
+                                   <th>上傳時間</th>
+                                   <th>是否公開<i ng-hide="isEditResume" ng-click="EditResume()" class="fa fa-pencil"></i></th>
+                                 </tr>
+                           </thead>
+                           <tbody ng-repeat = "resume in resumes">
+                                  <tr>
+                                    <td><a href = "#">{{resume.name}}</a></td>
+                                    <td>{{resume.type}}</td>
+                                    <td>{{resume.uploaddate}}</td>
+                                    <td ng-show = "!isEditResume">
+                                      <span ng-show = "resume.ispublic">
+                                        <i  class = "fa fa-check-circle"></i>公開</span>
+                                      <span ng-show = "!resume.ispublic">
+                                      <i  class = "fa fa-times-circle"></i>未公開</span>
+                                    </td>
+                                    <td ng-show = "isEditResume">
+                                      <label><input type="checkbox" checked="checked" ng-click = "EditPublic(resume)">公開資料</label>
+                                    </td>
+                                  </tr>
+                            </tbody>
+                         </table>
+                         <div ng-show = "isEditResume">
+                           <button class ="btn" ng-click="EditResumeCancel()">取消</button>
+                           <button class ="btn" ng-click="EditResumeCheck()">確認</button>
+                         </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+                <%- include ../layout/uploadInfo %>
           </div>
-          <%-include ../layout/uploadInfo %>
     </div>
 </div>
     <%- include ../layout/footer %>

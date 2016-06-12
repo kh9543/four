@@ -1,23 +1,55 @@
-h2{
-  font-size: 20px;
-  text-align: center;
-  font-family: inherit;
-  border-bottom: 2px solid rgba(0,0,0,.12);
+
+.modal-header{
+  h2{
+    margin-left:70px;
+    font-size: 30px;
+    text-align: center;
+    font-family: inherit;
+  }
 }
-.btn{
-  position: relative;
-  margin: 5% 0 5% 0;
-  line-height: normal;
-  font-weight: 500;
-  font-size: 15px;
-  input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 20px;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    cursor: inherit;
-    display: block;
+.modal-content{
+  .btn{
+    position: relative;
+    line-height: normal;
+    height:35px;
+    font-weight: 500;
+    font-size: 15px;
+    margin:0 15px 0 0 ;
+    input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 20px;
+      filter: alpha(opacity=0);
+      opacity: 0;
+      cursor: inherit;
+      display: block;
+    }
+  }
+  input[type=text]{
+    line-height: normal;
+    height:35px;
+    margin:0 15px;
+  }
+  .form-control{
+    width:140px;
+    display: inline;
+  }
+  #uploaddate{
+    display: none;
+  }
+  label{
+    margin: 5px 0 0 5px;
+  }
+  p{
+    font-size:20px;
+    line-height: 1.8em;
+  }
+  select{
+    margin-left: 10px;
+  }
+  span{
+    padding-left: 2px;
+    letter-spacing: 2px;
   }
 }

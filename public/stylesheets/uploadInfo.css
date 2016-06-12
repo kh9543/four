@@ -1,16 +1,17 @@
-h2 {
-  font-size: 20px;
+.modal-header h2 {
+  margin-left: 70px;
+  font-size: 30px;
   text-align: center;
-  font-family: inherit;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.12); }
+  font-family: inherit; }
 
-.btn {
+.modal-content .btn {
   position: relative;
-  margin: 5% 0 5% 0;
   line-height: normal;
+  height: 35px;
   font-weight: 500;
-  font-size: 15px; }
-  .btn input[type=file] {
+  font-size: 15px;
+  margin: 0 15px 0 0; }
+  .modal-content .btn input[type=file] {
     position: absolute;
     top: 0;
     right: 0;
@@ -19,5 +20,24 @@ h2 {
     opacity: 0;
     cursor: inherit;
     display: block; }
+.modal-content input[type=text] {
+  line-height: normal;
+  height: 35px;
+  margin: 0 15px; }
+.modal-content .form-control {
+  width: 140px;
+  display: inline; }
+.modal-content #uploaddate {
+  display: none; }
+.modal-content label {
+  margin: 5px 0 0 5px; }
+.modal-content p {
+  font-size: 20px;
+  line-height: 1.8em; }
+.modal-content select {
+  margin-left: 10px; }
+.modal-content span {
+  padding-left: 2px;
+  letter-spacing: 2px; }
 
 /*# sourceMappingURL=uploadInfo.css.map */

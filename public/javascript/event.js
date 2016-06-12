@@ -171,6 +171,9 @@ four.controller('profileController',function($http,$scope){
 	$scope.LookAtResume = false;
 	$scope.tempispublic = true;
 	$scope.newInfo = { ispublic:true};
+
+	$scope.newInfo.uploaddate=new Date();
+
 	$scope.AddResume = function(newInfo){
 		$scope.resumes.push(newInfo);
 	}
