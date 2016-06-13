@@ -174,6 +174,15 @@ four.controller('caseController',function($scope){
 
 four.controller('profileController',function($http,multipartForm, $window  ,$scope){
 
+	$scope.name=$window.name;
+	$scope.email=$window.email;
+  var b = new Date($window.birthdate);
+  $scope.birthdate =b.getFullYear()+"/" + ("0" + (b.getMonth() + 1)).slice(-2)+"/"+("0" + b.getDate()).slice(-2);
+	$scope.Intro=$window.Intro;
+	$scope.W_exp=$window.W_exp;
+	$scope.S_exp=$window.S_exp;
+	$scope.Achievement=$window.Achievement;
+
 	$scope.LookAtResume = false;
 
 	$scope.tempispublic = true;
@@ -190,10 +199,7 @@ four.controller('profileController',function($http,multipartForm, $window  ,$sco
 	}
 	$scope.resumes = $window.pdfs;
 
-	$scope.getbirth= function(date1){
-    var b = new Date(date1);
-    $scope.birthdate =b.getFullYear()+"/" + ("0" + (b.getMonth() + 1)).slice(-2)+"/"+("0" + b.getDate()).slice(-2);
-  }
+
 
 
 
@@ -210,6 +216,8 @@ four.controller('profileController',function($http,multipartForm, $window  ,$sco
 					console.error("error in posting");
 			});
 	 }
+
+
 
 	 $scope.sendPostUser = function() {
 		 var birth= $("#birthday").val();

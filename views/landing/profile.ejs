@@ -31,8 +31,10 @@
       <script>new WOW().init();</script>
       <script src="/javascript/clean.js"> </script>
       <script src="/javascript/event.js"> </script>
-      <script> var pdfs = <%- JSON.stringify(pdfs) %>;</script>
-  </head>
+      <script>
+      var pdfs = <%- JSON.stringify(pdfs) %>;
+      </script>
+        </head>
   <body>
     <div class="main" ng-controller="profileController">
         <%-include ../layout/login-nav %>
@@ -73,7 +75,7 @@
                          <form id="form1" name="f1">
                            <h3>姓名：{{ name }}</h3>
                            <h3>生日：
-                             <input name="birthdate" type="text" id="birthday" ng-model="birthdate | date:'yyyy/MM/dd'">
+                             <input name="birthdate" type="text" id="birthday" ng-model="birthdate">
                            </h3>
                            <h3 style="display:inline-block;">Email:
                               <input name="email" type="email" ng-model="email" placeholder="請輸入Email" required>
