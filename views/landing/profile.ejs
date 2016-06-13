@@ -31,8 +31,17 @@
       <script>new WOW().init();</script>
       <script src="/javascript/clean.js"> </script>
       <script src="/javascript/event.js"> </script>
-      <script> var pdfs = <%- JSON.stringify(pdfs) %>;</script>
-  </head>
+      <script>
+      var pdfs = <%- JSON.stringify(pdfs) %>;
+      var name = <%- JSON.stringify(name)%>;
+      var email = <%- JSON.stringify(email)%>;
+      var birthdate = <%- JSON.stringify(birthdate)%>;
+      var Intro = <%- JSON.stringify(intro)%>;
+      var S_exp = <%- JSON.stringify(s_exp)%>;
+      var W_exp = <%- JSON.stringify(w_exp)%> ;
+      var Achievement = <%- JSON.stringify(achievement)%>;
+      </script>
+        </head>
   <body>
     <div class="main" ng-controller="profileController">
         <%-include ../layout/login-nav %>
@@ -69,11 +78,11 @@
                    </div>
                  <div class="right-part" >
                    <div class="tab-content">
-                     <div id="about-me" class="tab-pane fade in active" ng-init="name='<%-name%>';email='<%-email%>';birthdate='<%-birthdate%>'">
+                     <div id="about-me" class="tab-pane fade in active" >
                          <form id="form1" name="f1">
                            <h3>姓名：{{ name }}</h3>
                            <h3>生日：
-                             <input name="birthdate" type="text" id="birthday" ng-model="birthdate | date:'yyyy/MM/dd'">
+                             <input name="birthdate" type="text" id="birthday" ng-model="birthdate">
                            </h3>
                            <h3 style="display:inline-block;">Email:
                               <input name="email" type="email" ng-model="email" placeholder="請輸入Email" required>
@@ -82,7 +91,7 @@
                            <p>{{myTxt}}</p>
                         </form>
                     </div>
-                    <div id="resume" class="tab-pane fade" ng-init="Intro='<%-intro%>';S_exp='<%-s_exp%>';W_exp='<%-w_exp%>';Achievement='<%-achievement%>'">
+                    <div id="resume" class="tab-pane fade" >
                         <h3>個人介紹: <i ng-hide="isEditIntro" ng-click="EditIntro()" class="fa fa-pencil"></i></h3>
                         <div class="line"></div>
                         <p ng-hide="isEditIntro" ng-bind="Intro">
