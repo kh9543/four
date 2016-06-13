@@ -6,9 +6,29 @@ var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 var multer = require('multer');
 var upload_img = multer({
     dest: 'uploads/images',
+    limits:{
+        fileSize: 15 * 1000 *1
+    },
+    fileFilter: function (req, file, cb) {
+        console.log(file.mimetype);
+        if (file.mimetype != "image/png" || file.mimetype != "image/jpg" || file.mimetype != "image/jpeg" || file.mimetype != "image/gif") {
+          return cb(new Error('Only jpg, jpeg, gif, png are allowed'))
+        }
+        cb(null, true)
+    }
 });
 var upload_pdf = multer({
     dest: 'uploads/pdfs',
+    limits: {
+        fileSize: 15 * 1000 * 1000
+    },
+    fileFilter: function (req, file, cb) {
+        console.log(file.mimetype);
+        if (file.mimetype != "application/pdf") {
+          return cb(new Error('Only pdfs are allowed'))
+        }
+        cb(null, true)
+    }
 });
 var mongoose = require('mongoose');
 // models

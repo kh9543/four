@@ -69,7 +69,7 @@
                    </div>
                  <div class="right-part" >
                    <div class="tab-content">
-                     <div id="about-me" class="tab-pane fade in active" ng-init="name='<%-name%>';email='<%-email%>';birthdate='<%-birthdate%>'">
+                     <div id="about-me" class="tab-pane fade in active" ng-init="name='<%=name%>';email='<%=email%>';birthdate='<%=birthdate%>'">
                          <form id="form1" name="f1">
                            <h3>姓名：{{ name }}</h3>
                            <h3>生日：
@@ -82,7 +82,7 @@
                            <p>{{myTxt}}</p>
                         </form>
                     </div>
-                    <div id="resume" class="tab-pane fade" ng-init="Intro='<%-intro%>';S_exp='<%-s_exp%>';W_exp='<%-w_exp%>';Achievement='<%-achievement%>'">
+                    <div id="resume" class="tab-pane fade" ng-init="Intro='<%=intro%>';S_exp='<%=s_exp%>';W_exp='<%=w_exp%>';Achievement='<%=achievement%>'">
                         <h3>個人介紹: <i ng-hide="isEditIntro" ng-click="EditIntro()" class="fa fa-pencil"></i></h3>
                         <div class="line"></div>
                         <p ng-hide="isEditIntro" ng-bind="Intro">
