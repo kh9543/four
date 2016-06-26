@@ -7,14 +7,14 @@ var multer = require('multer');
 var upload_img = multer({
     dest: 'uploads/images',
     limits:{
-        fileSize: 15 * 1000 *1
+        fileSize: 15 * 1000 * 1000
     },
     fileFilter: function (req, file, cb) {
         console.log(file.mimetype);
-        if (file.mimetype != "image/png" || file.mimetype != "image/jpg" || file.mimetype != "image/jpeg" || file.mimetype != "image/gif") {
-          return cb(new Error('Only jpg, jpeg, gif, png are allowed'))
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif") {
+          return cb(null,true);
         }
-        cb(null, true)
+        return cb(new Error('Only jpg, jpeg, gif, png are allowed'));
     }
 });
 var upload_pdf = multer({
